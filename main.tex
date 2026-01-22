@@ -385,7 +385,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Preparation of Papers for the IAENG International Journal of Computer Science}
+\title{Implementation of Inverse Perspective Mapping Using ROS 2 for Object Position Estimation \\ on a Humanoid Soccer Robot}
 %
 %
 % author names and IAENG memberships
@@ -397,9 +397,8 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Michael~Shell,~\IAENGmembership{Member,~IAENG,}
-        John~Doe,~\IAENGmembership{Senior Member,~IAENG,}
-        and~Jane~Doe,~\IAENGmembership{Fellow,~IAENG}% <-this % stops a space
+\author{Faa'iz~Haikal~Hilmi,
+        Rully~Soelaiman% <-this % stops a space
 \thanks{Manuscript received April XX, 20XX; revised June XX, 20XX. (Write the date on
 which you submitted your paper for review.) This work was supported
 in part by the U.S. Department of Commerce under Grant BS123456
@@ -471,10 +470,17 @@ GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this %
 
 \begin{abstract}
 %\boldmath
-The abstract goes here. Define all symbols used in the abstract. Do
-not cite references in the abstract. Do not delete the blank line
-immediately above the abstract; it sets the footnote at the bottom
-of this column.
+Accurate vision-based distance estimation is a critical component of perception systems 
+for humanoid soccer robots. Inverse Perspective Mapping (IPM) provides a geometric approach 
+to estimate object positions from monocular camera images without additional distance sensors, 
+which are prohibited in humanoid robot soccer competitions such as RoboCup. In practice, 
+because of camera extrinsic parameters changing continuously caused by walking motion and 
+head movements, IPM is challenging to implement reliably. This paper presents the implementation 
+of IPM to estimate object distance on humanoid soccer robot using ROS 2. The proposed system integrates 
+object detection outputs, camera intrinsic parameters, and real-time kinematic transformation 
+obtained from the robot model. Evaluations under static and walking conditions 
+show that the system produces stable object position estimation with an average error within 
+X centimeters in static scenarios and X centimeters during walking.
 \end{abstract}
 % IAENGtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -485,8 +491,7 @@ of this column.
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IAENGkeywords}
-visual-servoing, tracking, biomimetic, redundancy,
-degrees-of-freedom.
+IPM, Humanoid Robot, ROS 2
 \end{IAENGkeywords}
 
 
@@ -522,7 +527,33 @@ degrees-of-freedom.
 %
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IAENGPARstart{T}{his} demo file is intended to serve as a ``starter
+\IAENGPARstart{H}{umanoid} robots are designed to operate in environments intended
+for humans with body structures and capabilities similar to humans \cite{Kajita2014}.
+Research on humanoid robots has increased significantly across various domains \cite{Siciliano2010}.
+One benchmark for evaluating these advancements is robotic soccer, such as the RoboCup Humanoid League,
+where robots must perceive their environment, make decisions, and move autonomously
+in real time \cite{RoboCupHumanoidLeague2025}.
+
+Humanoid soccer robot must estimate the positions of objects such as the ball, goalposts, 
+and field features to perform navigation and make decisions \cite{SatyaWidodo2012}. Several approaches 
+have been proposed for estimating object distance using visual data. Monocular Depth Estimation uses
+deep learning approach to predict depth directly from a single image \cite{Zhang2025}. Although
+it produces stable accuracy, this approach is computationally expensive and highly dependent on training
+data, making it difficult to deploy on humanoid robots with limited computational resources \cite{Wofk2019}.
+Stereo vision is another alternative that estimates depth from two cameras, but requires precise calibration
+and is sensitive to lighting and texture variations, which reduces reliability in dynamic environments \cite{Kok2019}.
+
+In this paper, we implemented Inverse Perspective Mapping (IPM), a geometric method that estimates
+objects positions by projecting image points onto a known ground plane using camera parameters \cite{Hartley2004,Li2024}.
+IPM has been widely used in autonomus driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}. 
+However, implementing IPM to humanoid robots is more challenging because the camera pose change continuously due
+to body posture changes \cite{Dias2023}.
+
+The remaining of the paper is organized as follows: Section II describes the proposed IPM approach and its
+integration with the robot kinematic model. Section III presents experimental results and analysis.
+Section IV concludes the paper.
+
+demo file is intended to serve as a ``starter
 file'' for IAENG journal and conference papers produced under
 \LaTeX\ using IAENGtran.cls version 1.7 and later.
 % You must have at least 2 lines in the paragraph with the drop letter
@@ -538,7 +569,7 @@ processing program that will allow you to create the images as
 PostScript (PS), Encapsulated PostScript (EPS), or Tagged Image File
 Format (TIFF), sizes them, and adjusts the resolution settings. If
 you created your source files in one of the following you will be
-able to submit the graphics without converting to a PS, EPS, or TIFF
+able to submit the gri am preaphics without converting to a PS, EPS, or TIFF
 file: Microsoft Word, Microsoft PowerPoint, Microsoft Excel, or
 Portable Document Format (PDF).
 
@@ -784,8 +815,7 @@ The conclusion goes here. what
 A conclusion section is not compulsory. Although a conclusion may
 review the main points of the paper, do not replicate the abstract
 as the conclusion. A conclusion might elaborate on the importance of
-the work or suggest applications and extensions \cite{IJCS, EL,
-IJAM, WCECS, WCE, IMECS}.
+the work or suggest applications and extensions.
 
 
 
