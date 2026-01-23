@@ -161,7 +161,7 @@
 
 % *** MATH PACKAGES ***
 %
-%\usepackage[cmex10]{amsmath}
+\usepackage[cmex10]{amsmath}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics. If using
 % it, be sure to load this package with the cmex10 option to ensure that
@@ -544,42 +544,75 @@ Stereo vision is another alternative that estimates depth from two cameras, but 
 and is sensitive to lighting and texture variations, which reduces reliability in dynamic environments \cite{Kok2019}.
 
 In this paper, we implemented Inverse Perspective Mapping (IPM), a geometric method that estimates
-objects positions by projecting image points onto a known ground plane using camera parameters \cite{Hartley2004,Li2024}.
+objects positions by projecting image points onto a known ground plane \cite{Li2024}.
 IPM has been widely used in autonomus driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}. 
 However, implementing IPM to humanoid robots is more challenging because the camera pose change continuously due
 to body posture changes \cite{Dias2023}.
+
+IPM relies on the \textit{pinhole camera model}, which describes the relation of three-dimensional
+world point and two-dimensional image plane as shown in Equation \ref{eq:1}.
+
+\begin{equation} \label{eq:1}
+\begin{split}
+\begin{pmatrix} x \\ y \\ 1 \end{pmatrix} &= 
+\begin{bmatrix}
+f & 0 & p_{x} & 0 \\
+0 & f & p_{y} & 0 \\
+0 & 0 & 1     & 0 
+\end{bmatrix}
+\begin{bmatrix}
+R & T \\
+0 & 1 \\
+\end{bmatrix}
+\begin{pmatrix} X \\ Y \\ Z \\ 1 \end{pmatrix} \\
+&= K \begin{bmatrix} R & T \\ 0 & 1 \end{bmatrix}
+\begin{pmatrix} X \\ Y \\ Z \\ 1 \end{pmatrix}
+\end{split}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $(x, y)$: Coordinates of the projected point on the 2D image plane.
+    \item $(X, Y, Z)$: Coordinates of the point in the 3D world coordinate system.
+    \item $K$: The camera intrinsic matrix, parameters unique to specific camera hardware,  
+               including the focal length ($f$) and the principal point coordinates ($p_x, p_y$).
+    \item $R$: The camera rotation matrix ($3 \times 3$), representing the orientation 
+               of the camera in the world frame.
+    \item $T$: The camera translation vector ($3 \times 1$), representing the position 
+               of the camera origin in the world frame.
+\end{itemize}
+
+By assuming that objects of interests lie on a planar surface, the inverse of Equation \ref{eq:1} can be used to recover
+the spatial position of objects relative to the world frame \cite{Hartley2004,Mark2024}.
 
 The remaining of the paper is organized as follows: Section II describes the proposed IPM approach and its
 integration with the robot kinematic model. Section III presents experimental results and analysis.
 Section IV concludes the paper.
 
-demo file is intended to serve as a ``starter
-file'' for IAENG journal and conference papers produced under
-\LaTeX\ using IAENGtran.cls version 1.7 and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-It is assumed that the reader has at least a basic working knowledge
-of LATEX. Those so lacking are strongly encouraged to read some of
-the excellent literature on the subject. General support for LATEX
-related questions can be obtained in the internet newsgroup
-comp.text.tex.
+\section{Methodology}
 
-Format and save your graphic images using a suitable graphics
-processing program that will allow you to create the images as
-PostScript (PS), Encapsulated PostScript (EPS), or Tagged Image File
-Format (TIFF), sizes them, and adjusts the resolution settings. If
-you created your source files in one of the following you will be
-able to submit the gri am preaphics without converting to a PS, EPS, or TIFF
-file: Microsoft Word, Microsoft PowerPoint, Microsoft Excel, or
-Portable Document Format (PDF).
+This section describes the implemented vision-based distance estimation using
+IPM on a humanoid soccer robot. The methodology consist of camera calibration,
+kinematic modeling of the robot, computation of reference frame for the IPM,
+and the IPM implementation to estimate object distance.
 
-Most charts graphs and tables are one column wide (3 1/2 inches or
-21 picas) or two-column width (7 1/16 inches, 43 picas wide). We
-recommend that you avoid sizing figures less than one column wide,
-as extreme enlargements may distort your images and result in poor
-reproduction. Therefore, it is better if the image is slightly
-larger, as a minor reduction in size should not have an adverse
-affect the quality of the image.
+\subsection{Camera Calibration}
+The objective of camera calibration is to obtain the intrinsic parameters ($K$)
+required for the projection calculation between the three-dimensional world and two-dimensional
+image plane as mentioned in Equation \ref{eq:1}. In this paper, we utilized a Logitech C920 camera that was mounted
+on the robot's head.
+
+The calibration was conducted using standard MxN checkerboard with known 
+square dimensions. We captured approximately 15 images of the checkerboard from
+various distances and angles as shown in Figure 1.
+
+Fig 1
+
+These images were then processed using OpenCV
+calibration library to estimate the focal length ($f$) and principal point 
+coordinates ($p_x, p_y$). While the calibration script also calculates lens distortion coefficients, the
+radial and tangensial distortion values for the Logitech C920 were found to be
+sufficiently small to be neglected.
 
 %\hfill mds
 %\hfill January 11, 2007
@@ -806,7 +839,6 @@ Two & Four & Ten\\
 % Note that, LaTeX2e, unlike IAENG journals, places footnotes above bottom
 % floats. This can be corrected via the \fnbelowfloat command of the
 % stfloats package.
-
 
 
 \section{Conclusion}
