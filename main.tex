@@ -120,7 +120,7 @@
 \ifCLASSINFOpdf
    \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
+   \graphicspath{{figures/}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
    \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
@@ -130,7 +130,7 @@
   % driver is specified.
    \usepackage[dvips]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
+   \graphicspath{{figures/}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
    \DeclareGraphicsExtensions{.eps}
@@ -358,7 +358,7 @@
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
-%\usepackage{url}
+\usepackage{url}
 % url.sty was written by Donald Arseneau. It provides better support for
 % handling and breaking URLs. url.sty is already installed on most LaTeX
 % systems. The latest version can be obtained at:
@@ -593,8 +593,7 @@ Section IV concludes the paper.
 
 This section describes the implemented vision-based distance estimation using
 IPM on a humanoid soccer robot. The methodology consist of camera calibration,
-kinematic modeling of the robot, computation of reference frame for the IPM,
-and the IPM implementation to estimate object distance.
+kinematic modeling of the robot, and IPM implementation to estimate object distance.
 
 \subsection{Camera Calibration}
 The objective of camera calibration is to obtain the intrinsic parameters ($K$)
@@ -604,15 +603,48 @@ on the robot's head.
 
 The calibration was conducted using standard MxN checkerboard with known 
 square dimensions. We captured approximately 15 images of the checkerboard from
-various distances and angles as shown in Figure 1.
+various distances and angles as shown in Figure \ref{fig:1}.
 
-Fig 1
+\begin{figure}[!h]
+\centering
+\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
+\caption{A Simple Neural Network Structure}
+\label{fig:1}
+\end{figure}
 
 These images were then processed using OpenCV
 calibration library to estimate the focal length ($f$) and principal point 
 coordinates ($p_x, p_y$). While the calibration script also calculates lens distortion coefficients, the
 radial and tangensial distortion values for the Logitech C920 were found to be
 sufficiently small to be neglected.
+
+\subsection{Robot Kinematic Modeling}
+The robot's physical structure is modeled using the Universal Robot Definition Format
+(URDF). The model contains 5 static frames and 20 robot frames that forms a hierarchical tree.
+A simplified representation of this hierarchical tree is illustrated in Figure \ref{fig:2}.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{Simplified Kinematic Tree.png}
+\caption{Simplified kinematic tree of the humanoid robot.}
+\label{fig:2}
+\end{figure}
+
+The \texttt{camera\_frame} follows the standard ROS vision axis where the $Z$-axis points 
+forward along optical axis, $Y$-axis points downward, and $X$-axis points to the right \cite{IsaacSimDocumentation}.
+
+We implemented \texttt{robot\_frames}, a ROS 2 package which loads the URDF and
+broadcasts coordinate transformations using the \texttt{tf2} library. By consuming live joint encoders 
+and IMU data, the package provides real-time coordinate transformations
+that reflects the robot's physical state in the real world.
+
+Additionally, the package calculates \texttt{base\_footprint}, a virtual frame
+that serves as the reference frame in IPM calculation. The frame is calculated dynamically using
+\texttt{right\_foot\_frame} and \texttt{left\_foot\_frame} information. Since the robot will 
+always be on the ground, the $Z$-height of the \texttt{base\_footprint} is set to be the same
+as the supporting foot (the foot in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates
+are determined by the midpoint between both feet.
+
 
 %\hfill mds
 %\hfill January 11, 2007
