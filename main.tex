@@ -556,8 +556,8 @@ world point and two-dimensional image plane as shown in Equation \ref{eq:1}.
 \begin{split}
 \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} &= 
 \begin{bmatrix}
-f & 0 & p_{x} & 0 \\
-0 & f & p_{y} & 0 \\
+f_{x} & 0 & p_{x} & 0 \\
+0 & f_{y} & p_{y} & 0 \\
 0 & 0 & 1     & 0 
 \end{bmatrix}
 \begin{bmatrix}
@@ -569,16 +569,15 @@ R & T \\
 \begin{pmatrix} X \\ Y \\ Z \\ 1 \end{pmatrix}
 \end{split}
 \end{equation}
-
 where:
 \begin{itemize}
     \item $(x, y)$: Coordinates of the projected point on the 2D image plane.
     \item $(X, Y, Z)$: Coordinates of the point in the 3D world coordinate system.
     \item $K$: The camera intrinsic matrix, parameters unique to specific camera hardware,  
-               including the focal length ($f$) and the principal point coordinates ($p_x, p_y$).
-    \item $R$: The camera rotation matrix ($3 \times 3$), representing the orientation 
+               including the focal length $(f_x, f_y)$ and the principal point coordinates $(p_x, p_y)$.
+    \item $R$: The camera rotation matrix $(3 \times 3)$, representing the orientation 
                of the camera in the world frame.
-    \item $T$: The camera translation vector ($3 \times 1$), representing the position 
+    \item $T$: The camera translation vector $(3 \times 1)$, representing the position 
                of the camera origin in the world frame.
 \end{itemize}
 
@@ -601,10 +600,12 @@ required for the projection calculation between the three-dimensional world and 
 image plane as mentioned in Equation \ref{eq:1}. In this paper, we utilized a Logitech C920 camera that was mounted
 on the robot's head.
 
+% TODO: Change MxN
 The calibration was conducted using standard MxN checkerboard with known 
 square dimensions. We captured approximately 15 images of the checkerboard from
 various distances and angles as shown in Figure \ref{fig:1}.
 
+% TODO: Change figure
 \begin{figure}[!h]
 \centering
 \includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
@@ -613,8 +614,8 @@ various distances and angles as shown in Figure \ref{fig:1}.
 \end{figure}
 
 These images were then processed using OpenCV
-calibration library to estimate the focal length ($f$) and principal point 
-coordinates ($p_x, p_y$). While the calibration script also calculates lens distortion coefficients, the
+calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
+coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
 radial and tangensial distortion values for the Logitech C920 were found to be
 sufficiently small to be neglected.
 
@@ -634,8 +635,8 @@ The \texttt{camera\_frame} follows the standard ROS vision axis where the $Z$-ax
 forward along optical axis, $Y$-axis points downward, and $X$-axis points to the right \cite{IsaacSimDocumentation}.
 
 We implemented \texttt{robot\_frames}, a ROS 2 package which loads the URDF and
-broadcasts coordinate transformations using the \texttt{tf2} library. By consuming live joint encoders 
-and IMU data, the package provides real-time coordinate transformations
+broadcasts kinematic transformations using the \texttt{tf2} library. By consuming live joint encoders 
+and IMU data, the package provides real-time kinematic transformations
 that reflects the robot's physical state in the real world.
 
 Additionally, the package calculates \texttt{base\_footprint}, a virtual frame
@@ -644,6 +645,86 @@ that serves as the reference frame in IPM calculation. The frame is calculated d
 always be on the ground, the $Z$-height of the \texttt{base\_footprint} is set to be the same
 as the supporting foot (the foot in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates
 are determined by the midpoint between both feet.
+
+\subsection{Inverse Perspective Mapping}
+
+We implemented a dedicated ROS 2 package to perform distance estimation. 
+This package subscribes to object bounding boxes from a Deep Neural Network (DNN) 
+detection module and kinematic transformations from the \texttt{robot\_frames} package. 
+Additionally, it loads a JSON configuration file containing the camera intrinsic 
+parameters ($K$) derived from the calibration process.
+
+Detected objects are represented as bounding boxes in the image plane. 
+To estimate distance, a specific pixel $(x, y)$ must be selected that represent 
+the object's contact point with the ground. For objects such as other robots or goalposts, 
+the bottom-center of the bounding box is selected. For objects such as the ball or field markers, 
+the center of the bounding box is used.
+
+Note that for certain objects, such as ball, the target pixel may not represent direct ground contact. 
+This discrepancy is addressed by a height offset ($h$), which is explained later in this section.
+
+The first step in the deprojection process is to convert the target pixel $(x, y)$ 
+into three-dimensional coordinate in camera frame $P_c = [X_c, Y_c, Z_c]^T$. 
+Using the intrinsic parameters, $X_c$ and $Y_c$ can be expressed as shown in Equation \ref{eq:2}.
+
+\begin{equation} \label{eq:2} 
+\begin{bmatrix} X_c \ Y_c \end{bmatrix} = Z_c 
+\begin{bmatrix} \frac{x - p_x}{f_x} \\ \frac{y - p_y}{f_y} \end{bmatrix} = Z_c 
+\begin{bmatrix} u \ v \end{bmatrix} 
+\end{equation}
+where $(u, v)$ are normalized image coordinates. 
+
+To recover $Z_c$, We define a plane in the \texttt{camera\_frame} using plane equation as shown in Equation \ref{eq:3}.
+
+\begin{equation} \label{eq:3}
+n_c \cdot P_c + d = 0
+\end{equation}
+where $n_c = [n_x, n_y, n_z]^T$ is the plane normal in the camera frame and $d$ 
+is the perpendicular distance from the camera origin to the plane. By substituting 
+$P_c = [u Z_c, v Z_c, Z_c]^T$ into Equation \ref{eq:3}, we solve for $Z_c$:
+
+\begin{equation} \label{eq:4}
+Z_c = \frac{-d}{n_x u + n_y v + n_z}
+\end{equation}
+
+The normal $n_c$ is derived by transforming the fixed ground normal from the \texttt{base\_footprint} 
+frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest 
+lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$. 
+By applying the rotation matrix $R_{b}^{c}$, we can express this normal in the camera's coordinate system:
+
+\begin{equation} \label{eq:5}
+n_c = R_{b}^{c} \cdot n_b = \begin{bmatrix} r_{13} \\ r_{23} \\ r_{33} \end{bmatrix}
+\end{equation}
+where $r_{13}, r_{23}, r_{33}$ are elements of the third row of the rotation matrix $R_{b}^{c}$.
+
+The distance $d$ from the plane in the \texttt{camera\_frame} is determined by 
+the translation $T_z$ of the camera along the $Z$-axis relative to the base frame. 
+However, we must account for objects where the target pixel does not represent 
+direct contact with the ground, such as a ball. In these cases, we introduce a height offset $h$, 
+which effectively treats the ground as being elevated by that value. For example, since the 
+ball's dimensions are known, the height offset $h$ corresponds to its radius. 
+Hence, we can define $d$ as:
+
+\begin{equation} \label{eq:6}
+d = -(T_z - h)
+\end{equation}
+
+Substituting the normal $n_c$ and the distance $d$ into Equation \ref{eq:4} gives us 
+the final depth calculation:
+
+\begin{equation} \label{eq:7}
+Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
+\end{equation}
+
+Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$ 
+is obtained by transforming $P_c$ into the \texttt{base\_footprint} frame:
+
+\begin{equation}
+\begin{bmatrix} P_w \\ 1 \end{bmatrix} = \mathbf{T}_{c}^{b} \begin{bmatrix} P_c \\ 1 \end{bmatrix}
+\end{equation}
+where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix. 
+Notice that, the system rejects any results where $Z_c \leq 0$ or is undefined (NaN), 
+as these indicate points behind the camera or parallel to the optical axis.
 
 
 %\hfill mds
