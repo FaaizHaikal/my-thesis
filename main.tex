@@ -511,7 +511,7 @@ IPM, Humanoid Robot, ROS 2
 
 
 
-\section{Introduction}
+\section{Introduction} \label{sec:intro}
 % The very first letter is a 2 line initial drop letter followed
 % by the rest of the first word in caps.
 %
@@ -530,29 +530,119 @@ IPM, Humanoid Robot, ROS 2
 \IAENGPARstart{H}{umanoid} robots are designed to operate in environments intended
 for humans with body structures and capabilities similar to humans \cite{Kajita2014}.
 Research on humanoid robots has increased significantly across various domains \cite{Siciliano2010}.
-One benchmark for evaluating these advancements is robotic soccer, such as the RoboCup Humanoid League,
-where robots must perceive their environment, make decisions, and move autonomously
-in real time \cite{RoboCupHumanoidLeague2025}.
+One benchmark for evaluating these advancements is competitive soccer for evaluating autonomous systems 
+in real-time perception and dynamic stability \cite{RoboCupHumanoidLeague2025}. The RoboCup initiative sets a long-range goal: by 2050, 
+a team of fully autonomous humanoid robots shall win a soccer game against the winner of the most 
+recent FIFA World Cup \cite{RobocupFederation2026}.
 
-Humanoid soccer robot must estimate the positions of objects such as the ball, goalposts, 
-and field features to perform navigation and make decisions \cite{SatyaWidodo2012}. Several approaches 
-have been proposed for estimating object distance using visual data. Monocular Depth Estimation uses
+To encourage human-like perception, the RoboCup Humanoid League competition rules restrict the use of non-human sensors. 
+Distance sensors such as LiDAR and depth cameras are prohibited, forcing teams to rely primarily on 
+vision sensors, inertial sensors, and joint encoders. Consequently, accurate distance estimation from a 
+single camera remains a critical and challenging problem \cite{RoboCupHumanoidLeague2025}. Humanoid soccer robot must estimate 
+the positions of objects such as the ball, goalposts, and field features to perform navigation 
+and make decisions \cite{SatyaWidodo2012}.
+
+Several approaches have been proposed for estimating object distance using visual data. Monocular Depth Estimation uses
 deep learning approach to predict depth directly from a single image \cite{Zhang2025}. Although
 it produces stable accuracy, this approach is computationally expensive and highly dependent on training
 data, making it difficult to deploy on humanoid robots with limited computational resources \cite{Wofk2019}.
 Stereo vision is another alternative that estimates depth from two cameras, but requires precise calibration
 and is sensitive to lighting and texture variations, which reduces reliability in dynamic environments \cite{Kok2019}.
 
-In this paper, we implemented Inverse Perspective Mapping (IPM), a geometric method that estimates
-objects positions by projecting image points onto a known ground plane \cite{Li2024}.
+Inverse Perspective Mapping (IPM) offers a a lightweight geometric solution that estimates
+objects positions by projecting image points by assuming that objects of interests lie on a planar surface, \cite{Li2024}.
 IPM has been widely used in autonomus driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}. 
 However, implementing IPM to humanoid robots is more challenging because the camera pose change continuously due
-to body posture changes \cite{Dias2023}.
+to body posture changes \cite{Dias2024}.
 
-IPM relies on the \textit{pinhole camera model}, which describes the relation of three-dimensional
-world point and two-dimensional image plane as shown in Equation \ref{eq:1}.
+This paper presents the implementation of an IPM-based object position estimation system on a 
+humanoid soccer robot developed by the ICHIRO ITS team. The objective of this work is to demonstrate 
+how IPM can be integrated with real-time kinematic transformations in ROS 2 to estimate object positions 
+under both static and dynamic conditions.
 
-\begin{equation} \label{eq:1}
+The remainder of this paper is organized as follows. Section II presents the overall system description, 
+including the humanoid robot platform and the software framework used in this work. 
+Section III introduces the theoretical background underlying the proposed approach, 
+covering kinematic modeling and inverse perspective mapping principles. 
+Section IV describes the implementation methodology of the system. 
+Section V presents the experimental evaluation and results. 
+Finally, Section VI concludes the paper and discusses future work.
+
+\section{System Description} \label{sec:system_desc}
+
+This section describes the humanoid robot platform and software framework used 
+in this research, providing the system context in which the proposed approach is implemented.
+
+\subsection{ICHIRO ITS}
+The system is implemented on humanoid soccer robots developed by the ICHIRO ITS
+team from Institut Teknologi Sepuluh Nopember. The team participates in humanoid
+soccer competitions such as RoboCup, contributing to research and development
+of humanoid robotics.
+
+The robot is classified as a kid-size humanoid, equipped with 20 Degrees of Freedom (DOF)
+driven by servo actuators. A monocular RGB camera (Logitech C920) is mounted on the robot's
+head and serves as the primary sensor for perception. Additional sensors include joint
+encoders for all actuated joints and an Inertial Measurement Unit (IMU) that provides
+orientation information. The robot runs on an Intel NUC i5 mini PC, while a custom control
+module (CM) board is responsible for low-level sensor acquisition and actuator interfacing.
+An overview of the robot platform is shown in Figure ~\ref{fig:ichiro}.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
+\caption{ICHIRO ITS humanoid robot platform used in this research.}
+\label{fig:ichiro}
+\end{figure}
+
+\subsection{Robot Operating System 2}
+The robot's software is built using the Robot Operating System 2 (ROS 2) 
+Jazzy Jalisco, which provides a modular, multi-process architecture. 
+The system utilizes the Data Distribution Service (DDS) middleware to 
+ensure robust inter-process communication with configurable Quality of Service 
+(QoS) policies. The ROS 2 framework facilitates a publisher-subscriber 
+model that allows independent nodes to share information through standardized 
+topics \cite{Macenski2022}.
+
+In this research, the IPM implementation leverages existing software 
+modules that publish: a Deep Neural Network (DNN) node for publishing 
+detected objects as bounding boxes, a joint state publisher for real-time 
+servo encoder values, and an IMU node for orientation feedback. These 
+synchronized data streams provide the necessary inputs for the IPM deprojection 
+algorithm, allowing the system to accurately correlate visual features in 
+image space with the robot's physical configuration in the real world.
+
+\subsection{Universal Robot Definition Format}
+
+Universal Robot Definition Format (URDF) is an XML-based format used to 
+modelize robot's physical structure. This format is widely supported by 
+the robotics ecosystem, including ROS 2, and enables the construction of a 
+complete transformation tree. This tree transformations is constructed using
+the ROS 2 \texttt{tf2} library, which can be broadcasted by a publisher node, 
+allowing other nodes to consume synchronized pose data for real-time calculations.
+
+The URDF for the ICHIRO ITS robot incorporates the 20 DOF servo actuators 
+along with a dedicated \texttt{camera\_frame}. This frame follows the 
+standard ROS vision axis convention where the $Z$-axis points forward 
+along the optical axis, the $Y$-axis points downward, and the $X$-axis 
+points to the right \cite{NVIDIA2026}. Additionally, the model 
+defines the \texttt{left\_foot\_frame} and \texttt{right\_foot\_frame}, 
+which are utilized to dynamically compute the \texttt{base\_footprint}. 
+This virtual frame serves as the primary ground-level reference for 
+the \texttt{camera\_frame} in the IPM calculation, ensuring that visual 
+deprojections are correctly referenced to the playing surface.
+
+\section{Theoretical Background} \label{sec:theories}
+
+This section presents the theoretical foundations required for the 
+proposed approach, including camera projection models, kinematic transformations, 
+ground plane assumption, and the IPM formulation.
+
+\subsection{Pinhole Camera Model}
+
+The pinhole camera model describes the relation of three-dimensional
+world point and two dimensional image plane as shown in Equation \ref{eq:pinhole}.
+
+\begin{equation} \label{eq:pinhole}
 \begin{split}
 \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} &= 
 \begin{bmatrix}
@@ -561,11 +651,11 @@ f_{x} & 0 & p_{x} & 0 \\
 0 & 0 & 1     & 0 
 \end{bmatrix}
 \begin{bmatrix}
-R & T \\
+R & t \\
 0 & 1 \\
 \end{bmatrix}
 \begin{pmatrix} X \\ Y \\ Z \\ 1 \end{pmatrix} \\
-&= K \begin{bmatrix} R & T \\ 0 & 1 \end{bmatrix}
+&= K \begin{bmatrix} R & t \\ 0 & 1 \end{bmatrix}
 \begin{pmatrix} X \\ Y \\ Z \\ 1 \end{pmatrix}
 \end{split}
 \end{equation}
@@ -577,143 +667,90 @@ where:
                including the focal length $(f_x, f_y)$ and the principal point coordinates $(p_x, p_y)$.
     \item $R$: The camera rotation matrix $(3 \times 3)$, representing the orientation 
                of the camera in the world frame.
-    \item $T$: The camera translation vector $(3 \times 1)$, representing the position 
+    \item $t$: The camera translation vector $(3 \times 1)$, representing the position 
                of the camera origin in the world frame.
 \end{itemize}
+This formulation follows the standard pinhole camera model widely used in computer
+vision \cite{Hartley2003,Szeliski2011}.
 
-By assuming that objects of interests lie on a planar surface, the inverse of Equation \ref{eq:1} can be used to recover
-the spatial position of objects relative to the world frame \cite{Hartley2004,Mark2024}.
+\subsection{Kinematics Tree}
+A kinematic tree represents the hierarchical relationship between rigid 
+bodies (links) connected by joints. In this structure, each node corresponds 
+to a specific coordinate frame, while the edges define the rigid transformations 
+between parent and child frames. This mathematical representation allows the pose 
+of any link or sensor within the tree to be computed relative to a global or local 
+reference frame through the use of chained homogeneous transformations \cite{Craig1986,Siciliano2010}.
 
-The remaining of the paper is organized as follows: Section II describes the proposed IPM approach and its
-integration with the robot kinematic model. Section III presents experimental results and analysis.
-Section IV concludes the paper.
+A rigid body transformation between two frames is represented using 
+a $4 \times 4$ homogeneous transformation matrix as shown in Equation \ref{eq:transformation_matrix}.
+\begin{equation} \label{eq:transformation_matrix}
+\mathbf{T}_{a}^{b} = 
+\begin{bmatrix}
+\mathbf{R}_{a}^{b} & \mathbf{t}_{a}^{b} \\
+\mathbf{0}^{T} & 1
+\end{bmatrix}
+\end{equation}
+where $\mathbf{R}_{a}^{b}$ is a $3 \times 3$ rotation matrix and 
+$\mathbf{t}_{a}^{b}$ is a $3 \times 1$ translation vector from frame 
+$a$ to frame $b$. Using homogeneous transformation matrix, a point $P_a$ expressed 
+in coordinate frame $a$ is transformed into frame $b$ as shown in 
+Equation \ref{eq:transformation_equation}.
+\begin{equation} \label{eq:transformation_equation}
+\begin{bmatrix} P_b \\ 1 \end{bmatrix} = \mathbf{T}_{a}^{b} \begin{bmatrix} P_a \\ 1 \end{bmatrix}
+\end{equation}
+This representation is commonly used in robotics to model body structures and 
+to compute forward kinematics \cite{Kajita2014}.
 
-\section{Methodology}
+\subsection{Ground Plane Assumption}
+Inverse Perspective Mapping relies on the assumption that objects of interest lie on a planar surface \cite{Mark2024}. 
+In humanoid soccer, this assumption is valid for objects such as the ball, goalposts, and field markings, 
+as the playing field is flat \cite{RoboCupHumanoidLeague2025}.
 
-This section describes the implemented vision-based distance estimation using
-IPM on a humanoid soccer robot. The methodology consist of camera calibration,
-kinematic modeling of the robot, and IPM implementation to estimate object distance.
+By constraining points to lie on a plane, we can recover the depth Zc along the optical axis
+by defining a plane in the camera frame Pc using plane equation as shown in Equation \ref{eq:plane_camera}
 
-\subsection{Camera Calibration}
-The objective of camera calibration is to obtain the intrinsic parameters ($K$)
-required for the projection calculation between the three-dimensional world and two-dimensional
-image plane as mentioned in Equation \ref{eq:1}. In this paper, we utilized a Logitech C920 camera that was mounted
-on the robot's head.
+\begin{equation} \label{eq:plane_camera}
+n_c \cdot P_c + d = 0
+\end{equation}
+where $n_c = [n_x, n_y, n_z]^T$ is the plane normal in the camera frame and $d$ 
+is the perpendicular distance from the camera origin to the plane \cite{Stewart2012}.
 
-% TODO: Change MxN
-The calibration was conducted using standard MxN checkerboard with known 
-square dimensions. We captured approximately 15 images of the checkerboard from
-various distances and angles as shown in Figure \ref{fig:1}.
+The normal $n_c$ can be derived by transforming the fixed ground normal from the \texttt{base\_footprint} 
+frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest 
+lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$.
+By applying the rotation matrix $R_{b}^{c}$, we can express this 
+normal in the camera's coordinate system as shown in Equation \ref{eq:plane_camera_wrt_base}
 
-% TODO: Change figure
-\begin{figure}[!h]
-\centering
-\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
-\caption{A Simple Neural Network Structure}
-\label{fig:1}
-\end{figure}
-
-These images were then processed using OpenCV
-calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
-coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
-radial and tangensial distortion values for the Logitech C920 were found to be
-sufficiently small to be neglected.
-
-\subsection{Robot Kinematic Modeling}
-The robot's physical structure is modeled using the Universal Robot Definition Format
-(URDF). The model contains 5 static frames and 20 robot frames that forms a hierarchical tree.
-A simplified representation of this hierarchical tree is illustrated in Figure \ref{fig:2}.
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=\linewidth]{Simplified Kinematic Tree.png}
-\caption{Simplified kinematic tree of the humanoid robot.}
-\label{fig:2}
-\end{figure}
-
-The \texttt{camera\_frame} follows the standard ROS vision axis where the $Z$-axis points 
-forward along optical axis, $Y$-axis points downward, and $X$-axis points to the right \cite{IsaacSimDocumentation}.
-
-We implemented \texttt{robot\_frames}, a ROS 2 package which loads the URDF and
-broadcasts kinematic transformations using the \texttt{tf2} library. By consuming live joint encoders 
-and IMU data, the package provides real-time kinematic transformations
-that reflects the robot's physical state in the real world.
-
-Additionally, the package calculates \texttt{base\_footprint}, a virtual frame
-that serves as the reference frame in IPM calculation. The frame is calculated dynamically using
-\texttt{right\_foot\_frame} and \texttt{left\_foot\_frame} information. Since the robot will 
-always be on the ground, the $Z$-height of the \texttt{base\_footprint} is set to be the same
-as the supporting foot (the foot in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates
-are determined by the midpoint between both feet.
+\begin{equation} \label{eq:plane_camera_wrt_base}
+n_c = R_{b}^{c} \cdot n_b = \begin{bmatrix} r_{13} \\ r_{23} \\ r_{33} \end{bmatrix}
+\end{equation}
+where $r_{13}, r_{23}, r_{33}$ are elements of the third column of the rotation matrix $R_{b}^{c}$.
 
 \subsection{Inverse Perspective Mapping}
+Inverse Perspective Mapping (IPM) aims to recover the three-dimensional 
+position of an image point under the assumption that it lies on a known 
+planar surface, typically the ground. Given the camera intrinsic parameters 
+and the camera pose relative to the ground, the depth of a projected image 
+point can be analytically recovered \cite{Bertozzi1998,Park2023}.
 
-We implemented a dedicated ROS 2 package to perform distance estimation. 
-This package subscribes to object bounding boxes from a Deep Neural Network (DNN) 
-detection module and kinematic transformations from the \texttt{robot\_frames} package. 
-Additionally, it loads a JSON configuration file containing the camera intrinsic 
-parameters ($K$) derived from the calibration process.
+The pixel $(x, y)$ in image plane can be converted to three-dimensional coordinate in 
+camera frame $Pc = [X_c, Y_c, Z_c]$ using the inversion of pinhole camera model
+mentioned in Equation \ref{eq:pinhole}, which:
 
-Detected objects are represented as bounding boxes in the image plane. 
-To estimate distance, a specific pixel $(x, y)$ must be selected that represent 
-the object's contact point with the ground. For objects such as other robots or goalposts, 
-the bottom-center of the bounding box is selected. For objects such as the ball or field markers, 
-the center of the bounding box is used.
-
-Note that for certain objects, such as ball, the target pixel may not represent direct ground contact. 
-This discrepancy is addressed by a height offset ($h$), which is explained later in this section.
-
-The first step in the deprojection process is to convert the target pixel $(x, y)$ 
-into three-dimensional coordinate in camera frame $P_c = [X_c, Y_c, Z_c]^T$. 
-Using the intrinsic parameters, $X_c$ and $Y_c$ can be expressed as shown in Equation \ref{eq:2}.
-
-\begin{equation} \label{eq:2} 
+\begin{equation} \label{eq:coordinate_camera} 
 \begin{bmatrix} X_c \ Y_c \end{bmatrix} = Z_c 
 \begin{bmatrix} \frac{x - p_x}{f_x} \\ \frac{y - p_y}{f_y} \end{bmatrix} = Z_c 
 \begin{bmatrix} u \ v \end{bmatrix} 
 \end{equation}
-where $(u, v)$ are normalized image coordinates. 
+where $(u, v)$ are normalized image coordinates.
 
-To recover $Z_c$, We define a plane in the \texttt{camera\_frame} using plane equation as shown in Equation \ref{eq:3}.
+By substituting $P_c = [u Z_c, v Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with 
+the distance $d$ from the plane in the \texttt{camera\_frame} equal to 
+the camera translation $T_z$ along the vertical axis relative to the base frame.
+Therefore, $Z_c$ can be calculated as shown in Equation \ref{eq:zc}.
 
-\begin{equation} \label{eq:3}
-n_c \cdot P_c + d = 0
-\end{equation}
-where $n_c = [n_x, n_y, n_z]^T$ is the plane normal in the camera frame and $d$ 
-is the perpendicular distance from the camera origin to the plane. By substituting 
-$P_c = [u Z_c, v Z_c, Z_c]^T$ into Equation \ref{eq:3}, we solve for $Z_c$:
-
-\begin{equation} \label{eq:4}
-Z_c = \frac{-d}{n_x u + n_y v + n_z}
-\end{equation}
-
-The normal $n_c$ is derived by transforming the fixed ground normal from the \texttt{base\_footprint} 
-frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest 
-lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$. 
-By applying the rotation matrix $R_{b}^{c}$, we can express this normal in the camera's coordinate system:
-
-\begin{equation} \label{eq:5}
-n_c = R_{b}^{c} \cdot n_b = \begin{bmatrix} r_{13} \\ r_{23} \\ r_{33} \end{bmatrix}
-\end{equation}
-where $r_{13}, r_{23}, r_{33}$ are elements of the third row of the rotation matrix $R_{b}^{c}$.
-
-The distance $d$ from the plane in the \texttt{camera\_frame} is determined by 
-the translation $T_z$ of the camera along the $Z$-axis relative to the base frame. 
-However, we must account for objects where the target pixel does not represent 
-direct contact with the ground, such as a ball. In these cases, we introduce a height offset $h$, 
-which effectively treats the ground as being elevated by that value. For example, since the 
-ball's dimensions are known, the height offset $h$ corresponds to its radius. 
-Hence, we can define $d$ as:
-
-\begin{equation} \label{eq:6}
-d = -(T_z - h)
-\end{equation}
-
-Substituting the normal $n_c$ and the distance $d$ into Equation \ref{eq:4} gives us 
-the final depth calculation:
-
-\begin{equation} \label{eq:7}
-Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
+\begin{equation} \label{eq:zc}
+Z_c = \frac{-T_z}{n_x u + n_y v + n_z}
 \end{equation}
 
 Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$ 
@@ -726,6 +763,75 @@ where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix
 Notice that, the system rejects any results where $Z_c \leq 0$ or is undefined (NaN), 
 as these indicate points behind the camera or parallel to the optical axis.
 
+\section{Methodology}
+
+This section describes the implementation of the proposed system on a humanoid soccer robot. 
+The methodology focuses on practical aspects, including camera calibration, robot kinematic frame construction, 
+and the integration of the IPM module for object distance estimation.
+
+\subsection{Camera Calibration}
+The objective of camera calibration is to obtain the intrinsic parameters ($K$)
+required for the projection calculation between the three-dimensional world and two-dimensional
+image plane as mentioned in Equation \ref{eq:pinhole}. In this paper, we utilized a Logitech C920 camera that was mounted
+on the robot's head.
+
+% TODO: Change MxN
+The calibration was conducted using standard MxN checkerboard with known 
+square dimensions. We captured approximately 15 images of the checkerboard from
+various distances and angles as shown in Figure \ref{fig:camera_calib}.
+
+% TODO: Change figure
+\begin{figure}[!h]
+\centering
+\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
+\caption{A Simple Neural Network Structure}
+\label{fig:camera_calib}
+\end{figure}
+
+These images were then processed using OpenCV
+calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
+coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
+radial and tangensial distortion values for the Logitech C920 were found to be
+sufficiently small to be neglected.
+
+\subsection{Robot Frames Package}
+In this research, we implemented a dedicated ROS 2 package, \texttt{robot\_frames}, 
+which loads the URDF model and broadcasts kinematic transformations using the \texttt{tf2} library. 
+By consuming live joint encoder and IMU data, the package provides real-time kinematic transformations
+that reflect the robot's physical state in the real world.
+
+In addition, the package computes the \texttt{base\_footprint}, a virtual frame that serves as the 
+reference frame for IPM calculations. This frame is calculated dynamically using information from 
+the \texttt{right\_foot\_frame} and \texttt{left\_foot\_frame}. Since the robot is always in contact 
+with the ground, the $Z$-height of the \texttt{base\_footprint} is set to match the supporting foot 
+(i.e., the foot currently in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates are 
+defined as the midpoint between both feet.
+
+\subsection{IPM Package}
+
+We implemented another dedicated ROS~2 package, \texttt{ipm}, to perform distance estimation using 
+the Inverse Perspective Mapping (IPM) algorithm. This package subscribes to object bounding boxes 
+produced by a Deep Neural Network (DNN) detection module and kinematic transformations provided by 
+the \texttt{robot\_frames} package. In addition, it loads a JSON configuration file containing the 
+camera intrinsic parameters ($K$) obtained from the calibration process.
+
+For each detected object, a representative image pixel $(x, y)$ is selected to approximate the 
+object's contact point with the ground. For objects such as other robots or goalposts, the 
+bottom-center of the bounding box is selected. For objects such as the ball or field markers, 
+the center of the bounding box is used.
+
+Note that for certain objects, such as the ball, the selected pixel may not correspond to direct 
+ground contact. This discrepancy is handled by introducing a height offset ($h$), which effectively 
+treats the ground plane as being elevated by that amount. Since the physical dimensions of the ball 
+are known, the height offset $h$ corresponds to its radius. Consequently, the depth recovery 
+equation derived in the Section \ref{sec:theories} is modified as follows:
+
+\begin{equation} \label{eq:zc_final}
+Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
+\end{equation}
+
+The remaining steps of the IPM algorithm follow the procedure described in 
+Section \ref{sec:theories}.
 
 %\hfill mds
 %\hfill January 11, 2007
