@@ -238,6 +238,12 @@
 % Available at:
 % http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
 
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
 
 
 
@@ -833,158 +839,260 @@ Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
 The remaining steps of the IPM algorithm follow the procedure described in 
 Section \ref{sec:theories}.
 
-%\hfill mds
-%\hfill January 11, 2007
+\section{Evaluation}
 
-\subsection{Subsection Heading Here}
-Subsection text here. The copyright to the Contribution identified
-above is transferred to International Association of Engineers,
-(hereinafter called IAENG). The copyright transfer covers the sole
-right to print, publish, distribute and sell throughout the world
-the said Contribution and parts thereof, including all revisions or
-versions and future editions thereof and in any medium, such as in
-its electronic form (offline, online), as well as to translate,
-print, publish, distribute and sell the Contribution in any foreign
-languages and throughout the world. IAENG will take, either in its
-own name or in that of the Author, any necessary steps to protect
-these rights against infringement by third parties. It will have the
-copyright notice inserted into all editions of the Work according to
-the provisions of the Universal Copyright Convention (UCC) and
-dutifully take care of all formalities in this connection, either in
-its own name or in that of the Author. If the Author is an employee
-of the U.S. Government and performed this work as part of his
-employment, the Contribution is not subject to U.S. copyright
-protection. The Author transfers the publishing rights to IAENG to
-the extent transferable. The Author retains the right to republish
-the Contribution in any collection consisting solely of the Author's
-own works without charge and subject only to ensuring that the
-publication by IAENG is properly credited and that the relevant
-copyright notice is repeated verbatim. The Author warrants that the
-Contribution is original except for such excerpts from copyrighted
-works (including illustrations, tables, and text quotations) as may
-be included with the permission of the copyright holder thereof, in
-which case(s) the Author is required to obtain written permission
-and to indicate the precise source. IAENG has the right to permit
-others to use individual illustrations within the usual limits. The
-Author warrants that the Contribution has not heretofore been
-published in whole or in part, that it contains no libelous
-statements and does not infringe on any copyright, trademark,
-patent, statutory rights or proprietary rights of others; and that
-he will indemnify IAENG against any cost, expenses or damages for
-which IAENG may become liable as a result of any breach of this
-warranty.
+This section evaluates the performance of the proposed IPM-based distance 
+estimation under static and dynamic conditions. Both evaluations are 
+conducted using the same object configuration and identical initial 
+robot position to ensure consistency. The static evaluation measures 
+the intrinsic accuracy of IPM when the robot remains stationary, 
+while the dynamic evaluation analyzes system behavior during walking 
+and considers the influence of odometry when expressing results in 
+global coordinates.
 
+\subsection{Experimental Setup}
 
-% needed in second column of first page if using \IAENGpubid
-%\IAENGpubidadjcol
+All experiments are conducted on a flat RoboCup soccer field. 
+The robot is initialized at the same global position for both 
+static and dynamic evaluations, namely the kickoff position 
+$P(X_0, Y_0)$ at the center of the field.
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+A fixed set of objects is placed at known global coordinates 
+and remains unchanged throughout all trials. 
+Each object is assigned a symbolic notation for concise reference 
+in subsequent tables and equations.
 
-Number equations consecutively with equation numbers in parentheses
-flush with the right margin, as in (1). First use the equation
-editor to create the equation. Then select the "Equation" markup
-style. Press the tab key and write the equation number in
-parentheses. To make your equations more compact, you may use the
-solidus ( / ), the exp function, or appropriate exponents. Use
-parentheses to avoid ambiguities in denominators.
-
-
-% >>>>>>>>>>>>>>>>>>>> Add an equation <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-Equation numbers are automatically generated.  Label allows easy
-referencing throughout the paper
-
-\begin{equation}
-{\bf X}[k+1]=A{\bf X}[k]+B{\bf u}[k] \label{stateSpaceForm1}
-\end{equation}
-
-% >>>>>>>>>>>>>>>>>>> Add an unnumbered equation <<<<<<<<<<<<<<<<<<<<<<<<
-
-You can also add an unnumbered equation as follows
-
-$$
-\theta_c[k+1]=\theta_c[k]+Tu_p[k]
-$$
-
-
-The contents of IAENG journals and proceedings books are
-peer-reviewed and archival. The journals and proceedings series
-publish scholarly articles of archival value as well as tutorial
-expositions and critical reviews of classical subjects and topics of
-current interest. Authors should consider the following points:
-
-1) Technical papers submitted for publication must advance the state
-of knowledge and must cite relevant prior work.
-
-2)  The length of a submitted paper should be commensurate with the
-importance, or appropriate to the complexity, of the work. For
-example, an obvious extension of previously published work might not
-be appropriate for publication or might be adequately treated in
-just a few pages.
-
-3) Authors must convince both peer reviewers and the editors of the
-scientific and technical merit of a paper; the standards of proof
-are higher when extraordinary or unexpected results are reported.
-
-4) Because replication is required for scientific progress, papers
-submitted for publication must provide sufficient information to
-allow readers to perform similar experiments or calculations and use
-the reported results. Although not everything need be disclosed, a
-paper must contain new, useable, and fully described information.
-For example, a specimen's chemical composition need not be reported
-if the main purpose of a paper is to introduce a new measurement
-technique. Authors should expect to be challenged by reviewers if
-the results are not supported by adequate data and critical details.
-
-5)  Papers that describe ongoing work or announce the latest
-technical achievement, which are suitable for presentation at a
-professional conference, may not be appropriate for publication in a
-journal or proceedings book.
-
-
-
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IAENGtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex,
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
-
-\begin{figure}[!t]
+\begin{table}[h]
 \centering
-\includegraphics[width=2.5in]{NEURAL_NETWORK}
-\caption{A Simple Neural Network Structure}
-\label{fig_nn}
+\caption{Fixed object configuration used in all experiments}
+\label{tab:object_setup}
+\begin{tabular}{c c c}
+\hline
+Symbol & Object & Global Position $(X_i, Y_i)$ [m] \\
+\hline
+$O_1$ & Goalpost 1 & $(X_1, Y_1)$ \\
+$O_2$ & Goalpost 2 & $(X_2, Y_2)$ \\
+$O_3$ & Penalty Marker & $(X_3, Y_3)$ \\
+$O_4$ & Soccer Ball & $(X_4, Y_4)$ \\
+$O_5$ & Opponent Robot & $(X_5, Y_5)$ \\
+\hline
+\end{tabular}
+\end{table}
+
+The global coordinates $(X_i, Y_i)$ are determined using field geometry 
+and manual measurement to ensure repeatability. These positions remain 
+constant for both static and dynamic experiments. A visualization of 
+the experimental configuration is shown in Fig.~\ref{fig:experiment_setup}.
+
+% TODO: Change figure
+\begin{figure}[!h]
+\centering
+\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
+\caption{Experimental setup showing the kickoff position of the robot 
+and the fixed global positions of objects $O_1$–$O_5$ on the field.}
+\label{fig:experiment_setup}
 \end{figure}
 
 
-Figure axis labels are often a source of confusion. Use words rather
-than symbols. As an example, write the quantity "Magnetization," or
-"Magnetization M," not just "M." Put units in parentheses. Do not
-label axes only with units.
+\subsection{Static Evaluation}
 
-Large figures and tables may span both columns. Place figure
-captions below the figures; place table titles above the tables. If
-your figure has two parts, include the labels "(a)" and "(b)" as
-part of the artwork. Please verify that the figures and tables you
-mention in the text actually exist.
+In static evaluation, the robot remains stationary at the kickoff 
+position $P(X_0, Y_0)$, and both the body and head are kept fixed. 
+Since the robot pose is known and does not change, it is treated 
+as ground truth.
+
+For each object, the IPM module estimates the relative position 
+$(X_r, Y_r)$ with respect to the \texttt{base\_footprint} frame. 
+The estimated global position $(\hat{X}_i, \hat{Y}_i)$ is obtained 
+by applying a rigid body transformation using the known robot pose:
+
+\begin{equation}
+\begin{bmatrix}
+\hat{X}_i \\
+\hat{Y}_i \\
+1
+\end{bmatrix}
+=
+\mathbf{T}_{r}^{g}
+\begin{bmatrix}
+X_r \\
+Y_r \\
+1
+\end{bmatrix}
+\end{equation}
+
+where $\mathbf{T}_{r}^{g}$ denotes the homogeneous transformation 
+from the \texttt{base\_footprint} frame to the global field frame.
+
+The position error is computed as the Euclidean distance between 
+the estimated and ground-truth object positions:
+
+\begin{equation}
+e_i = \sqrt{( \hat{X}_i - X_i )^2 + ( \hat{Y}_i - Y_i )^2}
+\end{equation}
+
+Table~\ref{tab:static_results} presents an example format of 
+the static evaluation results.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Static IPM estimation results}
+\label{tab:static_results}
+\begin{tabularx}{\columnwidth}{@{} Y Y c @{}} % Using Y for Object and Position
+\toprule
+\textbf{Object} & \textbf{Estimated Position (m)} & \textbf{Error (m)} \\
+\midrule
+$O_1$ & (0.52, -0.01) & 0.02 \\
+$O_2$ & (1.03, 0.18) & 0.04 \\
+$O_3$ & (1.56, -0.28) & 0.06 \\
+$O_4$ & (0.98, 0.02) & 0.03 \\
+$O_5$ & (1.20, -0.15) & 0.05 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Dynamic Evaluation}
+
+The dynamic evaluation extends the experiment to conditions in 
+which the robot is walking. The robot starts from the same kickoff 
+position $P(X_0, Y_0)$ and walks toward a predefined target point 
+$Q(X_t, Y_t)$.
+
+During walking, the robot head performs continuous scanning motions 
+to detect visible objects. The IPM module continuously estimates 
+the relative object positions $(X_r, Y_r)$ in the 
+\texttt{base\_footprint} frame.
+
+To express object positions in global coordinates, the relative 
+IPM outputs are transformed using the robot pose estimated from odometry:
+
+\begin{equation}
+\begin{bmatrix}
+\hat{X}_i \\
+\hat{Y}_i \\
+1
+\end{bmatrix}
+=
+\mathbf{T}_{r,\text{odom}}^{g}
+\begin{bmatrix}
+X_r \\
+Y_r \\
+1
+\end{bmatrix}
+\end{equation}
+
+As in the static case, the error is computed as the Euclidean 
+distance between the estimated and ground-truth object positions.
+
+It is important to note that odometry is not involved in the IPM 
+distance computation itself. IPM estimates object positions purely 
+relative to the robot. Odometry is only used to express estimated 
+object positions in global coordinates during dynamic evaluation. 
+Therefore, the measured dynamic error is influenced by both IPM 
+estimation error and odometry drift.
+
+To characterize odometry performance independently, the robot 
+repeatedly walks from $P(X_0, Y_0)$ to $Q(X_t, Y_t)$ for $K$ trials. 
+After reaching the target, the odometry error is computed as:
+\[
+\Delta x = x_{\text{odom}} - x_{\text{true}}, \quad
+\Delta y = y_{\text{odom}} - y_{\text{true}}, \quad
+\Delta \theta = \theta_{\text{odom}} - \theta_{\text{true}}
+\]
+
+Following \cite{Martinelli2001}, odometry errors are statistically 
+characterized in terms of mean and variance and categorized as:
+
+\begin{itemize}
+    \item Systematic errors (repeatable and trajectory-dependent),
+    \item Non-systematic errors (random and externally influenced).
+\end{itemize}
+
+For each trial, IPM estimates are computed continuously for all 
+visible objects, and the reported values correspond to the mean 
+estimated position and mean Euclidean error over the duration 
+of the walk. Odometry drift values are reported once per trial, 
+as they equally affect all global reconstructions within that trial.
+
+Table~\ref{tab:dynamic_results} presents an example format 
+for the dynamic evaluation results.
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{3pt} 
+\caption{Dynamic IPM results with odometry drift per trial}
+\label{tab:dynamic_results}
+% Changed Object column to 'c' and kept Mean Pos as 'Y'
+\begin{tabularx}{\columnwidth}{@{} c c Y c c c c @{}} 
+\toprule
+\textbf{Trial} & \textbf{Obj.} & \textbf{Mean Pos. (m)} & \textbf{Err. (m)} & \boldmath$\Delta x$ & \boldmath$\Delta y$ & \boldmath$\Delta \theta$ \\
+\midrule
+\multirow{5}{*}{1}
+ & $O_1$ & (1.08, -0.02) & 0.10 & \multirow{5}{*}{0.05} & \multirow{5}{*}{-0.03} & \multirow{5}{*}{0.04} \\
+ & $O_2$ & (1.62, 0.24)  & 0.13 &  &  &  \\
+ & $O_3$ & (2.11, -0.28) & 0.11 &  &  &  \\
+ & $O_4$ & (1.62, 0.24)  & 0.13 &  &  &  \\
+ & $O_5$ & (2.11, -0.28) & 0.11 &  &  &  \\
+\midrule
+\multirow{5}{*}{2}
+ & $O_1$ & (1.05, -0.01) & 0.08 & \multirow{5}{*}{0.04} & \multirow{5}{*}{-0.02} & \multirow{5}{*}{0.03} \\
+ & $O_2$ & (1.57, 0.23)  & 0.09 &  &  &  \\
+ & $O_3$ & (2.06, -0.27) & 0.07 &  &  &  \\
+ & $O_4$ & (1.57, 0.23)  & 0.09 &  &  &  \\
+ & $O_5$ & (2.06, -0.27) & 0.07 &  &  &  \\
+\bottomrule
+\end{tabularx}
+\end{table}
+%\hfill mds
+%\hfill January 11, 2007
+
+
+% The contents of IAENG journals and proceedings books are
+% peer-reviewed and archival. The journals and proceedings series
+% publish scholarly articles of archival value as well as tutorial
+% expositions and critical reviews of classical subjects and topics of
+% current interest. Authors should consider the following points:
+
+% 1) Technical papers submitted for publication must advance the state
+% of knowledge and must cite relevant prior work.
+
+% 2)  The length of a submitted paper should be commensurate with the
+% importance, or appropriate to the complexity, of the work. For
+% example, an obvious extension of previously published work might not
+% be appropriate for publication or might be adequately treated in
+% just a few pages.
+
+% 3) Authors must convince both peer reviewers and the editors of the
+% scientific and technical merit of a paper; the standards of proof
+% are higher when extraordinary or unexpected results are reported.
+
+% 4) Because replication is required for scientific progress, papers
+% submitted for publication must provide sufficient information to
+% allow readers to perform similar experiments or calculations and use
+% the reported results. Although not everything need be disclosed, a
+% paper must contain new, useable, and fully described information.
+% For example, a specimen's chemical composition need not be reported
+% if the main purpose of a paper is to introduce a new measurement
+% technique. Authors should expect to be challenged by reviewers if
+% the results are not supported by adequate data and critical details.
+
+% 5)  Papers that describe ongoing work or announce the latest
+% technical achievement, which are suitable for presentation at a
+% professional conference, may not be appropriate for publication in a
+% journal or proceedings book.
+
+% Figure axis labels are often a source of confusion. Use words rather
+% than symbols. As an example, write the quantity "Magnetization," or
+% "Magnetization M," not just "M." Put units in parentheses. Do not
+% label axes only with units.
+
+% Large figures and tables may span both columns. Place figure
+% captions below the figures; place table titles above the tables. If
+% your figure has two parts, include the labels "(a)" and "(b)" as
+% part of the artwork. Please verify that the figures and tables you
+% mention in the text actually exist.
 
 
 % Note that IAENG typically puts floats only at the top, even when this
@@ -1037,19 +1145,6 @@ mention in the text actually exist.
 %\hline
 %\end{tabular}
 %\end{table}
-
-\begin{table}[!t]
-\renewcommand{\arraystretch}{1.3}
-\caption{An Example of a Table} \label{table_example}
-\centering
-\begin{tabular}{|c||c||c|}
-\hline
-One & Two & Five\\
-\hline
-Two & Four & Ten\\
-\hline
-\end{tabular}
-\end{table}
 
 
 % Note that IAENG does not put floats in the very first column - or typically
