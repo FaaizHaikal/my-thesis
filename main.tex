@@ -157,8 +157,6 @@
 
 
 
-
-
 % *** MATH PACKAGES ***
 %
 \usepackage[cmex10]{amsmath}
@@ -585,6 +583,13 @@ team from Institut Teknologi Sepuluh Nopember. The team participates in humanoid
 soccer competitions such as RoboCup, contributing to research and development
 of humanoid robotics.
 
+\begin{figure*}[t] % [t] places it at the top of the page
+\centering
+\includegraphics[width=\textwidth]{Ichiro Architecture.png}
+\caption{ICHIRO ITS humanoid robot platform used in this research.}
+\label{fig:ichiro}
+\end{figure*}
+
 The robot is classified as a kid-size humanoid, equipped with 20 Degrees of Freedom (DOF)
 driven by servo actuators. A monocular RGB camera (Logitech C920) is mounted on the robot's
 head and serves as the primary sensor for perception. Additional sensors include joint
@@ -592,13 +597,6 @@ encoders for all actuated joints and an Inertial Measurement Unit (IMU) that pro
 orientation information. The robot runs on an Intel NUC i5 mini PC, while a custom control
 module (CM) board is responsible for low-level sensor acquisition and actuator interfacing.
 An overview of the robot platform is shown in Figure ~\ref{fig:ichiro}.
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
-\caption{ICHIRO ITS humanoid robot platform used in this research.}
-\label{fig:ichiro}
-\end{figure}
 
 \subsection{Robot Operating System 2}
 The robot's software is built using the Robot Operating System 2 (ROS 2) 
@@ -852,7 +850,7 @@ global coordinates.
 
 \subsection{Experimental Setup}
 
-All experiments are conducted on a flat RoboCup soccer field. 
+All experiments are conducted on a flat RoboCup soccer field ($6 \times 9$ m).
 The robot is initialized at the same global position for both 
 static and dynamic evaluations, namely the kickoff position 
 $P(X_0, Y_0)$ at the center of the field.
@@ -884,10 +882,18 @@ and manual measurement to ensure repeatability. These positions remain
 constant for both static and dynamic experiments. A visualization of 
 the experimental configuration is shown in Fig.~\ref{fig:experiment_setup}.
 
-% TODO: Change figure
+% \begin{figure*}[t] % [t] places it at the top of the page
+% \centering
+% \includegraphics[width=\textwidth]{Experiment Setup.png}
+% \caption{Experimental setup showing the kickoff position of the robot 
+% and the fixed global positions of objects $O_1$–$O_5$ on the field.}
+% \label{fig:experiment_setup}
+% \end{figure*}
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
+% Change 1.0 to 0.6 or 0.5 to make it smaller
+\includegraphics[width=0.5\textwidth]{Experiment Setup.png} 
 \caption{Experimental setup showing the kickoff position of the robot 
 and the fixed global positions of objects $O_1$–$O_5$ on the field.}
 \label{fig:experiment_setup}
@@ -1001,7 +1007,7 @@ After reaching the target, the odometry error is computed as:
 \Delta \theta = \theta_{\text{odom}} - \theta_{\text{true}}
 \]
 
-Following \cite{Martinelli2001}, odometry errors are statistically 
+Following \cite{Martinelli2001APS}, odometry errors are statistically 
 characterized in terms of mean and variance and categorized as:
 
 \begin{itemize}
