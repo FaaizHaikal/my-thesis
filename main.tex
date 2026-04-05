@@ -386,6 +386,7 @@
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{float}
 
 \begin{document}
 %
@@ -472,13 +473,16 @@ which are prohibited in humanoid robot soccer competitions such as RoboCup. In p
 because of camera extrinsic parameters changing continuously caused by walking motion and 
 head movements, IPM is challenging to implement reliably. 
 
-This paper presents the implementation of IPM to estimate object distance on a humanoid soccer robot using ROS 2, 
-a widely used robotics framework that enables modular and real-time data exchange between multiple robot subsystems, 
+This paper presents the implementation of IPM to estimate object distance on a humanoid soccer robot
+developed by ICHIRO ITS team using ROS 2 software, a widely used robotics framework that enables modular 
+and real-time data exchange between multiple robot subsystems, 
 including sensors and processing modules. The proposed system integrates 
 object detection outputs, camera intrinsic parameters, and real-time kinematic transformation 
 obtained from the robot model. Evaluations under static and walking conditions 
-show that the system produces stable object position estimation with an average error within 
-X centimeters in static scenarios and X centimeters during walking.
+show that the system produces stable object position estimation. In addition, a comparison with 
+a previously used regression-based method by ICHIRO ITS demonstrates that the proposed IPM approach provides 
+more consistent accuracy across a wider distance range and eliminates the dependency on active 
+object tracking.
 \end{abstract}
 % IAENGtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -558,6 +562,18 @@ humanoid soccer robot developed by the ICHIRO ITS team. The objective of this wo
 how IPM can be integrated with real-time kinematic transformations in ROS 2 to estimate object positions 
 under both static and dynamic conditions.
 
+Previously, the ICHIRO ITS team utilized a polynomial regression-based 
+approach to estimate distances by mapping the robot's head pan and tilt 
+angles to tracked object distances. However, this method relies on active 
+object tracking, as the mapping is only valid when the object is centered 
+in the field of view. Its performance also degrades at longer distances, 
+where the head tilt angle approaches zero and reduces model sensitivity. 
+In addition, the method requires an empirical calibration process across 
+various head configurations, which is time-consuming and must be repeated 
+whenever the robot configuration changes. These limitations motivate the 
+use of a more robust approach, addressed in this work using Inverse 
+Perspective Mapping.
+
 The remainder of this paper is organized as follows. Section II presents the overall system description, 
 including the humanoid robot platform and the software framework used in this work. 
 Section III introduces the theoretical background underlying the proposed approach, 
@@ -572,17 +588,20 @@ This section describes the humanoid robot platform and software framework used
 in this research, providing the system context in which the proposed approach is implemented.
 
 \subsection{ICHIRO ITS}
-The system is implemented on humanoid soccer robots developed by the ICHIRO ITS
-team from Institut Teknologi Sepuluh Nopember. The team participates in humanoid
-soccer competitions such as RoboCup, contributing to research and development
-of humanoid robotics.
 
-\begin{figure*}[t] % [t] places it at the top of the page
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{Ichiro Architecture.png}
 \caption{ICHIRO ITS humanoid robot platform used in this research.}
 \label{fig:ichiro}
 \end{figure*}
+
+The system is implemented on humanoid soccer robots developed by the ICHIRO ITS
+team from Institut Teknologi Sepuluh Nopember. The team participates in humanoid
+soccer competitions such as RoboCup, contributing to research and development
+of humanoid robotics.
+
+
 
 The robot is classified as a kid-size humanoid, equipped with 20 Degrees of Freedom (DOF)
 driven by servo actuators. A monocular RGB camera (Logitech C930e) is mounted on the robot's
@@ -779,7 +798,7 @@ various distances and angles as shown in Figure \ref{fig:camera_calib}.
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=3in,height=2.5in]{camera-calibration.png}
+\includegraphics[width=3in,height=2.25in]{camera-calibration.png}
 \caption{Visualization of detected checkerboard corners used for camera calibration.}
 \label{fig:camera_calib}
 \end{figure}
@@ -802,6 +821,9 @@ the \texttt{right\_foot\_frame} and \texttt{left\_foot\_frame}. Since the robot 
 with the ground, the $Z$-height of the \texttt{base\_footprint} is set to match the supporting foot 
 (i.e., the foot currently in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates are 
 defined as the midpoint between both feet.
+
+The overall procedure of the robot frame computation is summarized 
+in Algorithm~\ref{alg:robot_frames}.
 
 \begin{algorithm}[!h]
 \caption{Robot Frames Package}
@@ -862,8 +884,8 @@ equation derived in the Section \ref{sec:theories} is modified as follows:
 Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
 \end{equation}
 
-The remaining steps of the IPM algorithm follow the procedure described in 
-Section \ref{sec:theories}.
+The complete IPM projection pipeline is described in 
+Algorithm~\ref{alg:ipm}.
 
 \begin{algorithm}[!h]
 \caption{IPM Package}
@@ -874,8 +896,6 @@ Section \ref{sec:theories}.
 \Ensure Projected Object Positions ($\mathcal{P}$)
 
 \State $K \gets \text{LoadCameraIntrinsics}()$
-\State $(f_x, f_y, c_x, c_y) \gets \text{ExtractIntrinsics}(K)$
-
 \While{receiving detections}
     \State $\mathcal{O} \gets \text{ReadDetections}()$
     \State $\mathcal{P} \gets \emptyset$
@@ -888,15 +908,13 @@ Section \ref{sec:theories}.
             \State $v \gets (o.top + o.bottom)/2$
         \EndIf
 
-        \State $x \gets (u - c_x)/f_x$
+        \State $(x, y) \gets \text{NormalizePixel(u, v, K)}$
         \State $y \gets (v - c_y)/f_y$
 
-        \State $T \gets \text{LookupTransform}(\mathcal{T}, \text{camera} \rightarrow \text{base\_footprint})$
-        \State $R \gets \text{RotationMatrix}(T)$
-        \State $t \gets \text{TranslationVector}(T)$
+        \State $(R, t) \gets \text{LookupTransform}(\mathcal{T}, \text{camera} \rightarrow \text{base\_footprint})$
 
         \State $h \gets 0$
-        \If{$o.\text{label} = \text{ball}$}
+        \If{$o.\text{label} = \text{"ball"}$}
             \State $h \gets \text{ball radius}$
         \EndIf
 
@@ -905,10 +923,7 @@ Section \ref{sec:theories}.
             \State \textbf{continue}
         \EndIf
 
-        \State $X_c \gets Z_c \cdot x$
-        \State $Y_c \gets Z_c \cdot y$
-        \State $P_c \gets (X_c, Y_c, Z_c)$
-
+        \State $P_c \gets (Z_c \cdot x, Z_c \cdot y, Z_c)$
         \State $P_w \gets R \cdot P_c + t$
 
         \State $\mathcal{P} \gets \mathcal{P} \cup \{P_w\}$
@@ -978,7 +993,7 @@ and the fixed global positions of objects $O_1$–$O_6$ on the field.}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.5\textwidth]{Real Setup.jpg}
+\includegraphics[width=0.5\textwidth,height=2.5in]{Real Setup.jpg}
 \caption{Actual experimental setup on the RoboCup field, showing the 
 robot placement and physical arrangement of objects used during evaluation.}
 \label{fig:real_setup}
@@ -1041,7 +1056,6 @@ Y_r \\
 1
 \end{bmatrix}
 \end{equation}
-
 where $\mathbf{T}_{r}^{g}$ denotes the homogeneous transformation 
 from the \texttt{base\_footprint} frame to the global field frame.
 
@@ -1165,6 +1179,31 @@ The small magnitude of these parameters indicates that odometry error
 is limited and is unlikely to be the dominant source of error in the 
 dynamic IPM results.
 
+\subsection{Comparison with Regression-Based Method}
+
+To evaluate the effectiveness of the proposed IPM approach to ICHIRO ITS team, 
+a comparison is conducted with the previous distance estimation method used in the 
+system, which is based on polynomial regression of the robot head 
+pan and tilt angles.
+
+The evaluation is performed in a static setup, where the ball is placed 
+at increasing distances from the robot, ranging from 20 cm to 400 cm. 
+For each distance, both the regression-based method and the proposed 
+IPM method are used to estimate the distance to the ball. In both approaches, 
+the robot actively tracks the ball to ensure a consistent observation 
+for comparison.
+
+Figure~\ref{fig:regression_vs_ipm} shows the comparison between the 
+ground-truth distance and the estimated distances produced by both methods.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{regression_vs_ipm.png}
+\caption{Comparison between regression-based distance estimation and 
+IPM across varying object distances.}
+\label{fig:regression_vs_ipm}
+\end{figure}
+
 %\hfill mds
 %\hfill January 11, 2007
 
@@ -1276,12 +1315,28 @@ dynamic IPM results.
 
 
 \section{Conclusion}
-The conclusion goes here. what
 
-A conclusion section is not compulsory. Although a conclusion may
-review the main points of the paper, do not replicate the abstract
-as the conclusion. A conclusion might elaborate on the importance of
-the work or suggest applications and extensions.
+In this paper,we implemented Inverse Perspective Mapping (IPM)-based 
+object position estimation system on a humanoid soccer robot developed 
+by ICHIRO ITS team using ROS 2. The proposed approach integrates camera calibration, 
+real-time kinematic transformations, and object detection outputs to estimate 
+object positions from monocular vision.
+
+Experimental results demonstrate that the system achieves reliable performance under 
+both static and dynamic conditions. In static scenarios, the method produces accurate 
+and consistent estimates across multiple object types. During walking, the system 
+maintains stable performance despite the influence of robot motion and odometry drift, 
+showing its robustness in realistic operating conditions.
+
+Compared to the previously used regression-based method by ICHIRO ITS, the proposed IPM approach 
+provides more consistent accuracy over a wider distance range and eliminates the 
+dependency on active object tracking. In addition, it removes the need for repeated 
+empirical calibration, making it more practical for deployment in dynamic and 
+time-constrained environments such as humanoid robot competitions.
+
+Future work will focus on integrating the proposed system with higher-level perception 
+modules, such as localization and mapping, as well as improving robustness against 
+detection noise, joint offsets, and IMU drifts.
 
 
 % Can use something like this to put references on a page
@@ -1289,7 +1344,6 @@ the work or suggest applications and extensions.
 % \ifCLASSOPTIONcaptionsoff
 %   \newpage
 % \fi
-
 
 
 % trigger a \newpage just before the given reference
