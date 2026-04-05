@@ -585,7 +585,7 @@ of humanoid robotics.
 \end{figure*}
 
 The robot is classified as a kid-size humanoid, equipped with 20 Degrees of Freedom (DOF)
-driven by servo actuators. A monocular RGB camera (Logitech C920) is mounted on the robot's
+driven by servo actuators. A monocular RGB camera (Logitech C930e) is mounted on the robot's
 head and serves as the primary sensor for perception. Additional sensors include joint
 encoders for all actuated joints and an Inertial Measurement Unit (IMU) that provides
 orientation information. The robot runs on an Intel NUC i5 mini PC, while a custom control
@@ -770,26 +770,24 @@ and the integration of the IPM module for object distance estimation.
 \subsection{Camera Calibration}
 The objective of camera calibration is to obtain the intrinsic parameters ($K$)
 required for the projection calculation between the three-dimensional world and two-dimensional
-image plane as mentioned in Equation \ref{eq:pinhole}. In this paper, we utilized a Logitech C920 camera that was mounted
+image plane as mentioned in Equation \ref{eq:pinhole}. In this paper, we utilized a Logitech C930e camera that was mounted
 on the robot's head.
 
-% TODO: Change MxN
-The calibration was conducted using standard MxN checkerboard with known 
+The calibration was conducted using standard $8 \times 6$ checkerboard with known 
 square dimensions. We captured approximately 15 images of the checkerboard from
 various distances and angles as shown in Figure \ref{fig:camera_calib}.
 
-% TODO: Change figure
 \begin{figure}[!h]
 \centering
-\includegraphics[width=2.5in,height=2in]{NEURAL_NETWORK}
-\caption{A Simple Neural Network Structure}
+\includegraphics[width=3in,height=2.5in]{camera-calibration.png}
+\caption{Visualization of detected checkerboard corners used for camera calibration.}
 \label{fig:camera_calib}
 \end{figure}
 
 These images were then processed using OpenCV
 calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
 coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
-radial and tangensial distortion values for the Logitech C920 were found to be
+radial and tangensial distortion values for the Logitech C930e were found to be
 sufficiently small to be neglected.
 
 \subsection{Robot Frames Package}
@@ -939,7 +937,7 @@ global coordinates.
 All experiments are conducted on a flat RoboCup soccer field ($6 \times 9$ m).
 The robot is initialized at the same global position for both 
 static and dynamic evaluations, namely the kickoff position 
-$P(X_0, Y_0)$ at the center of the field.
+$P(450.0, 300.0)$ at the center of the field.
 
 A fixed set of objects is placed at known global coordinates 
 and remains unchanged throughout all trials. 
@@ -952,44 +950,75 @@ in subsequent tables and equations.
 \label{tab:object_setup}
 \begin{tabular}{c c c}
 \hline
-Symbol & Object & Global Position $(X_i, Y_i)$ [m] \\
+Symbol & Object & Global Position $(X_i, Y_i)$ [cm] \\
 \hline
-$O_1$ & Goalpost 1 & $(X_1, Y_1)$ \\
-$O_2$ & Goalpost 2 & $(X_2, Y_2)$ \\
-$O_3$ & Penalty Marker & $(X_3, Y_3)$ \\
-$O_4$ & Soccer Ball & $(X_4, Y_4)$ \\
-$O_5$ & Opponent Robot & $(X_5, Y_5)$ \\
+$O_1$ & Soccer Ball & $(550.0, 350.0)$ \\
+$O_2$ & Opponent Robot & $(650.0, 200.0)$ \\
+$O_3$ & Penalty Marker & $(750.0, 300.0)$ \\
+$O_4$ & L-Intersection & $(800.0, 450.0)$ \\
+$O_5$ & T-Intersection & $(900.0, 460.0)$ \\
+$O_6$ & Left Goalpost & $(900.0, 170.0)$ \\
 \hline
 \end{tabular}
 \end{table}
 
 The global coordinates $(X_i, Y_i)$ are determined using field geometry 
 and manual measurement to ensure repeatability. These positions remain 
-constant for both static and dynamic experiments. A visualization of 
-the experimental configuration is shown in Fig.~\ref{fig:experiment_setup}.
-
-% \begin{figure*}[t] % [t] places it at the top of the page
-% \centering
-% \includegraphics[width=\textwidth]{Experiment Setup.png}
-% \caption{Experimental setup showing the kickoff position of the robot 
-% and the fixed global positions of objects $O_1$–$O_5$ on the field.}
-% \label{fig:experiment_setup}
-% \end{figure*}
+constant for both static and dynamic experiments. A visualization of the 
+experimental cpnfiguration is shown in Fig.~\ref{fig:experiment_setup}, while the actual experimental setup 
+is presented in Fig.~\ref{fig:real_setup}.
 
 \begin{figure}[!h]
 \centering
-% Change 1.0 to 0.6 or 0.5 to make it smaller
 \includegraphics[width=0.5\textwidth]{Experiment Setup.png} 
 \caption{Experimental setup showing the kickoff position of the robot 
-and the fixed global positions of objects $O_1$–$O_5$ on the field.}
+and the fixed global positions of objects $O_1$–$O_6$ on the field.}
 \label{fig:experiment_setup}
 \end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.5\textwidth]{Real Setup.jpg}
+\caption{Actual experimental setup on the RoboCup field, showing the 
+robot placement and physical arrangement of objects used during evaluation.}
+\label{fig:real_setup}
+\end{figure}
+
+To assess the accuracy of the IPM estimations, three primary error metrics 
+are defined for each observed object: the Euclidean error ($E$), the X-axis 
+error ($E_x$), and the Y-axis error ($E_y$). These errors represents the overall 
+geometric deviation between the estimated position $(\hat{X}, \hat{Y})$ and the ground-truth position 
+$(X, Y)$, defined as:
+
+\begin{equation}
+E_x = \hat{X} - X, \quad
+E_y = \hat{Y} - Y, \quad
+E = \sqrt{(E_x )^2 + ( E_y )^2}
+\end{equation}
+
+To provide a normalized measure of error, the Euclidean error is expressed 
+as a percentage relative to the distance between the robot's initial position 
+$P(450.0, 300.0)$ and the object:
+
+\begin{equation}
+D = \sqrt{(X - X_0)^2 + (Y - Y_0)^2}
+\end{equation}
+
+\begin{equation}
+E^{\%} = \frac{E}{D} \times 100\%
+\end{equation}
+Similarly, the axis-wise percentage errors are defined as:
+
+\begin{equation}
+E_x^{\%} = \frac{|E_x|}{|X - X_0|} \times 100\%, \quad
+E_y^{\%} = \frac{|E_y|}{|Y - Y_0|} \times 100\%
+\end{equation}
 
 
 \subsection{Static Evaluation}
 
 In static evaluation, the robot remains stationary at the kickoff 
-position $P(X_0, Y_0)$, and both the body and head are kept fixed. 
+position $P(450.0, 300.0)$, and both the body and head are kept fixed. 
 Since the robot pose is known and does not change, it is treated 
 as ground truth.
 
@@ -1016,40 +1045,35 @@ Y_r \\
 where $\mathbf{T}_{r}^{g}$ denotes the homogeneous transformation 
 from the \texttt{base\_footprint} frame to the global field frame.
 
-The position error is computed as the Euclidean distance between 
-the estimated and ground-truth object positions:
-
-\begin{equation}
-e_i = \sqrt{( \hat{X}_i - X_i )^2 + ( \hat{Y}_i - Y_i )^2}
-\end{equation}
-
-Table~\ref{tab:static_results} presents an example format of 
-the static evaluation results.
+Table~\ref{tab:static_results} summarizes the static evaluation results, 
+including the estimated positions, Euclidean error, and axis-wise errors 
+reported in both absolute and percentage forms.
 
 \begin{table}[h]
 \centering
-\small
+\footnotesize
 \caption{Static IPM estimation results}
 \label{tab:static_results}
-\begin{tabularx}{\columnwidth}{@{} Y Y c @{}} % Using Y for Object and Position
+\begin{tabular}{c c c c c}
 \toprule
-\textbf{Object} & \textbf{Estimated Position (m)} & \textbf{Error (m)} \\
+\textbf{Obj} & \textbf{$(\hat{X}, \hat{Y})$} & \textbf{$E$} & \textbf{$E_x$} & \textbf{$E_y$} \\
 \midrule
-$O_1$ & (0.52, -0.01) & 0.02 \\
-$O_2$ & (1.03, 0.18) & 0.04 \\
-$O_3$ & (1.56, -0.28) & 0.06 \\
-$O_4$ & (0.98, 0.02) & 0.03 \\
-$O_5$ & (1.20, -0.15) & 0.05 \\
+$O_1$ & (548.1, 351.5) & 2.5 (2.2\%) & -1.9 (1.9\%) & 1.5 (3.1\%) \\
+$O_2$ & (642.5, 200.5) & 7.5 (3.4\%) & -7.5 (3.8\%) & 0.5 (0.5\%) \\
+$O_3$ & (752.3, 300.6) & 2.4 (0.8\%) & 2.3 (0.8\%) & 0.6 (0.0\%) \\
+$O_4$ & (804.2, 443.6) & 7.7 (2.0\%) & 4.2 (1.2\%) & -6.4 (4.3\%) \\
+$O_5$ & (930.1, 460.4) & 31.8 (6.7\%) & 30.1 (6.7\%) & 10.4 (6.9\%) \\
+$O_6$ & (967.4, 168.7) & 67.4 (14.4\%) & 67.4 (15.0\%) & -1.3 (1.0\%) \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \subsection{Dynamic Evaluation}
 
 The dynamic evaluation extends the experiment to conditions in 
 which the robot is walking. The robot starts from the same kickoff 
-position $P(X_0, Y_0)$ and walks toward a predefined target point 
-$Q(X_t, Y_t)$.
+position $P(450.0, 500.0)$ and walks forward for 1 meter toward target point 
+$P'(550.0, 300.0)$, repeated for 10 trials.
 
 During walking, the robot head performs continuous scanning motions 
 to detect visible objects. The IPM module continuously estimates 
@@ -1075,68 +1099,72 @@ Y_r \\
 \end{equation}
 
 As in the static case, the error is computed as the Euclidean 
-distance between the estimated and ground-truth object positions.
+distance between the estimated and ground-truth object positions. 
+In addition, axis-wise errors $(E_x, E_y)$ are reported to analyze 
+directional bias.
+
+Certain objects are excluded from the dynamic evaluation. In particular, 
+the L-intersection ($O_4$) and T-intersection ($O_5$) are not considered, 
+as multiple instances of these features are detected at different 
+locations during walking. This ambiguity makes it difficult to associate 
+detections with a unique ground-truth reference. Therefore, only objects 
+with consistent and unambiguous detections are included in the analysis.
+
+Table~\ref{tab:dynamic_results} presents the aggregated dynamic 
+evaluation results.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Dynamic IPM estimation results (aggregated over 10 trials)}
+\label{tab:dynamic_results}
+\begin{tabular}{c c c c}
+\toprule
+\textbf{Obj} & \textbf{Mean Estimated Position} & \textbf{$E$ (cm)} & \textbf{$(E_x, E_y)$ (cm)} \\
+\midrule
+$O_1$ & (551.7, 347.6) & 10.2 & (1.7, -2.4) \\
+$O_2$ & (643.2, 203.2) & 19.0 & (-6.8, 3.2) \\
+$O_3$ & (744.2, 299.9) & 11.2 & (-5.8, -0.1) \\
+$O_6$ & (953.1, 177.7) & 68.2 & (53.1, 7.6) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 It is important to note that odometry is not involved in the IPM 
 distance computation itself. IPM estimates object positions purely 
 relative to the robot. Odometry is only used to express estimated 
 object positions in global coordinates during dynamic evaluation. 
 Therefore, the measured dynamic error is influenced by both IPM 
-estimation error and odometry drift.
+estimation error and odometry drift. To better understand this 
+influence, odometry error is analyzed independently using the 
+approach proposed by Martinelli~\cite{Martinelli2001APS}.
 
-To characterize odometry performance independently, the robot 
-repeatedly walks from $P(X_0, Y_0)$ to $Q(X_t, Y_t)$ for $K$ trials. 
-After reaching the target, the odometry error is computed as:
-\[
-\Delta x = x_{\text{odom}} - x_{\text{true}}, \quad
-\Delta y = y_{\text{odom}} - y_{\text{true}}, \quad
-\Delta \theta = \theta_{\text{odom}} - \theta_{\text{true}}
-\]
+This method characterizes odometry uncertainty through four parameters: 
+translational bias ($E_t$), translational noise ($K_\rho$), 
+rotational bias ($E_r$), and rotational noise ($K_\theta$).
+The parameters $E_t$ and $E_r$ represent \textit{systematic errors}, 
+which correspond to consistent and repeatable deviations in robot motion, 
+such as bias in traveled distance or heading. In contrast, the parameters 
+$K_\rho$ and $K_\theta$ represent \textit{non-systematic errors}, which 
+capture random variations caused by factors such as sensor noise and 
+surface interaction.
 
-Following \cite{Martinelli2001APS}, odometry errors are statistically 
-characterized in terms of mean and variance and categorized as:
+The parameters are estimated by comparing the odometry-based pose 
+$(x_{\text{odom}}, y_{\text{odom}}, \theta_{\text{odom}})$ with the 
+ground-truth pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$ 
+over 10 trials of 1-meter forward motion. The resulting odometry 
+error parameters are:
+\begin{align*}
+E_r &= -0.0005 \ \text{deg/cm}, \\
+K_\theta &= 0.1995 \ \text{deg}^2/\text{cm}, \\
+E_t &= -2.61\%, \\
+K_\rho &= -0.0272 \ \text{cm}.
+\end{align*}
 
-\begin{itemize}
-    \item Systematic errors (repeatable and trajectory-dependent),
-    \item Non-systematic errors (random and externally influenced).
-\end{itemize}
+The small magnitude of these parameters indicates that odometry error 
+is limited and is unlikely to be the dominant source of error in the 
+dynamic IPM results.
 
-For each trial, IPM estimates are computed continuously for all 
-visible objects, and the reported values correspond to the mean 
-estimated position and mean Euclidean error over the duration 
-of the walk. Odometry drift values are reported once per trial, 
-as they equally affect all global reconstructions within that trial.
-
-Table~\ref{tab:dynamic_results} presents an example format 
-for the dynamic evaluation results.
-
-\begin{table}[h]
-\centering
-\small
-\setlength{\tabcolsep}{3pt} 
-\caption{Dynamic IPM results with odometry drift per trial}
-\label{tab:dynamic_results}
-% Changed Object column to 'c' and kept Mean Pos as 'Y'
-\begin{tabularx}{\columnwidth}{@{} c c Y c c c c @{}} 
-\toprule
-\textbf{Trial} & \textbf{Obj.} & \textbf{Mean Pos. (m)} & \textbf{Err. (m)} & \boldmath$\Delta x$ & \boldmath$\Delta y$ & \boldmath$\Delta \theta$ \\
-\midrule
-\multirow{5}{*}{1}
- & $O_1$ & (1.08, -0.02) & 0.10 & \multirow{5}{*}{0.05} & \multirow{5}{*}{-0.03} & \multirow{5}{*}{0.04} \\
- & $O_2$ & (1.62, 0.24)  & 0.13 &  &  &  \\
- & $O_3$ & (2.11, -0.28) & 0.11 &  &  &  \\
- & $O_4$ & (1.62, 0.24)  & 0.13 &  &  &  \\
- & $O_5$ & (2.11, -0.28) & 0.11 &  &  &  \\
-\midrule
-\multirow{5}{*}{2}
- & $O_1$ & (1.05, -0.01) & 0.08 & \multirow{5}{*}{0.04} & \multirow{5}{*}{-0.02} & \multirow{5}{*}{0.03} \\
- & $O_2$ & (1.57, 0.23)  & 0.09 &  &  &  \\
- & $O_3$ & (2.06, -0.27) & 0.07 &  &  &  \\
- & $O_4$ & (1.57, 0.23)  & 0.09 &  &  &  \\
- & $O_5$ & (2.06, -0.27) & 0.07 &  &  &  \\
-\bottomrule
-\end{tabularx}
-\end{table}
 %\hfill mds
 %\hfill January 11, 2007
 
