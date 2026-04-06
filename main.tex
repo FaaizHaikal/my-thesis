@@ -723,8 +723,8 @@ Inverse Perspective Mapping relies on the assumption that objects of interest li
 In humanoid soccer, this assumption is valid for objects such as the ball, goalposts, and field markings, 
 as the playing field is flat \cite{RoboCupHumanoidLeague2025}.
 
-By constraining points to lie on a plane, we can recover the depth Zc along the optical axis
-by defining a plane in the camera frame Pc using plane equation as shown in Equation \ref{eq:plane_camera}
+By constraining points to lie on a plane, we can recover the depth $Z_c$ along the optical axis
+by defining a plane in the camera frame $P_c$ using plane equation as shown in Equation \ref{eq:plane_camera}
 
 \begin{equation} \label{eq:plane_camera}
 n_c \cdot P_c + d = 0
@@ -782,9 +782,8 @@ as these indicate points behind the camera or parallel to the optical axis.
 
 \section{Methodology}
 
-This section describes the implementation of the proposed system on a humanoid soccer robot. 
-The methodology focuses on practical aspects, including camera calibration, robot kinematic frame construction, 
-and the integration of the IPM module for object distance estimation.
+This section focuses on practical aspects, including camera calibration, 
+robot kinematic frame construction,and the integration of the IPM module for object distance estimation.
 
 \subsection{Camera Calibration}
 The objective of camera calibration is to obtain the intrinsic parameters ($K$)
@@ -1223,7 +1222,7 @@ the robot actively tracks the ball to ensure a consistent observation
 for comparison. The experimental setup during these measurements are 
 shown in Figure~\ref{fig:regression_vs_ipm_setup} while 
 Figure~\ref{fig:regression_vs_ipm} shows the comparison between the 
-ground-truth distance and the estimated distances produced by both methods..
+ground-truth distance and the estimated distances produced by both methods.
 
 \begin{figure}[h]
 \centering
