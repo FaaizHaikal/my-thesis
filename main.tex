@@ -750,24 +750,24 @@ planar surface, typically the ground. Given the camera intrinsic parameters
 and the camera pose relative to the ground, the depth of a projected image 
 point can be analytically recovered \cite{Bertozzi1998,Park2023}.
 
-The pixel $(x, y)$ in image plane can be converted to three-dimensional coordinate in 
+The pixel $(u, v)$ in image plane can be converted to three-dimensional coordinate in 
 camera frame $Pc = [X_c, Y_c, Z_c]$ using the inversion of pinhole camera model
 mentioned in Equation \ref{eq:pinhole}, which:
 
 \begin{equation} \label{eq:coordinate_camera} 
 \begin{bmatrix} X_c \ Y_c \end{bmatrix} = Z_c 
-\begin{bmatrix} \frac{x - p_x}{f_x} \\ \frac{y - p_y}{f_y} \end{bmatrix} = Z_c 
-\begin{bmatrix} u \ v \end{bmatrix} 
+\begin{bmatrix} \frac{u - p_x}{f_x} \\ \frac{v - p_y}{f_y} \end{bmatrix} = Z_c 
+\begin{bmatrix} x \ y \end{bmatrix} 
 \end{equation}
-where $(u, v)$ are normalized image coordinates.
+where $(x, y)$ are normalized image coordinates.
 
-By substituting $P_c = [u Z_c, v Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with 
+By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with 
 the distance $d$ from the plane in the \texttt{camera\_frame} equal to 
 the camera translation $T_z$ along the vertical axis relative to the base frame.
 Therefore, $Z_c$ can be calculated as shown in Equation \ref{eq:zc}.
 
 \begin{equation} \label{eq:zc}
-Z_c = \frac{-T_z}{n_x u + n_y v + n_z}
+Z_c = \frac{-T_z}{r_{13} x + r_{23} y + r_{33}}
 \end{equation}
 
 Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$ 
@@ -909,8 +909,6 @@ Algorithm~\ref{alg:ipm}.
         \EndIf
 
         \State $(x, y) \gets \text{NormalizePixel(u, v, K)}$
-        \State $y \gets (v - c_y)/f_y$
-
         \State $(R, t) \gets \text{LookupTransform}(\mathcal{T}, \text{camera} \rightarrow \text{base\_footprint})$
 
         \State $h \gets 0$
