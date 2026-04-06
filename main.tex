@@ -947,6 +947,12 @@ while the dynamic evaluation analyzes system behavior during walking
 and considers the influence of odometry when expressing results in 
 global coordinates.
 
+In addition, a comparative evaluation is conducted against the 
+previous regression-based method used in the system. This comparison 
+highlights the limitations of the prior approach and demonstrates 
+the advantages of the proposed IPM method in terms of scalability 
+and robustness across varying distances.
+
 \subsection{Experimental Setup}
 
 All experiments are conducted on a flat RoboCup soccer field ($6 \times 9$ m).
@@ -1082,6 +1088,20 @@ $O_6$ & (967.4, 168.7) & 67.4 (14.4\%) & 67.4 (15.0\%) & -1.3 (1.0\%) \\
 \end{tabular}
 \end{table}
 
+The results in Table~\ref{tab:static_results} show that the proposed 
+IPM method achieves high accuracy for objects located at moderate distances, 
+with most errors remaining below 10 cm. However, a clear trend can be observed 
+where the estimation error increases as the object distance becomes larger, 
+particularly for $O_5$ and $O_6$.
+
+This behavior is inherent to the IPM formulation. In this setup, the robot's head 
+is oriented forward with a tilt angle of $0^\circ$. As the object 
+moves farther away, its image projection approaches the horizon line due to 
+perspective effects. In this region, small variations in pixel location 
+lead to large changes in the estimated depth, causing the value computed 
+in Equation~\ref{eq:zc_final} to increase significantly and become more 
+sensitive to noise.
+
 \subsection{Dynamic Evaluation}
 
 The dynamic evaluation extends the experiment to conditions in 
@@ -1179,6 +1199,17 @@ The small magnitude of these parameters indicates that odometry error
 is limited and is unlikely to be the dominant source of error in the 
 dynamic IPM results.
 
+The dynamic evaluation results in Table~\ref{tab:dynamic_results} show an overall 
+increase in estimation error compared to the static case. This is expected, 
+as the robot performs continuous motion, introducing additional sources 
+of uncertainty such as body oscillation, head movement, and detection noises.
+Despite these challenges, the IPM method maintains relatively stable 
+performance across most objects. The ball ($O_1$) and penalty marker ($O_3$) 
+exhibit low mean errors, indicating that the system remains reliable for 
+nearby and mid-range objects during walking. Larger errors are observed for 
+distant objects such as the goalpost ($O_6$), which is consistent 
+with the limitations explained in the static evaluation.
+
 \subsection{Comparison with Regression-Based Method}
 
 To evaluate the effectiveness of the proposed IPM approach to ICHIRO ITS team, 
@@ -1203,6 +1234,25 @@ ground-truth distance and the estimated distances produced by both methods.
 IPM across varying object distances.}
 \label{fig:regression_vs_ipm}
 \end{figure}
+
+As shown in Figure~\ref{fig:regression_vs_ipm}, the regression-based method 
+produces acceptable performance at short distances but fails to generalize 
+as the distance increases. In particular, beyond approximately 250 cm, 
+the estimated distance saturates and no longer follows the ground-truth trend.
+This limitation arises because the regression model relies primarily on the head 
+tilt angle as its input feature. As the object moves farther away, the tilt angle 
+eventually remains at $0^\circ$, reducing the sensitivity of the 
+mapping and causing the model to lose its predictive capability.
+
+In contrast, the proposed IPM method maintains a consistent relationship with 
+the ground-truth distance across the entire range. Even at longer distances, 
+the estimated values continue to increase proportionally, demonstrating better 
+scalability and robustness.
+
+Furthermore, unlike the regression-based approach, IPM does not require 
+continuous object tracking, as demonstrated in both the static and dynamic 
+evaluations. This enables more flexible perception and supports higher-level 
+capabilities such as localization.
 
 %\hfill mds
 %\hfill January 11, 2007
@@ -1316,7 +1366,7 @@ IPM across varying object distances.}
 
 \section{Conclusion}
 
-In this paper,we implemented Inverse Perspective Mapping (IPM)-based 
+In this paper, we implemented Inverse Perspective Mapping (IPM)-based 
 object position estimation system on a humanoid soccer robot developed 
 by ICHIRO ITS team using ROS 2. The proposed approach integrates camera calibration, 
 real-time kinematic transformations, and object detection outputs to estimate 
@@ -1345,6 +1395,7 @@ detection noise, joint offsets, and IMU drifts.
 %   \newpage
 % \fi
 
+\newpage
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
