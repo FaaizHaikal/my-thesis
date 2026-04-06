@@ -1184,8 +1184,8 @@ surface interaction.
 The parameters are estimated by comparing the odometry-based pose 
 $(x_{\text{odom}}, y_{\text{odom}}, \theta_{\text{odom}})$ with the 
 ground-truth pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$ 
-over 10 trials of 1-meter forward motion. The resulting odometry 
-error parameters are:
+at the end of each trial, when the robot reaches the target position 
+$P'(550.0, 300.0)$. The resulting odometry error parameters are:
 \begin{align*}
 E_r &= -0.0005 \ \text{deg/cm}, \\
 K_\theta &= 0.1995 \ \text{deg}^2/\text{cm}, \\
@@ -1220,10 +1220,17 @@ at increasing distances from the robot, ranging from 20 cm to 400 cm.
 For each distance, both the regression-based method and the proposed 
 IPM method are used to estimate the distance to the ball. In both approaches, 
 the robot actively tracks the ball to ensure a consistent observation 
-for comparison.
-
+for comparison. The experimental setup during these measurements are 
+shown in Figure~\ref{fig:regression_vs_ipm_setup} while 
 Figure~\ref{fig:regression_vs_ipm} shows the comparison between the 
-ground-truth distance and the estimated distances produced by both methods.
+ground-truth distance and the estimated distances produced by both methods..
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth,height=3in]{regression_vs_ipm_setup.jpg}
+\caption{Actual experimental setup for comparing between regression-based and IPM distance estimation.}
+\label{fig:regression_vs_ipm_setup}
+\end{figure}
 
 \begin{figure}[h]
 \centering
