@@ -962,7 +962,8 @@ and robustness across varying distances.
 
 \subsection{Experimental Setup}
 
-All experiments are conducted on a flat RoboCup soccer field ($6 \times 9$ m).
+All experiments were done on a $6 \times 9$ m kid-size field 
+following the RoboCup 2026 rules.
 The robot is initialized at the same global position for both 
 static and dynamic evaluations, namely the kickoff position 
 $P(450.0, 300.0)$ at the center of the field.
@@ -985,7 +986,7 @@ $O_2$ & Opponent Robot & $(650.0, 200.0)$ \\
 $O_3$ & Penalty Marker & $(750.0, 300.0)$ \\
 $O_4$ & L-Intersection & $(800.0, 450.0)$ \\
 $O_5$ & T-Intersection & $(900.0, 450.0)$ \\
-$O_6$ & Left Goalpost & $(900.0, 170.0)$ \\
+$O_6$ & Left Goalpost & $(900.0, 190.0)$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -1085,12 +1086,12 @@ reported in both absolute and percentage forms.
 \toprule
 \textbf{Obj} & \textbf{$(\hat{X}, \hat{Y})$} & \textbf{$E$} & \textbf{$E_x$} & \textbf{$E_y$} \\
 \midrule
-$O_1$ & (548.1, 351.5) & 2.5 (2.2\%) & -1.9 (1.9\%) & 1.5 (3.1\%) \\
-$O_2$ & (642.5, 200.5) & 7.5 (3.4\%) & -7.5 (3.8\%) & 0.5 (0.5\%) \\
-$O_3$ & (752.3, 300.6) & 2.4 (0.8\%) & 2.3 (0.8\%) & 0.6 (0.0\%) \\
-$O_4$ & (804.2, 443.6) & 7.7 (2.0\%) & 4.2 (1.2\%) & -6.4 (4.3\%) \\
-$O_5$ & (930.1, 460.4) & 31.8 (6.7\%) & 30.1 (6.7\%) & 10.4 (6.9\%) \\
-$O_6$ & (967.4, 168.7) & 67.4 (14.4\%) & 67.4 (15.0\%) & -1.3 (1.0\%) \\
+$O_1$ & (550.0, 348.4) & 1.6 (1.4\%) & 0.0 (0.0\%) & -1.6 (3.1\%) \\
+$O_2$ & (644.0, 197.3) & 6.6 (3.0\%) & -6.0 (3.0\%) & -2.7 (2.7\%) \\
+$O_3$ & (746.7.3, 300.5) & 3.3 (1.1\%) & -3.3 (1.1\%) & 0.5 (0.0\%) \\
+$O_4$ & (806.2, 446.8) & 7.0 (1.9\%) & 6.2 (1.8\%) & -3.2 (2.2\%) \\
+$O_5$ & (916.4, 463.4) & 21.3 (4.5\%) & 16.4 (3.7\%) & 13.4 (8.9\%) \\
+$O_6$ & (938.6, 194.3) & 38.8 (8.4\%) & 38.6 (8.6\%) & 4.3 (3.9\%) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1163,10 +1164,10 @@ evaluation results.
 \toprule
 \textbf{Obj} & \textbf{Mean Estimated Position} & \textbf{$E$ (cm)} & \textbf{$(E_x, E_y)$ (cm)} \\
 \midrule
-$O_1$ & (551.7, 347.6) & 10.2 & (1.7, -2.4) \\
-$O_2$ & (643.2, 203.2) & 19.0 & (-6.8, 3.2) \\
-$O_3$ & (744.2, 299.9) & 11.2 & (-5.8, -0.1) \\
-$O_6$ & (953.1, 177.7) & 68.2 & (53.1, 7.6) \\
+$O_1$ & (552.9, 344.4) & 9.6 & (2.9, -5.6) \\
+$O_2$ & (650.4, 188.9) & 23.7 & (0.4, -11.1) \\
+$O_3$ & (748.6, 299.3) & 12.1 & (-1.4, -0.7) \\
+$O_6$ & (940.2, 197.3) & 54.1 & (40.2, 7.3) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1196,10 +1197,10 @@ ground-truth pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$
 at the end of each trial, when the robot reaches the target position 
 $P'(550.0, 300.0)$. The resulting odometry error parameters are:
 \begin{align*}
-E_r &= -0.0005 \ \text{deg/cm}, \\
-K_\theta &= 0.1995 \ \text{deg}^2/\text{cm}, \\
-E_t &= -2.61\%, \\
-K_\rho &= -0.0272 \ \text{cm}.
+E_r &= 0.0007 \ \text{deg/cm}, \\
+K_\theta &= 0.1068 \ \text{deg}^2/\text{cm}, \\
+E_t &= -1.8142\%, \\
+K_\rho &= 0.346958 \ \text{cm}.
 \end{align*}
 
 The small magnitude of these parameters indicates that odometry error 
