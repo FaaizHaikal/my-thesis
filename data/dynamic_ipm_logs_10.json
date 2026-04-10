@@ -3,680 +3,788 @@
     {
       "frame": 0,
       "label": "ball",
-      "field_x": 551.2255627685951,
-      "field_y": 355.1104303888284,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 0,
       "label": "robot",
-      "field_x": 644.4143502674411,
-      "field_y": 201.5714489069565,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 0,
       "label": "L-Intersection",
-      "field_x": 804.7361783374049,
-      "field_y": 443.5955865390548,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 0,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 0,
-      "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 0,
       "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659334,
+      "field_x": 935.5912245843597,
+      "field_y": 461.1380268439053,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 0,
+      "label": "X-Intersection",
+      "field_x": 751.9526203311076,
+      "field_y": 300.134200605092,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 0,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 1,
       "label": "ball",
-      "field_x": 551.9734699385601,
-      "field_y": 355.7088350384398,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 1,
       "label": "robot",
-      "field_x": 641.9198469675324,
-      "field_y": 202.90570612647946,
+      "field_x": 641.1109735697896,
+      "field_y": 206.2518881132641,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 1,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.71069146512,
+      "field_y": 439.668159999301,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 1,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 1,
-      "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659334,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 1,
       "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
+      "field_x": 752.0038871151196,
+      "field_y": 300.7356074257959,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 1,
+      "label": "T-Intersection",
+      "field_x": 920.104547648232,
+      "field_y": 457.08510064703967,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 1,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 2,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 2,
       "label": "robot",
-      "field_x": 641.9198469675324,
-      "field_y": 202.90570612647946,
+      "field_x": 641.1109735697896,
+      "field_y": 206.2518881132641,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 2,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 2,
       "label": "goalpost",
-      "field_x": 976.2436313077392,
-      "field_y": 179.68711864234825,
+      "field_x": 938.2376214810606,
+      "field_y": 185.84863254652078,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 2,
       "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
+      "field_x": 751.9013711022441,
+      "field_y": 299.53299972252444,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 2,
       "label": "T-Intersection",
-      "field_x": 935.3909183683093,
-      "field_y": 466.4756723607204,
+      "field_x": 935.72497482498,
+      "field_y": 462.15504280617023,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 2,
+      "label": "goalpost",
+      "field_x": 920.3964149447336,
+      "field_y": 402.49060645683403,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 2,
+      "label": "T-Intersection",
+      "field_x": 906.8726684653702,
+      "field_y": 132.25344912938039,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 3,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 3,
       "label": "robot",
-      "field_x": 641.9198469675324,
-      "field_y": 202.90570612647946,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 3,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 3,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 3,
       "label": "X-Intersection",
-      "field_x": 746.7503290415021,
-      "field_y": 300.56049342952923,
+      "field_x": 751.9013711022441,
+      "field_y": 299.53299972252444,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 3,
       "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659334,
+      "field_x": 935.4575483827487,
+      "field_y": 460.1215738627136,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 3,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 4,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 4,
       "label": "robot",
-      "field_x": 644.4143502674411,
-      "field_y": 201.57144890695648,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 4,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.086274266523,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 4,
       "label": "goalpost",
-      "field_x": 957.9210232486889,
-      "field_y": 184.0302168392021,
+      "field_x": 938.2376214810606,
+      "field_y": 185.84863254652078,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 4,
       "label": "X-Intersection",
-      "field_x": 746.7503290415023,
-      "field_y": 300.56049342952923,
+      "field_x": 745.9553210399043,
+      "field_y": 300.8407164426622,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 4,
       "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659335,
+      "field_x": 919.8541605437457,
+      "field_y": 455.1202945433208,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 4,
+      "label": "goalpost",
+      "field_x": 920.3964149447336,
+      "field_y": 402.49060645683403,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 5,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 5,
       "label": "robot",
-      "field_x": 641.9198469675324,
-      "field_y": 202.90570612647946,
+      "field_x": 641.1109735697896,
+      "field_y": 206.2518881132641,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 5,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.71069146512,
+      "field_y": 439.668159999301,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 5,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 938.2376214810606,
+      "field_y": 185.84863254652078,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 5,
-      "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659334,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 5,
       "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
+      "field_x": 748.848134074166,
+      "field_y": 299.5984150849673,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 5,
+      "label": "T-Intersection",
+      "field_x": 935.72497482498,
+      "field_y": 462.15504280617023,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 5,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 6,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 6,
       "label": "robot",
-      "field_x": 644.3817183201712,
-      "field_y": 201.20276834141066,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 6,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 6,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 6,
-      "label": "T-Intersection",
-      "field_x": 943.5956596372647,
-      "field_y": 469.2519130659334,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 6,
       "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
+      "field_x": 751.9013711022441,
+      "field_y": 299.53299972252444,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 6,
+      "label": "T-Intersection",
+      "field_x": 919.8541605437457,
+      "field_y": 455.1202945433208,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 6,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 7,
       "label": "ball",
-      "field_x": 551.2350280595908,
-      "field_y": 355.31085539642766,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 7,
       "label": "robot",
-      "field_x": 641.9198469675324,
-      "field_y": 202.90570612647946,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 7,
       "label": "L-Intersection",
-      "field_x": 804.5151132618569,
-      "field_y": 442.08627426652293,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 7,
       "label": "goalpost",
-      "field_x": 957.9210232486888,
-      "field_y": 184.03021683920213,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 7,
       "label": "X-Intersection",
-      "field_x": 752.8446931070266,
-      "field_y": 300.4988719714641,
+      "field_x": 751.9526203311076,
+      "field_y": 300.134200605092,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 7,
       "label": "T-Intersection",
-      "field_x": 943.3803219718963,
-      "field_y": 468.18716415948404,
+      "field_x": 935.4575483827487,
+      "field_y": 460.1215738627136,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 7,
+      "label": "goalpost",
+      "field_x": 920.6473986085003,
+      "field_y": 404.42957225073997,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 8,
       "label": "ball",
-      "field_x": 550.9888495193305,
-      "field_y": 355.30511235611095,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 8,
       "label": "robot",
-      "field_x": 641.3430687381392,
-      "field_y": 203.11104643350177,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 8,
       "label": "L-Intersection",
-      "field_x": 802.0715585895728,
-      "field_y": 441.5330856221064,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 8,
       "label": "goalpost",
-      "field_x": 953.315241067835,
-      "field_y": 185.70573276154175,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 8,
       "label": "X-Intersection",
-      "field_x": 751.1834692449736,
-      "field_y": 300.83613982219543,
+      "field_x": 751.9526203311076,
+      "field_y": 300.134200605092,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 8,
       "label": "T-Intersection",
-      "field_x": 930.8881630366673,
-      "field_y": 465.4974104853243,
+      "field_x": 920.104547648232,
+      "field_y": 457.08510064703967,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 8,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 9,
       "label": "ball",
-      "field_x": 551.5329109371933,
-      "field_y": 355.4186652735753,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 9,
       "label": "robot",
-      "field_x": 644.4893737117782,
-      "field_y": 201.414864641248,
+      "field_x": 643.5744545173436,
+      "field_y": 204.93749602239336,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 9,
       "label": "L-Intersection",
-      "field_x": 813.1267630323442,
-      "field_y": 445.94774002497184,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 9,
       "label": "goalpost",
-      "field_x": 976.3745591845039,
-      "field_y": 180.26123286147993,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 9,
       "label": "X-Intersection",
-      "field_x": 752.8439687430124,
-      "field_y": 300.8292239226991,
+      "field_x": 751.9526203311076,
+      "field_y": 300.134200605092,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 9,
       "label": "T-Intersection",
-      "field_x": 942.9825768643166,
-      "field_y": 467.6612111195552,
+      "field_x": 935.72497482498,
+      "field_y": 462.15504280617023,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.003272492347489368
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 9,
+      "label": "goalpost",
+      "field_x": 920.2710240306454,
+      "field_y": 401.52190319688987,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 10,
       "label": "ball",
-      "field_x": 549.52321849347,
-      "field_y": 353.75705313443837,
+      "field_x": 551.9485291491735,
+      "field_y": 353.1548872503064,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 10,
       "label": "robot",
-      "field_x": 635.377813883066,
-      "field_y": 205.63905615036384,
+      "field_x": 641.1109735697896,
+      "field_y": 206.2518881132641,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 10,
       "label": "L-Intersection",
-      "field_x": 783.1848469455729,
-      "field_y": 432.4996358173332,
+      "field_x": 799.6417450585908,
+      "field_y": 438.94292639021535,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 10,
       "label": "goalpost",
-      "field_x": 914.0617356757439,
-      "field_y": 193.41351710168158,
+      "field_x": 955.1248646930151,
+      "field_y": 181.65881736998597,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 10,
       "label": "X-Intersection",
-      "field_x": 731.5682895270761,
-      "field_y": 300.0246506566822,
+      "field_x": 748.848134074166,
+      "field_y": 299.5984150849673,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 10,
       "label": "T-Intersection",
-      "field_x": 888.8750151609751,
-      "field_y": 448.4134379933836,
+      "field_x": 919.8541605437457,
+      "field_y": 455.1202945433208,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 10,
+      "label": "goalpost",
+      "field_x": 920.5218731193077,
+      "field_y": 403.4598293353833,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 11,
       "label": "ball",
-      "field_x": 548.9988308398572,
-      "field_y": 353.45878805544777,
+      "field_x": 551.9672074676417,
+      "field_y": 353.1580589021311,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 11,
       "label": "robot",
-      "field_x": 634.7732365273391,
-      "field_y": 205.98024473770602,
+      "field_x": 641.055695524575,
+      "field_y": 206.27179318947375,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 11,
       "label": "L-Intersection",
-      "field_x": 774.0770785320585,
-      "field_y": 430.1921425412896,
+      "field_x": 795.7513377541317,
+      "field_y": 438.11894337381693,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 11,
       "label": "goalpost",
-      "field_x": 910.1078866823048,
-      "field_y": 194.3668973525597,
+      "field_x": 938.065905146537,
+      "field_y": 185.8687943621132,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 11,
       "label": "X-Intersection",
-      "field_x": 730.1360317666467,
-      "field_y": 300.03540017018537,
+      "field_x": 748.8474743122764,
+      "field_y": 299.58518496144825,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     },
     {
       "frame": 11,
       "label": "T-Intersection",
-      "field_x": 872.6290799886488,
-      "field_y": 442.1182102543197,
+      "field_x": 920.4572769744752,
+      "field_y": 458.12131124076984,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": 0.001090830782496456
     }
   ],
   [
     {
       "frame": 12,
       "label": "ball",
-      "field_x": 549.883466291671,
-      "field_y": 353.94286667991366,
+      "field_x": 552.3872791815102,
+      "field_y": 353.2552781659621,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -684,8 +792,8 @@
     {
       "frame": 12,
       "label": "robot",
-      "field_x": 637.7037055481997,
-      "field_y": 204.39208499319452,
+      "field_x": 644.8094290343112,
+      "field_y": 203.98530354891585,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -693,8 +801,8 @@
     {
       "frame": 12,
       "label": "L-Intersection",
-      "field_x": 790.8892782024676,
-      "field_y": 435.51246281602397,
+      "field_x": 800.1891351111562,
+      "field_y": 439.4692139990516,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -702,8 +810,8 @@
     {
       "frame": 12,
       "label": "goalpost",
-      "field_x": 929.2667663093532,
-      "field_y": 189.77935535011557,
+      "field_x": 964.6301510289786,
+      "field_y": 178.68350435108394,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -711,8 +819,8 @@
     {
       "frame": 12,
       "label": "X-Intersection",
-      "field_x": 737.0333951977897,
-      "field_y": 299.95649171242115,
+      "field_x": 755.2561700473959,
+      "field_y": 299.13736413574316,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -720,8 +828,8 @@
     {
       "frame": 12,
       "label": "T-Intersection",
-      "field_x": 895.3615020366508,
-      "field_y": 449.6784068697275,
+      "field_x": 944.9454062442755,
+      "field_y": 465.6124569409037,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -731,221 +839,62 @@
     {
       "frame": 13,
       "label": "ball",
-      "field_x": 549.3557906212004,
-      "field_y": 353.64212711642256,
+      "field_x": 552.3352488451568,
+      "field_y": 353.12285905195114,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
       "frame": 13,
       "label": "robot",
-      "field_x": 634.7765290150329,
-      "field_y": 205.98612765097408,
+      "field_x": 645.0538118944446,
+      "field_y": 203.64783581271,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
       "frame": 13,
       "label": "L-Intersection",
-      "field_x": 781.1603948730229,
-      "field_y": 431.66755035948336,
+      "field_x": 803.5636224367842,
+      "field_y": 439.71657479259477,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
       "frame": 13,
       "label": "goalpost",
-      "field_x": 910.0955939822605,
-      "field_y": 194.37343763386758,
+      "field_x": 965.6475818581457,
+      "field_y": 177.97789715762516,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
       "frame": 13,
       "label": "X-Intersection",
-      "field_x": 730.1339262883882,
-      "field_y": 300.0359591358344,
+      "field_x": 752.1352176818908,
+      "field_y": 298.9583757891816,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
       "frame": 13,
       "label": "T-Intersection",
-      "field_x": 898.6618794677804,
-      "field_y": 451.62811677902596,
+      "field_x": 943.4737858344935,
+      "field_y": 463.6796164918337,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0
-    }
-  ],
-  [
-    {
-      "frame": 14,
-      "label": "ball",
-      "field_x": 549.6490795496348,
-      "field_y": 353.7765804583731,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
+      "robot_theta": -0.001090830782496456
     },
     {
-      "frame": 14,
-      "label": "robot",
-      "field_x": 635.0594937945292,
-      "field_y": 205.76926804039147,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 14,
-      "label": "L-Intersection",
-      "field_x": 783.9951675656511,
-      "field_y": 432.7187528448369,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 14,
+      "frame": 13,
       "label": "goalpost",
-      "field_x": 913.1235488970103,
-      "field_y": 193.5177478947462,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 14,
-      "label": "X-Intersection",
-      "field_x": 731.5641852785425,
-      "field_y": 299.95174043982774,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 14,
-      "label": "T-Intersection",
-      "field_x": 903.3099994517493,
-      "field_y": 451.2784010225174,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    }
-  ],
-  [
-    {
-      "frame": 15,
-      "label": "ball",
-      "field_x": 549.3530065926969,
-      "field_y": 353.4440499892422,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 15,
-      "label": "robot",
-      "field_x": 637.0863684580935,
-      "field_y": 204.7478938243758,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 15,
-      "label": "L-Intersection",
-      "field_x": 780.9612753018184,
-      "field_y": 430.2644608072369,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 15,
-      "label": "goalpost",
-      "field_x": 910.0846039280616,
-      "field_y": 194.37927728796225,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 15,
-      "label": "X-Intersection",
-      "field_x": 735.3966062166569,
-      "field_y": 298.8314015651345,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    },
-    {
-      "frame": 15,
-      "label": "T-Intersection",
-      "field_x": 898.2934367982971,
-      "field_y": 449.7068076757218,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0
-    }
-  ],
-  [
-    {
-      "frame": 16,
-      "label": "ball",
-      "field_x": 549.4209269958272,
-      "field_y": 353.5311378253938,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.001090830782496456
-    },
-    {
-      "frame": 16,
-      "label": "robot",
-      "field_x": 636.9823532410583,
-      "field_y": 204.54387096594579,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.001090830782496456
-    },
-    {
-      "frame": 16,
-      "label": "L-Intersection",
-      "field_x": 781.2993533439018,
-      "field_y": 431.30006743729354,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.001090830782496456
-    },
-    {
-      "frame": 16,
-      "label": "goalpost",
-      "field_x": 909.9691158852854,
-      "field_y": 193.8774657786416,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.001090830782496456
-    },
-    {
-      "frame": 16,
-      "label": "X-Intersection",
-      "field_x": 735.3951616753873,
-      "field_y": 298.5200829188583,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.001090830782496456
-    },
-    {
-      "frame": 16,
-      "label": "T-Intersection",
-      "field_x": 898.6364626798718,
-      "field_y": 450.17419429145394,
+      "field_x": 928.1549498598572,
+      "field_y": 404.1426628299685,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": -0.001090830782496456
@@ -953,10 +902,205 @@
   ],
   [
     {
+      "frame": 14,
+      "label": "ball",
+      "field_x": 552.0914048233456,
+      "field_y": 353.12704368827906,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "robot",
+      "field_x": 644.4861061330296,
+      "field_y": 204.23781870828083,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "L-Intersection",
+      "field_x": 801.1337488728987,
+      "field_y": 439.1958499776257,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "goalpost",
+      "field_x": 960.8849770507613,
+      "field_y": 179.77378375017554,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "X-Intersection",
+      "field_x": 753.5694315902301,
+      "field_y": 299.25229798554955,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "T-Intersection",
+      "field_x": 923.0040580395139,
+      "field_y": 457.6123413419134,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 14,
+      "label": "goalpost",
+      "field_x": 923.8415280383578,
+      "field_y": 403.7627965820618,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    }
+  ],
+  [
+    {
+      "frame": 15,
+      "label": "ball",
+      "field_x": 552.0370506189712,
+      "field_y": 353.23703150034225,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "robot",
+      "field_x": 644.5917835092255,
+      "field_y": 204.4531573923321,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "L-Intersection",
+      "field_x": 800.9785248698075,
+      "field_y": 439.5751461181478,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "goalpost",
+      "field_x": 961.0080297192012,
+      "field_y": 180.3349698990425,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "X-Intersection",
+      "field_x": 753.6166835593668,
+      "field_y": 300.1885143349169,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "T-Intersection",
+      "field_x": 922.5883425859306,
+      "field_y": 456.1521651142946,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    },
+    {
+      "frame": 15,
+      "label": "goalpost",
+      "field_x": 923.4836111761249,
+      "field_y": 402.3284508029036,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.001090830782496456
+    }
+  ],
+  [
+    {
+      "frame": 16,
+      "label": "ball",
+      "field_x": 551.7982013004539,
+      "field_y": 352.99956047494163,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "robot",
+      "field_x": 644.1638914469098,
+      "field_y": 204.49076860865586,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "L-Intersection",
+      "field_x": 797.990094461859,
+      "field_y": 438.05021619700346,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "goalpost",
+      "field_x": 957.190037923564,
+      "field_y": 180.85089099549583,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "X-Intersection",
+      "field_x": 751.9455526540287,
+      "field_y": 299.9679822227752,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "T-Intersection",
+      "field_x": 932.744032661136,
+      "field_y": 458.9238273321887,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 16,
+      "label": "goalpost",
+      "field_x": 918.5957323791497,
+      "field_y": 400.8903386074012,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    }
+  ],
+  [
+    {
       "frame": 17,
       "label": "ball",
-      "field_x": 549.3435405554866,
-      "field_y": 353.24858006326144,
+      "field_x": 551.7994890091843,
+      "field_y": 352.9990831842957,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -964,8 +1108,8 @@
     {
       "frame": 17,
       "label": "robot",
-      "field_x": 637.0863684580929,
-      "field_y": 204.74789382437604,
+      "field_x": 644.164356794501,
+      "field_y": 204.49187314760292,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -973,8 +1117,8 @@
     {
       "frame": 17,
       "label": "L-Intersection",
-      "field_x": 781.1559301085167,
-      "field_y": 431.66138078072953,
+      "field_x": 797.9889891041787,
+      "field_y": 438.0489358818206,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -982,8 +1126,8 @@
     {
       "frame": 17,
       "label": "goalpost",
-      "field_x": 910.084603928059,
-      "field_y": 194.37927728796268,
+      "field_x": 957.1873069898406,
+      "field_y": 180.85223691906828,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -991,8 +1135,8 @@
     {
       "frame": 17,
       "label": "X-Intersection",
-      "field_x": 735.5412801661038,
-      "field_y": 299.9683662808941,
+      "field_x": 751.944917452948,
+      "field_y": 299.9681118526379,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1000,8 +1144,17 @@
     {
       "frame": 17,
       "label": "T-Intersection",
-      "field_x": 898.2934367982962,
-      "field_y": 449.7068076757214,
+      "field_x": 917.5295559198803,
+      "field_y": 455.92935044137835,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 17,
+      "label": "goalpost",
+      "field_x": 918.8118665388672,
+      "field_y": 402.81275950188456,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1011,8 +1164,8 @@
     {
       "frame": 18,
       "label": "ball",
-      "field_x": 275.9309660813707,
-      "field_y": 616.3619801747918,
+      "field_x": 551.7994890091843,
+      "field_y": 352.9990831842957,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1020,8 +1173,8 @@
     {
       "frame": 18,
       "label": "robot",
-      "field_x": 599.1371345518013,
-      "field_y": 579.0473892092041,
+      "field_x": 644.164356794501,
+      "field_y": 204.49187314760292,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1029,8 +1182,8 @@
     {
       "frame": 18,
       "label": "L-Intersection",
-      "field_x": 450,
-      "field_y": 300,
+      "field_x": 797.9889891041787,
+      "field_y": 438.0489358818206,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1038,8 +1191,8 @@
     {
       "frame": 18,
       "label": "goalpost",
-      "field_x": 450,
-      "field_y": 300,
+      "field_x": 957.1873069898406,
+      "field_y": 180.85223691906828,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1047,8 +1200,8 @@
     {
       "frame": 18,
       "label": "X-Intersection",
-      "field_x": 450,
-      "field_y": 300,
+      "field_x": 751.944917452948,
+      "field_y": 299.9681118526379,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1056,8 +1209,82 @@
     {
       "frame": 18,
       "label": "T-Intersection",
-      "field_x": 450,
-      "field_y": 300,
+      "field_x": 932.8574617182386,
+      "field_y": 459.92682373176666,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 18,
+      "label": "goalpost",
+      "field_x": 918.8118665388672,
+      "field_y": 402.81275950188456,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    }
+  ],
+  [
+    {
+      "frame": 19,
+      "label": "ball",
+      "field_x": 551.7994890091843,
+      "field_y": 352.9990831842957,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "robot",
+      "field_x": 644.164356794501,
+      "field_y": 204.49187314760292,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "L-Intersection",
+      "field_x": 802.2131315216029,
+      "field_y": 440.3765232337156,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "goalpost",
+      "field_x": 940.1560709847819,
+      "field_y": 185.08803956825926,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "X-Intersection",
+      "field_x": 751.9900987551098,
+      "field_y": 300.5695045707561,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "T-Intersection",
+      "field_x": 933.0894491298968,
+      "field_y": 461.9372477450877,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0
+    },
+    {
+      "frame": 19,
+      "label": "T-Intersection",
+      "field_x": 916.859163822905,
+      "field_y": 128.12294497555547,
       "robot_x": 450,
       "robot_y": 300,
       "robot_theta": 0
@@ -1066,361 +1293,182 @@
   [
     {
       "frame": 20,
-      "label": "T-Intersection",
-      "field_x": 446.0255553806919,
-      "field_y": 686.8857680459882,
+      "label": "ball",
+      "field_x": 326.1611603194006,
+      "field_y": 575.829539646478,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.01090830782496456
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "robot",
+      "field_x": 590.0567847609607,
+      "field_y": 570.0132218917086,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "L-Intersection",
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "goalpost",
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "T-Intersection",
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "goalpost",
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
+    },
+    {
+      "frame": 20,
+      "label": "X-Intersection",
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": -0.003272492347489368
     }
   ],
   [
     {
       "frame": 21,
       "label": "T-Intersection",
-      "field_x": 482.9326997812308,
-      "field_y": 535.2829166645971,
+      "field_x": 197.77067022526708,
+      "field_y": 1642.4414622146653,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.004363323129985824
+      "robot_theta": 0.017453292519943295
     }
   ],
   [
     {
       "frame": 22,
       "label": "T-Intersection",
-      "field_x": 502.799761539857,
-      "field_y": 572.7370729068978,
+      "field_x": 449.47609445850907,
+      "field_y": 735.9945753606685,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.05235987755982989
+      "robot_theta": 0.039269908169872414
     }
   ],
   [
     {
       "frame": 23,
       "label": "T-Intersection",
-      "field_x": 533.744468543688,
-      "field_y": 943.3714459664127,
+      "field_x": 490.75028137742396,
+      "field_y": 347.2490692963205,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.001090830782496456
+      "robot_theta": 0.002181661564992912
     }
   ],
   [
     {
       "frame": 24,
-      "label": "L-Intersection",
-      "field_x": 677.3136133690832,
-      "field_y": 414.30735327161824,
+      "label": "X-Intersection",
+      "field_x": 463.6127764150196,
+      "field_y": 361.9320259142247,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.032724923474893676
+      "robot_theta": -0.013089969389957472
     },
     {
       "frame": 24,
       "label": "T-Intersection",
-      "field_x": 501.55836253276175,
-      "field_y": 632.7352836977534,
+      "field_x": 509.72029257144004,
+      "field_y": 443.6390313665711,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.032724923474893676
+      "robot_theta": -0.013089969389957472
     }
   ],
   [
     {
       "frame": 25,
-      "label": "L-Intersection",
-      "field_x": 669.3413547827357,
-      "field_y": 408.1134640259585,
+      "label": "ball",
+      "field_x": 554.1180754648162,
+      "field_y": 357.7177039250694,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.007635815477475192
+      "robot_theta": 0.050178215994836975
     }
   ],
   [
     {
       "frame": 26,
       "label": "ball",
-      "field_x": 552.0996326145272,
-      "field_y": 335.2214030893228,
+      "field_x": 544.41292734376,
+      "field_y": 349.6415082555112,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.013089969389957472
+      "robot_theta": 0.08617563181722002
     },
     {
       "frame": 26,
-      "label": "L-Intersection",
-      "field_x": 765.1273602332693,
-      "field_y": 464.69610953691165,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.013089969389957472
-    },
-    {
-      "frame": 26,
-      "label": "L-Intersection",
-      "field_x": 818.1328566641811,
-      "field_y": 371.9864204699296,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.013089969389957472
-    }
-  ],
-  [
-    {
-      "frame": 27,
-      "label": "ball",
-      "field_x": 548.677389266279,
-      "field_y": 334.070024715403,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.014180800172453928
-    },
-    {
-      "frame": 27,
-      "label": "L-Intersection",
-      "field_x": 717.6846754090427,
-      "field_y": 434.5164288126557,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.014180800172453928
-    },
-    {
-      "frame": 27,
-      "label": "L-Intersection",
-      "field_x": 773.6981404981266,
-      "field_y": 360.04222665670034,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.014180800172453928
-    }
-  ],
-  [
-    {
-      "frame": 28,
-      "label": "ball",
-      "field_x": 550.2436858291105,
-      "field_y": 332.90132177167175,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.050178215994836975
-    },
-    {
-      "frame": 28,
-      "label": "L-Intersection",
-      "field_x": 803.9474808563032,
-      "field_y": 362.1745706992425,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.050178215994836975
-    },
-    {
-      "frame": 28,
-      "label": "L-Intersection",
-      "field_x": 732.5941978871327,
-      "field_y": 441.0361630779393,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.050178215994836975
-    }
-  ],
-  [
-    {
-      "frame": 29,
-      "label": "ball",
-      "field_x": 555.8454944799118,
-      "field_y": 341.91897418198766,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.01090830782496456
-    },
-    {
-      "frame": 29,
-      "label": "L-Intersection",
-      "field_x": 800.8421845555598,
-      "field_y": 506.5097885220897,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.01090830782496456
-    },
-    {
-      "frame": 29,
-      "label": "L-Intersection",
-      "field_x": 880.1783027618034,
-      "field_y": 408.5864425398415,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.01090830782496456
-    },
-    {
-      "frame": 29,
-      "label": "goalpost",
-      "field_x": 855.3790411190271,
-      "field_y": 142.35225930427228,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.01090830782496456
-    },
-    {
-      "frame": 29,
       "label": "X-Intersection",
-      "field_x": 736.4758495083456,
-      "field_y": 260.08155197678366,
+      "field_x": 449.4797482252994,
+      "field_y": 379.63760845550075,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.01090830782496456
+      "robot_theta": 0.08617563181722002
     }
   ],
   [
     {
-      "frame": 30,
+      "frame": 27,
       "label": "ball",
-      "field_x": 555.2091276280421,
-      "field_y": 335.97474262599167,
+      "field_x": 495.00922549268034,
+      "field_y": 283.0538446645253,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 30,
-      "label": "L-Intersection",
-      "field_x": 713.7394750062261,
-      "field_y": 435.3295344854871,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 30,
-      "label": "L-Intersection",
-      "field_x": 785.7109789693828,
-      "field_y": 366.02529126552656,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 30,
-      "label": "goalpost",
-      "field_x": 870.4552780353984,
-      "field_y": 119.67199090710557,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    },
-    {
-      "frame": 30,
-      "label": "goalpost",
-      "field_x": 873.724102883636,
-      "field_y": 323.16345096531114,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": 0.002181661564992912
-    }
-  ],
-  [
-    {
-      "frame": 31,
-      "label": "robot",
-      "field_x": 635.0896364976688,
-      "field_y": 163.21433090201498,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.025089107997418487
-    },
-    {
-      "frame": 31,
-      "label": "goalpost",
-      "field_x": 902.2000059041649,
-      "field_y": 115.94694873498892,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.025089107997418487
-    },
-    {
-      "frame": 31,
-      "label": "ball",
-      "field_x": 556.0273394870629,
-      "field_y": 335.2808528447153,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.025089107997418487
-    },
-    {
-      "frame": 31,
-      "label": "X-Intersection",
-      "field_x": 734.3957662742727,
-      "field_y": 256.27756181964355,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.025089107997418487
+      "robot_theta": 0.020725784867432664
     }
   ],
   [
     {
       "frame": 32,
       "label": "robot",
-      "field_x": 624.5604845723675,
-      "field_y": 177.9907400285244,
+      "field_x": 698.3982354507999,
+      "field_y": 180.69149010666808,
       "robot_x": 450,
       "robot_y": 300,
-      "robot_theta": -0.0272707695624114
-    },
-    {
-      "frame": 32,
-      "label": "L-Intersection",
-      "field_x": 652.0028337544765,
-      "field_y": 87.63930100241157,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.0272707695624114
-    },
-    {
-      "frame": 32,
-      "label": "goalpost",
-      "field_x": 865.5044739454248,
-      "field_y": 143.5758179787872,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.0272707695624114
-    },
-    {
-      "frame": 32,
-      "label": "goalpost",
-      "field_x": 956.3553484114539,
-      "field_y": 337.7220862546453,
-      "robot_x": 450,
-      "robot_y": 300,
-      "robot_theta": -0.0272707695624114
+      "robot_theta": 0.07853981633974483
     }
   ],
   [
     {
       "frame": 33,
       "label": "robot",
-      "field_x": 651.6572430277384,
-      "field_y": 166.48202362070825,
-      "robot_x": 452.6231544792363,
-      "robot_y": 299.9656610268425,
-      "robot_theta": 0.016362461737446838
-    },
-    {
-      "frame": 33,
-      "label": "L-Intersection",
-      "field_x": 716.1685265945233,
-      "field_y": 28.313935982327735,
-      "robot_x": 452.6231544792363,
-      "robot_y": 299.9656610268425,
-      "robot_theta": 0.016362461737446838
-    },
-    {
-      "frame": 33,
-      "label": "goalpost",
-      "field_x": 915.8157278809995,
-      "field_y": 139.0328003961648,
-      "robot_x": 452.6231544792363,
-      "robot_y": 299.9656610268425,
+      "field_x": 673.5928329953236,
+      "field_y": 191.72370705290854,
+      "robot_x": 450,
+      "robot_y": 300,
       "robot_theta": 0.016362461737446838
     }
   ],
@@ -1428,814 +1476,1128 @@
     {
       "frame": 34,
       "label": "robot",
-      "field_x": 622.7698211793967,
-      "field_y": 173.4178538701379,
-      "robot_x": 452.6231544792363,
-      "robot_y": 299.9656610268425,
-      "robot_theta": -0.0272707695624114
-    },
-    {
-      "frame": 34,
-      "label": "L-Intersection",
-      "field_x": 667.3257680238559,
-      "field_y": 57.54045839749347,
-      "robot_x": 452.6231544792363,
-      "robot_y": 299.9656610268425,
-      "robot_theta": -0.0272707695624114
+      "field_x": 450,
+      "field_y": 300,
+      "robot_x": 450,
+      "robot_y": 300,
+      "robot_theta": 0.0272707695624114
     }
   ],
   [
     {
       "frame": 35,
-      "label": "robot",
-      "field_x": 654.6583111017837,
-      "field_y": 167.62401586631674,
-      "robot_x": 456.6532740942818,
-      "robot_y": 299.88212167269813,
-      "robot_theta": -0.028361600344907856
+      "label": "T-Intersection",
+      "field_x": 452.61362073231163,
+      "field_y": 300.13411537227597,
+      "robot_x": 452.61362073231163,
+      "robot_y": 300.13411537227597,
+      "robot_theta": 0.07635815477475191
     },
     {
       "frame": 35,
-      "label": "L-Intersection",
-      "field_x": 710.2309585182725,
-      "field_y": 47.251288643962994,
-      "robot_x": 456.6532740942818,
-      "robot_y": 299.88212167269813,
-      "robot_theta": -0.028361600344907856
-    }
-  ],
-  [
-    {
-      "frame": 36,
-      "label": "robot",
-      "field_x": 674.1771148877754,
-      "field_y": 153.29021854181272,
-      "robot_x": 461.35319433651784,
-      "robot_y": 299.88724849240714,
-      "robot_theta": 0.006544984694978736
-    },
-    {
-      "frame": 36,
-      "label": "L-Intersection",
-      "field_x": 758.1122933935457,
-      "field_y": -9.574231159473413,
-      "robot_x": 461.35319433651784,
-      "robot_y": 299.88724849240714,
-      "robot_theta": 0.006544984694978736
-    }
-  ],
-  [
-    {
-      "frame": 37,
-      "label": "L-Intersection",
-      "field_x": 650.301757888338,
-      "field_y": 108.46744311622922,
-      "robot_x": 466.28995616485327,
-      "robot_y": 299.3901427155421,
-      "robot_theta": -0.05781403147231216
-    },
-    {
-      "frame": 37,
-      "label": "T-Intersection",
-      "field_x": 362.763702606323,
-      "field_y": -201.93276663979736,
-      "robot_x": 466.28995616485327,
-      "robot_y": 299.3901427155421,
-      "robot_theta": -0.05781403147231216
-    }
-  ],
-  [
-    {
-      "frame": 38,
-      "label": "T-Intersection",
-      "field_x": 426.3396340125647,
-      "field_y": -25.11599259189046,
-      "robot_x": 466.28995616485327,
-      "robot_y": 299.3901427155421,
-      "robot_theta": -0.10035643198967395
-    },
-    {
-      "frame": 38,
       "label": "goalpost",
-      "field_x": 466.28995616485327,
-      "field_y": 299.3901427155421,
-      "robot_x": 466.28995616485327,
-      "robot_y": 299.3901427155421,
-      "robot_theta": -0.10035643198967395
+      "field_x": 452.61362073231163,
+      "field_y": 300.13411537227597,
+      "robot_x": 452.61362073231163,
+      "robot_y": 300.13411537227597,
+      "robot_theta": 0.07635815477475191
+    }
+  ],
+  [
+    {
+      "frame": 36,
+      "label": "T-Intersection",
+      "field_x": 455.3150205373307,
+      "field_y": -374.6193003479056,
+      "robot_x": 456.63613650368427,
+      "robot_y": 300.34052680508034,
+      "robot_theta": 0.04036073895236887
+    }
+  ],
+  [
+    {
+      "frame": 37,
+      "label": "T-Intersection",
+      "field_x": 473.064041868483,
+      "field_y": -26.22700653896129,
+      "robot_x": 456.63613650368427,
+      "robot_y": 300.34052680508034,
+      "robot_theta": 0.03490658503988659
+    }
+  ],
+  [
+    {
+      "frame": 38,
+      "label": "T-Intersection",
+      "field_x": 630.326703455237,
+      "field_y": 304.42640355815024,
+      "robot_x": 461.32626878635676,
+      "robot_y": 300.62225264543235,
+      "robot_theta": 0.06217735460229799
     }
   ],
   [
     {
       "frame": 39,
+      "label": "robot",
+      "field_x": 603.0780181297309,
+      "field_y": 330.0675831814127,
+      "robot_x": 461.32626878635676,
+      "robot_y": 300.62225264543235,
+      "robot_theta": 0.009817477042468103
+    }
+  ],
+  [
+    {
+      "frame": 40,
+      "label": "robot",
+      "field_x": 647.7249489564731,
+      "field_y": 208.4426032301473,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
+      "label": "ball",
+      "field_x": 569.2994802448984,
+      "field_y": 359.6736434702786,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
+      "label": "L-Intersection",
+      "field_x": 962.9700836869583,
+      "field_y": 507.5936629126279,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
+      "label": "goalpost",
+      "field_x": 1059.8444695190983,
+      "field_y": 159.70870715133793,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
+      "label": "X-Intersection",
+      "field_x": 806.0348468711778,
+      "field_y": 301.3687288905649,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
+      "label": "goalpost",
+      "field_x": 1126.6786972587745,
+      "field_y": 454.4304656750529,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    },
+    {
+      "frame": 40,
       "label": "T-Intersection",
-      "field_x": 397.3647826421585,
-      "field_y": -176.55993494144224,
-      "robot_x": 471.28835799262566,
-      "robot_y": 299.57560972193403,
-      "robot_theta": 0.08944812416470939
+      "field_x": 1233.8572082822038,
+      "field_y": 564.6057545039755,
+      "robot_x": 466.2878534675897,
+      "robot_y": 300.6330771612065,
+      "robot_theta": -0.009817477042468103
+    }
+  ],
+  [
+    {
+      "frame": 41,
+      "label": "ball",
+      "field_x": 565.7732795738912,
+      "field_y": 360.7313394660654,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    },
+    {
+      "frame": 41,
+      "label": "L-Intersection",
+      "field_x": 734.9715485682261,
+      "field_y": 523.8118054399921,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    },
+    {
+      "frame": 41,
+      "label": "goalpost",
+      "field_x": 1182.0427242362418,
+      "field_y": 143.84776340316841,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    },
+    {
+      "frame": 41,
+      "label": "T-Intersection",
+      "field_x": 1024.0360832584772,
+      "field_y": 501.5834265930798,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    },
+    {
+      "frame": 41,
+      "label": "L-Intersection",
+      "field_x": 864.7024093459213,
+      "field_y": 473.8827292833067,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    },
+    {
+      "frame": 41,
+      "label": "X-Intersection",
+      "field_x": 803.2166268423988,
+      "field_y": 307.1167209481975,
+      "robot_x": 471.26339949414717,
+      "robot_y": 301.14505574877006,
+      "robot_theta": 0.14726215563702155
+    }
+  ],
+  [
+    {
+      "frame": 42,
+      "label": "goalpost",
+      "field_x": 837.696939197729,
+      "field_y": 1294.9999448315712,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.004363323129985824
+    },
+    {
+      "frame": 42,
+      "label": "L-Intersection",
+      "field_x": 476.185882905176,
+      "field_y": 301.2256068840205,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.004363323129985824
+    },
+    {
+      "frame": 42,
+      "label": "T-Intersection",
+      "field_x": 476.185882905176,
+      "field_y": 301.2256068840205,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.004363323129985824
+    },
+    {
+      "frame": 42,
+      "label": "L-Intersection",
+      "field_x": 476.185882905176,
+      "field_y": 301.2256068840205,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.004363323129985824
+    },
+    {
+      "frame": 42,
+      "label": "goalpost",
+      "field_x": 476.185882905176,
+      "field_y": 301.2256068840205,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.004363323129985824
+    }
+  ],
+  [
+    {
+      "frame": 43,
+      "label": "T-Intersection",
+      "field_x": 211.06045206216604,
+      "field_y": 1058.1160740849068,
+      "robot_x": 476.185882905176,
+      "robot_y": 301.2256068840205,
+      "robot_theta": 0.022907446432425576
+    }
+  ],
+  [
+    {
+      "frame": 44,
+      "label": "T-Intersection",
+      "field_x": 458.65462923252835,
+      "field_y": 692.3322347077377,
+      "robot_x": 480.9360497812571,
+      "robot_y": 301.77732044859596,
+      "robot_theta": 0.12108221685710661
+    }
+  ],
+  [
+    {
+      "frame": 45,
+      "label": "T-Intersection",
+      "field_x": 518.4406813154606,
+      "field_y": 366.30577968223065,
+      "robot_x": 480.9360497812571,
+      "robot_y": 301.77732044859596,
+      "robot_theta": 0.038179077387375956
+    }
+  ],
+  [
+    {
+      "frame": 46,
+      "label": "L-Intersection",
+      "field_x": 532.6345156793992,
+      "field_y": 446.87167137719007,
+      "robot_x": 485.54555436568734,
+      "robot_y": 301.91312083365796,
+      "robot_theta": 0.032724923474893676
+    }
+  ],
+  [
+    {
+      "frame": 47,
+      "label": "ball",
+      "field_x": 563.3352251009502,
+      "field_y": 357.53283205742514,
+      "robot_x": 489.9470921818828,
+      "robot_y": 302.3951676233287,
+      "robot_theta": 0.1341721862470641
     }
   ],
   [
     {
       "frame": 48,
       "label": "ball",
-      "field_x": 547.6037939441036,
-      "field_y": 363.5315394048022,
-      "robot_x": 498.2712144225161,
-      "robot_y": 300.1109589964952,
-      "robot_theta": 0.09272061651219876
+      "field_x": 554.7048992035533,
+      "field_y": 348.8055028212254,
+      "robot_x": 489.9470921818828,
+      "robot_y": 302.3951676233287,
+      "robot_theta": 0.04145156973486533
+    },
+    {
+      "frame": 48,
+      "label": "L-Intersection",
+      "field_x": 699.9200378841832,
+      "field_y": 464.4197477234925,
+      "robot_x": 489.9470921818828,
+      "robot_y": 302.3951676233287,
+      "robot_theta": 0.04145156973486533
     }
   ],
   [
     {
       "frame": 49,
       "label": "ball",
-      "field_x": 545.4575717996263,
-      "field_y": 356.792197208688,
-      "robot_x": 498.2712144225161,
-      "robot_y": 300.1109589964952,
-      "robot_theta": -0.028361600344907856
+      "field_x": 527.6082559796085,
+      "field_y": 297.6485311550669,
+      "robot_x": 494.1875838495475,
+      "robot_y": 302.4969516583763,
+      "robot_theta": 0.004363323129985824
+    },
+    {
+      "frame": 49,
+      "label": "L-Intersection",
+      "field_x": 572.2520426692921,
+      "field_y": 299.0701250696239,
+      "robot_x": 494.1875838495475,
+      "robot_y": 302.4969516583763,
+      "robot_theta": 0.004363323129985824
     }
   ],
   [
     {
       "frame": 50,
       "label": "ball",
-      "field_x": 547.6325906423623,
-      "field_y": 365.00448294412126,
-      "robot_x": 502.14487840446816,
-      "robot_y": 300.1025079592621,
-      "robot_theta": -0.04581489286485115
+      "field_x": 556.2473992333299,
+      "field_y": 345.43170868643404,
+      "robot_x": 498.2207326966391,
+      "robot_y": 302.9386532943026,
+      "robot_theta": 0.1407171709420428
     }
   ],
   [
     {
       "frame": 51,
       "label": "ball",
-      "field_x": 543.2999593188057,
-      "field_y": 362.0259479348081,
-      "robot_x": 505.83909770116065,
-      "robot_y": 300.30419639811896,
-      "robot_theta": 0.0818123086872342
+      "field_x": 559.243824701456,
+      "field_y": 342.10145561926504,
+      "robot_x": 502.0981789623558,
+      "robot_y": 303.0190279202959,
+      "robot_theta": 0.017453292519943295
     }
   ],
   [
     {
       "frame": 52,
       "label": "ball",
-      "field_x": 545.6704407153389,
-      "field_y": 355.9358756320017,
-      "robot_x": 509.37051235709873,
-      "robot_y": 300.2117230509103,
-      "robot_theta": -0.02399827721492203
+      "field_x": 562.3577241816274,
+      "field_y": 344.651295157767,
+      "robot_x": 502.0981789623558,
+      "robot_y": 303.0190279202959,
+      "robot_theta": 0.019634954084936207
     }
   ],
   [
     {
       "frame": 53,
       "label": "ball",
-      "field_x": 543.1049502100748,
-      "field_y": 364.24602222484936,
-      "robot_x": 509.37051235709873,
-      "robot_y": 300.2117230509103,
-      "robot_theta": 0.013089969389957472
+      "field_x": 688.9535159181961,
+      "field_y": 272.8780035763376,
+      "robot_x": 505.7876667700191,
+      "robot_y": 303.3580442246863,
+      "robot_theta": 0.10253809355466686
     }
   ],
   [
     {
       "frame": 54,
-      "label": "ball",
-      "field_x": 666.7423779844819,
-      "field_y": 542.3153380065834,
-      "robot_x": 512.7347314162852,
-      "robot_y": 300.4469721643988,
-      "robot_theta": 0.11344640137963143
+      "label": "robot",
+      "field_x": 682.7449133608646,
+      "field_y": 184.15809374348567,
+      "robot_x": 505.7876667700191,
+      "robot_y": 303.3580442246863,
+      "robot_theta": 0.026179938779914945
+    },
+    {
+      "frame": 54,
+      "label": "L-Intersection",
+      "field_x": 826.7747549231065,
+      "field_y": -35.68072144276783,
+      "robot_x": 505.7876667700191,
+      "robot_y": 303.3580442246863,
+      "robot_theta": 0.026179938779914945
     }
   ],
   [
     {
       "frame": 55,
-      "label": "ball",
-      "field_x": 556.8289815631014,
-      "field_y": 343.00403169081574,
-      "robot_x": 512.7347314162852,
-      "robot_y": 300.4469721643988,
-      "robot_theta": -0.028361600344907856
+      "label": "robot",
+      "field_x": 691.0212148759161,
+      "field_y": 187.2132747329881,
+      "robot_x": 509.3262889298325,
+      "robot_y": 303.3039994914209,
+      "robot_theta": -0.04363323129985824
     },
     {
       "frame": 55,
       "label": "L-Intersection",
-      "field_x": 744.1037789057294,
-      "field_y": 435.8766549807109,
-      "robot_x": 512.7347314162852,
-      "robot_y": 300.4469721643988,
-      "robot_theta": -0.028361600344907856
+      "field_x": 800.50209680976,
+      "field_y": 16.1676185637902,
+      "robot_x": 509.3262889298325,
+      "robot_y": 303.3039994914209,
+      "robot_theta": -0.04363323129985824
     },
     {
       "frame": 55,
       "label": "L-Intersection",
-      "field_x": 556.3769017270666,
-      "field_y": 951.1914866231139,
-      "robot_x": 512.7347314162852,
-      "robot_y": 300.4469721643988,
-      "robot_theta": -0.028361600344907856
+      "field_x": 946.0842637998144,
+      "field_y": 88.82470007280733,
+      "robot_x": 509.3262889298325,
+      "robot_y": 303.3039994914209,
+      "robot_theta": -0.04363323129985824
     }
   ],
   [
     {
       "frame": 56,
-      "label": "ball",
-      "field_x": 552.2501011672742,
-      "field_y": 348.9410303238065,
-      "robot_x": 515.9540075560441,
-      "robot_y": 300.4259017504711,
-      "robot_theta": 0.026179938779914945
+      "label": "robot",
+      "field_x": 512.700283986628,
+      "field_y": 303.49558881516595,
+      "robot_x": 512.700283986628,
+      "robot_y": 303.49558881516595,
+      "robot_theta": 0.13744467859455345
     },
     {
       "frame": 56,
       "label": "L-Intersection",
-      "field_x": 800.1270399695251,
-      "field_y": 534.7256204620695,
-      "robot_x": 515.9540075560441,
-      "robot_y": 300.4259017504711,
-      "robot_theta": 0.026179938779914945
+      "field_x": 512.700283986628,
+      "field_y": 303.49558881516595,
+      "robot_x": 512.700283986628,
+      "robot_y": 303.49558881516595,
+      "robot_theta": 0.13744467859455345
     },
     {
       "frame": 56,
       "label": "T-Intersection",
-      "field_x": 867.7472132897221,
-      "field_y": 473.1061325840007,
-      "robot_x": 515.9540075560441,
-      "robot_y": 300.4259017504711,
-      "robot_theta": 0.026179938779914945
+      "field_x": 512.700283986628,
+      "field_y": 303.49558881516595,
+      "robot_x": 512.700283986628,
+      "robot_y": 303.49558881516595,
+      "robot_theta": 0.13744467859455345
+    },
+    {
+      "frame": 56,
+      "label": "goalpost",
+      "field_x": 512.700283986628,
+      "field_y": 303.49558881516595,
+      "robot_x": 512.700283986628,
+      "robot_y": 303.49558881516595,
+      "robot_theta": 0.13744467859455345
     }
   ],
   [
     {
       "frame": 57,
-      "label": "ball",
-      "field_x": 557.3971064146907,
-      "field_y": 346.6424483323609,
-      "robot_x": 519.0219806114952,
-      "robot_y": 300.6001138856602,
-      "robot_theta": 0.07853981633974483
-    },
-    {
-      "frame": 57,
-      "label": "L-Intersection",
-      "field_x": 758.1344223411564,
-      "field_y": 471.91377897356153,
-      "robot_x": 519.0219806114952,
-      "robot_y": 300.6001138856602,
-      "robot_theta": 0.07853981633974483
-    },
-    {
-      "frame": 57,
-      "label": "L-Intersection",
-      "field_x": 813.8362883572752,
-      "field_y": 382.7514169459855,
-      "robot_x": 519.0219806114952,
-      "robot_y": 300.6001138856602,
-      "robot_theta": 0.07853981633974483
+      "label": "robot",
+      "field_x": 665.700916179755,
+      "field_y": 89.7492584263351,
+      "robot_x": 512.700283986628,
+      "robot_y": 303.49558881516595,
+      "robot_theta": 0.044724062082354694
     }
   ],
   [
-    {
-      "frame": 58,
-      "label": "ball",
-      "field_x": 557.7297961638308,
-      "field_y": 344.8809607376115,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": -0.020725784867432664
-    },
-    {
-      "frame": 58,
-      "label": "L-Intersection",
-      "field_x": 722.5073946946945,
-      "field_y": 433.3431221458294,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": -0.020725784867432664
-    },
     {
       "frame": 58,
       "label": "T-Intersection",
-      "field_x": 767.3763663316465,
-      "field_y": 387.60794296336735,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": -0.020725784867432664
+      "field_x": 447.2513434726416,
+      "field_y": -77.16124102362079,
+      "robot_x": 518.982950801219,
+      "robot_y": 304.0120633074462,
+      "robot_theta": 0.07308566242726255
+    },
+    {
+      "frame": 58,
+      "label": "goalpost",
+      "field_x": 518.982950801219,
+      "field_y": 304.0120633074462,
+      "robot_x": 518.982950801219,
+      "robot_y": 304.0120633074462,
+      "robot_theta": 0.07308566242726255
     }
   ],
   [
     {
       "frame": 59,
-      "label": "ball",
-      "field_x": 558.090182962938,
-      "field_y": 348.56388752317145,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": 0
-    },
-    {
-      "frame": 59,
-      "label": "L-Intersection",
-      "field_x": 812.5522250044226,
-      "field_y": 522.5791071353588,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": 0
-    },
-    {
-      "frame": 59,
-      "label": "X-Intersection",
-      "field_x": 743.4052147792477,
-      "field_y": 263.3536056363251,
-      "robot_x": 521.9536591109861,
-      "robot_y": 300.5073419480831,
-      "robot_theta": 0
+      "label": "T-Intersection",
+      "field_x": 412.79815099488667,
+      "field_y": -274.3494834689928,
+      "robot_x": 518.982950801219,
+      "robot_y": 304.0120633074462,
+      "robot_theta": 0.12871803233458182
     }
   ],
   [
     {
       "frame": 60,
+      "label": "T-Intersection",
+      "field_x": 682.5127736880404,
+      "field_y": 271.4024542812102,
+      "robot_x": 518.982950801219,
+      "robot_y": 304.0120633074462,
+      "robot_theta": 0.08290313946973066
+    }
+  ],
+  [
+    {
+      "frame": 61,
+      "label": "robot",
+      "field_x": 675.4362700652837,
+      "field_y": 308.30386762262634,
+      "robot_x": 521.8540769469023,
+      "robot_y": 304.1185971935885,
+      "robot_theta": -0.011999138607461015
+    }
+  ],
+  [
+    {
+      "frame": 62,
       "label": "L-Intersection",
-      "field_x": 741.1933182987779,
-      "field_y": 461.03725112862514,
-      "robot_x": 524.7474460178297,
-      "robot_y": 300.687395993061,
-      "robot_theta": 0.06872233929727672
+      "field_x": 752.8261896045583,
+      "field_y": 435.58177028070526,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": 0.12762720155208535
     },
     {
-      "frame": 60,
+      "frame": 62,
+      "label": "goalpost",
+      "field_x": 856.6138937757166,
+      "field_y": 239.00181925168556,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": 0.12762720155208535
+    },
+    {
+      "frame": 62,
+      "label": "goalpost",
+      "field_x": 824.8866555636296,
+      "field_y": 405.12725339154986,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": 0.12762720155208535
+    },
+    {
+      "frame": 62,
       "label": "T-Intersection",
-      "field_x": 830.5107066232392,
-      "field_y": 430.0673053619428,
-      "robot_x": 524.7474460178297,
-      "robot_y": 300.687395993061,
-      "robot_theta": 0.06872233929727672
+      "field_x": 816.1074385702634,
+      "field_y": 441.8533689463558,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": 0.12762720155208535
     }
   ],
   [
     {
       "frame": 63,
-      "label": "X-Intersection",
-      "field_x": 774.6762055387779,
-      "field_y": 261.9362360881882,
-      "robot_x": 529.9666924050338,
-      "robot_y": 300.70287647115543,
-      "robot_theta": 0.0545415391248228
-    }
-  ],
-  [
-    {
-      "frame": 64,
-      "label": "robot",
-      "field_x": 641.5957713778402,
-      "field_y": 170.63429704315362,
-      "robot_x": 532.3996388235348,
-      "robot_y": 300.6179161100892,
-      "robot_theta": -0.016362461737446838
-    },
-    {
-      "frame": 64,
-      "label": "X-Intersection",
-      "field_x": 729.5802820878289,
-      "field_y": 266.4991109227474,
-      "robot_x": 532.3996388235348,
-      "robot_y": 300.6179161100892,
-      "robot_theta": -0.016362461737446838
-    }
-  ],
-  [
-    {
-      "frame": 65,
-      "label": "robot",
-      "field_x": 649.7920708983374,
-      "field_y": 173.99935399904572,
-      "robot_x": 532.3996388235348,
-      "robot_y": 300.6179161100892,
-      "robot_theta": -0.02945243112740431
-    },
-    {
-      "frame": 65,
       "label": "L-Intersection",
-      "field_x": 805.3908004807874,
-      "field_y": 108.59594949491532,
-      "robot_x": 532.3996388235348,
-      "robot_y": 300.6179161100892,
-      "robot_theta": -0.02945243112740431
+      "field_x": 759.2118468509094,
+      "field_y": 403.6695555299449,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": -0.006544984694978736
     },
     {
-      "frame": 65,
-      "label": "L-Intersection",
-      "field_x": 694.9199344372092,
-      "field_y": 59.28896736116627,
-      "robot_x": 532.3996388235348,
-      "robot_y": 300.6179161100892,
-      "robot_theta": -0.02945243112740431
-    }
-  ],
-  [
-    {
-      "frame": 66,
-      "label": "robot",
-      "field_x": 655.0530355089878,
-      "field_y": 168.25106712560546,
-      "robot_x": 534.7225510673602,
-      "robot_y": 300.67113740751904,
-      "robot_theta": 0.050178215994836975
+      "frame": 63,
+      "label": "T-Intersection",
+      "field_x": 822.6586052870647,
+      "field_y": 400.7427393225112,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": -0.006544984694978736
     },
     {
-      "frame": 66,
-      "label": "L-Intersection",
-      "field_x": 813.8402104122127,
-      "field_y": 100.38970814257274,
-      "robot_x": 534.7225510673602,
-      "robot_y": 300.67113740751904,
-      "robot_theta": 0.050178215994836975
+      "frame": 63,
+      "label": "goalpost",
+      "field_x": 858.8276961420354,
+      "field_y": 186.20794879784256,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
+      "robot_theta": -0.006544984694978736
     },
     {
-      "frame": 66,
-      "label": "L-Intersection",
-      "field_x": 718.1172447324034,
-      "field_y": 18.930817121025257,
-      "robot_x": 534.7225510673602,
-      "robot_y": 300.67113740751904,
-      "robot_theta": 0.050178215994836975
-    }
-  ],
-  [
-    {
-      "frame": 67,
-      "label": "robot",
-      "field_x": 643.6923244173861,
-      "field_y": 169.30061770302746,
-      "robot_x": 534.7225510673602,
-      "robot_y": 300.67113740751904,
-      "robot_theta": -0.05781403147231216
-    }
-  ],
-  [
-    {
-      "frame": 68,
-      "label": "robot",
-      "field_x": 651.2214500002885,
-      "field_y": 178.85098862551817,
-      "robot_x": 536.938038713537,
-      "robot_y": 300.57198568253216,
-      "robot_theta": -0.018544123302439753
-    }
-  ],
-  [
-    {
-      "frame": 69,
-      "label": "robot",
-      "field_x": 655.8504908261499,
-      "field_y": 170.02053395778864,
-      "robot_x": 539.0546197212393,
-      "robot_y": 300.5881478186661,
+      "frame": 63,
+      "label": "goalpost",
+      "field_x": 833.181850272262,
+      "field_y": 361.93451233979874,
+      "robot_x": 524.619052204614,
+      "robot_y": 304.360501183568,
       "robot_theta": -0.006544984694978736
     }
   ],
   [
     {
+      "frame": 64,
+      "label": "L-Intersection",
+      "field_x": 770.1359769950528,
+      "field_y": 724.1054901750936,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "goalpost",
+      "field_x": 527.107415474562,
+      "field_y": 304.33335627436225,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "L-Intersection",
+      "field_x": 527.107415474562,
+      "field_y": 304.33335627436225,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "T-Intersection",
+      "field_x": 527.107415474562,
+      "field_y": 304.33335627436225,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "goalpost",
+      "field_x": 527.107415474562,
+      "field_y": 304.33335627436225,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "X-Intersection",
+      "field_x": 638.9565378051163,
+      "field_y": 2527.337921129876,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    },
+    {
+      "frame": 64,
+      "label": "T-Intersection",
+      "field_x": 527.107415474562,
+      "field_y": 304.33335627436225,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": -0.00545415391248228
+    }
+  ],
+  [
+    {
+      "frame": 65,
+      "label": "T-Intersection",
+      "field_x": 70.60751979416071,
+      "field_y": 1188.6182905975536,
+      "robot_x": 527.107415474562,
+      "robot_y": 304.33335627436225,
+      "robot_theta": 0.038179077387375956
+    }
+  ],
+  [
+    {
+      "frame": 66,
+      "label": "T-Intersection",
+      "field_x": 436.9010957954689,
+      "field_y": 680.8737973841783,
+      "robot_x": 529.5725376489684,
+      "robot_y": 304.4275181204938,
+      "robot_theta": -0.03381575425739013
+    }
+  ],
+  [
+    {
+      "frame": 67,
+      "label": "T-Intersection",
+      "field_x": 560.976253460862,
+      "field_y": 373.6261267302111,
+      "robot_x": 531.9683695719278,
+      "robot_y": 304.2442204339595,
+      "robot_theta": -0.1189005552921137
+    }
+  ],
+  [
+    {
+      "frame": 68,
+      "label": "ball",
+      "field_x": 564.034136168038,
+      "field_y": 337.34236901905984,
+      "robot_x": 534.2898516882195,
+      "robot_y": 304.11493747938914,
+      "robot_theta": -0.03381575425739013
+    },
+    {
+      "frame": 68,
+      "label": "L-Intersection",
+      "field_x": 643.0299094735318,
+      "field_y": 351.78671513975456,
+      "robot_x": 534.2898516882195,
+      "robot_y": 304.11493747938914,
+      "robot_theta": -0.03381575425739013
+    }
+  ],
+  [
+    {
+      "frame": 69,
+      "label": "ball",
+      "field_x": 561.5840860330203,
+      "field_y": 352.2415422324689,
+      "robot_x": 534.2898516882195,
+      "robot_y": 304.11493747938914,
+      "robot_theta": -0.16253378659197193
+    },
+    {
+      "frame": 69,
+      "label": "L-Intersection",
+      "field_x": 720.0988904337013,
+      "field_y": 467.6554804705702,
+      "robot_x": 534.2898516882195,
+      "robot_y": 304.11493747938914,
+      "robot_theta": -0.16253378659197193
+    },
+    {
+      "frame": 69,
+      "label": "L-Intersection",
+      "field_x": 787.8857043677538,
+      "field_y": 395.5185838311867,
+      "robot_x": 534.2898516882195,
+      "robot_y": 304.11493747938914,
+      "robot_theta": -0.16253378659197193
+    }
+  ],
+  [
+    {
+      "frame": 70,
+      "label": "ball",
+      "field_x": 561.7494350074064,
+      "field_y": 358.25504635852394,
+      "robot_x": 536.4886651008595,
+      "robot_y": 303.69996418500233,
+      "robot_theta": -0.1810779098944117
+    },
+    {
       "frame": 70,
       "label": "L-Intersection",
-      "field_x": 24.426319603995985,
-      "field_y": -697.8726251886039,
-      "robot_x": 541.0719500637048,
-      "robot_y": 300.4802172782507,
-      "robot_theta": -0.03599741582238305
+      "field_x": 806.0165437273447,
+      "field_y": 592.5280858887284,
+      "robot_x": 536.4886651008595,
+      "robot_y": 303.69996418500233,
+      "robot_theta": -0.1810779098944117
     }
   ],
   [
     {
       "frame": 71,
-      "label": "T-Intersection",
-      "field_x": 541.0719500637048,
-      "field_y": 300.4802172782507,
-      "robot_x": 541.0719500637048,
-      "robot_y": 300.4802172782507,
-      "robot_theta": -0.030543261909900768
+      "label": "ball",
+      "field_x": 558.9751730522123,
+      "field_y": 320.5769479028792,
+      "robot_x": 538.6094108394569,
+      "robot_y": 303.37118161961325,
+      "robot_theta": -0.20289452554434081
+    },
+    {
+      "frame": 71,
+      "label": "L-Intersection",
+      "field_x": 604.6807258999025,
+      "field_y": 307.29920373042296,
+      "robot_x": 538.6094108394569,
+      "robot_y": 303.37118161961325,
+      "robot_theta": -0.20289452554434081
+    },
+    {
+      "frame": 71,
+      "label": "L-Intersection",
+      "field_x": 605.7957115413479,
+      "field_y": 278.82120830026025,
+      "robot_x": 538.6094108394569,
+      "robot_y": 303.37118161961325,
+      "robot_theta": -0.20289452554434081
     }
   ],
   [
     {
-      "frame": 72,
-      "label": "X-Intersection",
-      "field_x": 730.8938481326459,
-      "field_y": 146.81747178093408,
-      "robot_x": 542.9994250924165,
-      "robot_y": 300.53068998817906,
-      "robot_theta": 0.04145156973486533
-    }
-  ],
-  [
-    {
-      "frame": 73,
+      "frame": 76,
       "label": "robot",
-      "field_x": 653.765125438845,
-      "field_y": 230.0642487263427,
-      "robot_x": 542.9994250924165,
-      "robot_y": 300.53068998817906,
-      "robot_theta": -0.025089107997418487
+      "field_x": 664.5256081248187,
+      "field_y": 204.21866276186088,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2476185876266955
     },
     {
-      "frame": 73,
-      "label": "X-Intersection",
-      "field_x": 702.0052679026556,
-      "field_y": 176.81132037951778,
-      "robot_x": 542.9994250924165,
-      "robot_y": 300.53068998817906,
-      "robot_theta": -0.025089107997418487
-    },
-    {
-      "frame": 73,
+      "frame": 76,
       "label": "goalpost",
-      "field_x": 542.9994250924165,
-      "field_y": 300.53068998817906,
-      "robot_x": 542.9994250924165,
-      "robot_y": 300.53068998817906,
-      "robot_theta": -0.025089107997418487
-    }
-  ],
-  [
-    {
-      "frame": 74,
-      "label": "robot",
-      "field_x": 654.7753054384063,
-      "field_y": 234.1485276494116,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.04799655442984406
-    },
-    {
-      "frame": 74,
-      "label": "L-Intersection",
-      "field_x": 695.3435883417997,
-      "field_y": 176.9978196794755,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.04799655442984406
-    }
-  ],
-  [
-    {
-      "frame": 75,
-      "label": "robot",
-      "field_x": 664.5377256017969,
-      "field_y": 226.82843173870495,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.04036073895236887
-    },
-    {
-      "frame": 75,
-      "label": "L-Intersection",
-      "field_x": 801.42299033759,
-      "field_y": 214.7388109733729,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.04036073895236887
-    }
-  ],
-  [
-    {
-      "frame": 76,
-      "label": "robot",
-      "field_x": 666.8197467305406,
-      "field_y": 226.65387485121778,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
-    },
-    {
-      "frame": 76,
-      "label": "T-Intersection",
-      "field_x": 896.2361450065401,
-      "field_y": 228.78145723264575,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
+      "field_x": 565.2475478173502,
+      "field_y": -276.1801992219001,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2476185876266955
     },
     {
       "frame": 76,
       "label": "L-Intersection",
-      "field_x": 804.4425353861238,
-      "field_y": 217.4593853872767,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
-    },
-    {
-      "frame": 76,
-      "label": "L-Intersection",
-      "field_x": 724.9744828814312,
-      "field_y": 149.606383178923,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
-    },
-    {
-      "frame": 76,
-      "label": "L-Intersection",
-      "field_x": 927.3135758449936,
-      "field_y": 181.88555723269727,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
+      "field_x": 723.8429121853871,
+      "field_y": 85.14415466741161,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2476185876266955
     }
   ],
   [
     {
       "frame": 77,
       "label": "robot",
-      "field_x": 657.1983550236966,
-      "field_y": 230.244023502414,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.037088246604879506
+      "field_x": 664.0535442852328,
+      "field_y": 212.30560359679131,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.23343778745424157
     },
     {
       "frame": 77,
       "label": "goalpost",
-      "field_x": 867.8406032147822,
-      "field_y": 275.5041788715557,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.037088246604879506
-    },
-    {
-      "frame": 77,
-      "label": "L-Intersection",
-      "field_x": 781.8309688790812,
-      "field_y": 220.0540235119011,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.037088246604879506
-    },
-    {
-      "frame": 77,
-      "label": "L-Intersection",
-      "field_x": 703.887444741677,
-      "field_y": 161.9682003927538,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.037088246604879506
+      "field_x": 576.6200148250268,
+      "field_y": -186.64818496996685,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.23343778745424157
     }
   ],
   [
     {
       "frame": 78,
       "label": "robot",
-      "field_x": 658.5966335944123,
-      "field_y": 226.11752887950473,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
-    },
-    {
-      "frame": 78,
-      "label": "goalpost",
-      "field_x": 897.1033650062412,
-      "field_y": 268.1776521282977,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
-    },
-    {
-      "frame": 78,
-      "label": "T-Intersection",
-      "field_x": 871.5458399651073,
-      "field_y": 221.40703930152176,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
-    },
-    {
-      "frame": 78,
-      "label": "X-Intersection",
-      "field_x": 743.2871909017406,
-      "field_y": 334.2348305055363,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
-    },
-    {
-      "frame": 78,
-      "label": "L-Intersection",
-      "field_x": 794.7013578137572,
-      "field_y": 212.41825786711837,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24325526449670967
     }
   ],
   [
     {
       "frame": 79,
-      "label": "robot",
-      "field_x": 656.5844106765554,
-      "field_y": 228.5401414336826,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.03599741582238305
-    },
-    {
-      "frame": 79,
-      "label": "goalpost",
-      "field_x": 893.8829642982766,
-      "field_y": 270.3150130833966,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.03599741582238305
-    },
-    {
-      "frame": 79,
-      "label": "T-Intersection",
-      "field_x": 853.0366039018595,
-      "field_y": 226.78942559967206,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.03599741582238305
-    },
-    {
-      "frame": 79,
       "label": "L-Intersection",
-      "field_x": 782.3861698450925,
-      "field_y": 217.0376410483989,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.03599741582238305
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.23671027980173096
     }
   ],
   [
     {
       "frame": 80,
-      "label": "L-Intersection",
-      "field_x": 775.6251328553649,
-      "field_y": 215.5655503663832,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
-    },
-    {
-      "frame": 80,
-      "label": "goalpost",
-      "field_x": 864.9997468119087,
-      "field_y": 270.72787395513257,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
-    },
-    {
-      "frame": 80,
-      "label": "X-Intersection",
-      "field_x": 737.1579164216354,
-      "field_y": 333.75959013900706,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.038179077387375956
+      "label": "T-Intersection",
+      "field_x": 397.1280039563121,
+      "field_y": -225.37621454264968,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24325526449670967
     }
   ],
   [
     {
       "frame": 81,
+      "label": "T-Intersection",
+      "field_x": 395.29498861199085,
+      "field_y": -232.04904473994776,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    }
+  ],
+  [
+    {
+      "frame": 82,
+      "label": "T-Intersection",
+      "field_x": 688.7994536016989,
+      "field_y": 267.16513924727155,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    }
+  ],
+  [
+    {
+      "frame": 83,
+      "label": "robot",
+      "field_x": 689.4070398848794,
+      "field_y": 293.8989283101237,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 83,
+      "label": "L-Intersection",
+      "field_x": 755.8193139749151,
+      "field_y": 251.43688899839063,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    }
+  ],
+  [
+    {
+      "frame": 84,
+      "label": "robot",
+      "field_x": 656.0439111742445,
+      "field_y": 213.29233706497212,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 84,
+      "label": "L-Intersection",
+      "field_x": 795.4937490132735,
+      "field_y": 157.43053334477213,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 84,
       "label": "goalpost",
-      "field_x": 879.6949443022268,
-      "field_y": 264.3930392325968,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
+      "field_x": 916.6652215393199,
+      "field_y": 404.42158073461115,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
     },
     {
-      "frame": 81,
-      "label": "L-Intersection",
-      "field_x": 804.9839079711248,
-      "field_y": 509.7617846356941,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
+      "frame": 84,
+      "label": "goalpost",
+      "field_x": 909.5767823726111,
+      "field_y": 200.31046402300382,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
     },
     {
-      "frame": 81,
-      "label": "L-Intersection",
-      "field_x": 775.164453024751,
-      "field_y": 220.16893762014053,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
+      "frame": 84,
+      "label": "T-Intersection",
+      "field_x": 876.4154497105947,
+      "field_y": 154.42565039085008,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
     },
     {
-      "frame": 81,
+      "frame": 84,
       "label": "X-Intersection",
-      "field_x": 741.00317186227,
-      "field_y": 332.1259100242688,
-      "robot_x": 544.3859595969552,
-      "robot_y": 300.5019488568797,
-      "robot_theta": -0.039269908169872414
+      "field_x": 751.5384525717946,
+      "field_y": 301.36024203037357,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    }
+  ],
+  [
+    {
+      "frame": 85,
+      "label": "robot",
+      "field_x": 655.8036100645912,
+      "field_y": 213.51804875660847,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 85,
+      "label": "L-Intersection",
+      "field_x": 798.8242275369727,
+      "field_y": 154.79807296029193,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 85,
+      "label": "goalpost",
+      "field_x": 914.173993090798,
+      "field_y": 403.1186899547688,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 85,
+      "label": "goalpost",
+      "field_x": 916.5548665959395,
+      "field_y": 198.24554971579468,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 85,
+      "label": "X-Intersection",
+      "field_x": 751.9710807954624,
+      "field_y": 300.5583355172943,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    },
+    {
+      "frame": 85,
+      "label": "T-Intersection",
+      "field_x": 878.0677153433188,
+      "field_y": 152.89121780041958,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.24107360293171676
+    }
+  ],
+  [
+    {
+      "frame": 86,
+      "label": "robot",
+      "field_x": 671.1288120432216,
+      "field_y": 456.876966794326,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 86,
+      "label": "L-Intersection",
+      "field_x": 1628.4467850443955,
+      "field_y": 2055.478293232393,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 86,
+      "label": "T-Intersection",
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 86,
+      "label": "goalpost",
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 86,
+      "label": "goalpost",
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 86,
+      "label": "X-Intersection",
+      "field_x": 543.9030213830545,
+      "field_y": 302.157846633232,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    }
+  ],
+  [
+    {
+      "frame": 87,
+      "label": "L-Intersection",
+      "field_x": 729.1881000736288,
+      "field_y": 651.421201207444,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    }
+  ],
+  [
+    {
+      "frame": 88,
+      "label": "L-Intersection",
+      "field_x": 722.0183957791962,
+      "field_y": 500.75565803779057,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
+    },
+    {
+      "frame": 88,
+      "label": "T-Intersection",
+      "field_x": 336.8439676006103,
+      "field_y": 949.8290658889263,
+      "robot_x": 543.9030213830545,
+      "robot_y": 302.157846633232,
+      "robot_theta": -0.2399827721492203
     }
   ]
 ]

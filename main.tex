@@ -1148,9 +1148,10 @@ directional bias.
 Certain objects are excluded from the dynamic evaluation. In particular, 
 the L-intersection ($O_4$) and T-intersection ($O_5$) are not considered, 
 as multiple instances of these features are detected at different 
-locations during walking. This ambiguity makes it difficult to associate 
-detections with a unique ground-truth reference. Therefore, only objects 
-with consistent and unambiguous detections are included in the analysis.
+locations during walking. Additionally, the goalpost ($O_6$) is excluded due 
+ambiguity where only a single post instead of the complete goal may be detected.
+This ambiguity makes it difficult to associate detections with a unique ground-truth reference. 
+Therefore, only objects with consistent and unambiguous detections are included in the analysis.
 
 Table~\ref{tab:dynamic_results} presents the aggregated dynamic 
 evaluation results.
@@ -1164,10 +1165,9 @@ evaluation results.
 \toprule
 \textbf{Obj} & \textbf{Mean Estimated Position} & \textbf{$E$ (cm)} & \textbf{$(E_x, E_y)$ (cm)} \\
 \midrule
-$O_1$ & (552.9, 344.4) & 9.6 & (2.9, -5.6) \\
-$O_2$ & (650.4, 188.9) & 23.7 & (0.4, -11.1) \\
-$O_3$ & (748.6, 299.3) & 12.1 & (-1.4, -0.7) \\
-$O_6$ & (940.2, 197.3) & 54.1 & (40.2, 7.3) \\
+$O_1$ & (555.3, 343.7) & 11.6 & (5.3, -6.3) \\
+$O_2$ & (652.7, 202.3) & 18.5 & (2.7, 2.3) \\
+$O_3$ & (743.5, 300.1) & 14.1 & (-6.5, 0.1) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1197,10 +1197,10 @@ ground-truth pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$
 at the end of each trial, when the robot reaches the target position 
 $P'(550.0, 300.0)$. The resulting odometry error parameters are:
 \begin{align*}
-E_r &= 0.0007 \ \text{deg/cm}, \\
-K_\theta &= 0.1068 \ \text{deg}^2/\text{cm}, \\
-E_t &= -1.8142\%, \\
-K_\rho &= 0.346958 \ \text{cm}.
+E_r &= 0.0005 \ \text{deg/cm}, \\
+K_\theta &= 0.1994 \ \text{deg}^2/\text{cm}, \\
+E_t &= -1.6902\%, \\
+K_\rho &= 0.042551 \ \text{cm}.
 \end{align*}
 
 The small magnitude of these parameters indicates that odometry error 
@@ -1212,11 +1212,7 @@ increase in estimation error compared to the static case. This is expected,
 as the robot performs continuous motion, introducing additional sources 
 of uncertainty such as body oscillation, head movement, and detection noises.
 Despite these challenges, the IPM method maintains relatively stable 
-performance across most objects. The ball ($O_1$) and penalty marker ($O_3$) 
-exhibit low mean errors, indicating that the system remains reliable for 
-nearby and mid-range objects during walking. Larger errors are observed for 
-distant objects such as the goalpost ($O_6$), which is consistent 
-with the limitations explained in the static evaluation.
+performance across all objects.
 
 \subsection{Comparison with Regression-Based Method}
 
