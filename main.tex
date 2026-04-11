@@ -745,13 +745,13 @@ is the perpendicular distance from the camera origin to the plane \cite{Stewart2
 The normal $n_c$ can be derived by transforming the fixed ground normal from the \texttt{base\_footprint} 
 frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest 
 lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$.
-By applying the rotation matrix $R_{b}^{c}$, we can express this 
-normal in the camera's coordinate system as shown in Equation \ref{eq:plane_camera_wrt_base}
+By applying the rotation matrix $R_{c}^{b}$, we can express this 
+normal in the camera's coordinate system as shown in Equation \ref{eq:base_plane_wrt_camera}
 
-\begin{equation} \label{eq:plane_camera_wrt_base}
-n_c = R_{b}^{c} \cdot n_b = \begin{bmatrix} r_{13} \\ r_{23} \\ r_{33} \end{bmatrix}
+\begin{equation} \label{eq:base_plane_wrt_camera}
+n_c = (R_{c}^{b})^{T} \cdot n_b = \begin{bmatrix} r_{31} \\ r_{32} \\ r_{33} \end{bmatrix}
 \end{equation}
-where $r_{13}, r_{23}, r_{33}$ are elements of the third column of the rotation matrix $R_{b}^{c}$.
+where $r_{31}, r_{32}, r_{33}$ are elements of the third row of the rotation matrix $R_{c}^{b}$.
 
 \subsection{Inverse Perspective Mapping}
 Inverse Perspective Mapping (IPM) aims to recover the three-dimensional 
@@ -777,7 +777,7 @@ the camera translation $T_z$ along the vertical axis relative to the base frame.
 Therefore, $Z_c$ can be calculated as shown in Equation \ref{eq:zc}.
 
 \begin{equation} \label{eq:zc}
-Z_c = \frac{-T_z}{r_{13} x + r_{23} y + r_{33}}
+Z_c = \frac{-T_z}{r_{31} x + r_{32} y + r_{33}}
 \end{equation}
 
 Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$ 
@@ -890,7 +890,7 @@ are known, the height offset $h$ corresponds to its radius. Consequently, the de
 equation derived in the Section \ref{sec:theories} is modified as follows:
 
 \begin{equation} \label{eq:zc_final}
-Z_c = \frac{T_z - h}{r_{13}u + r_{23}v + r_{33}}
+Z_c = \frac{T_z - h}{r_{31}x + r_{32}y + r_{33}}
 \end{equation}
 
 The complete IPM projection pipeline is described in 
@@ -925,7 +925,7 @@ Algorithm~\ref{alg:ipm}.
             \State $h \gets \text{ball radius}$
         \EndIf
 
-        \State $Z_c \gets \dfrac{t_z - h}{R_{13}x + R_{23}y + R_{33}}$
+        \State $Z_c \gets \dfrac{t_z - h}{R_{31}x + R_{32}y + R_{33}}$
         \If{$Z_c \leq 0$}
             \State \textbf{continue}
         \EndIf
@@ -1052,7 +1052,7 @@ Since the robot pose is known and does not change, it is treated
 as ground truth.
 
 For each object, the IPM module estimates the relative position 
-$(X_r, Y_r)$ with respect to the \texttt{base\_footprint} frame. 
+$(X_b, Y_b)$ with respect to the \texttt{base\_footprint} frame. 
 The estimated global position $(\hat{X}_i, \hat{Y}_i)$ is obtained 
 by applying a rigid body transformation using the known robot pose:
 
@@ -1063,14 +1063,14 @@ by applying a rigid body transformation using the known robot pose:
 1
 \end{bmatrix}
 =
-\mathbf{T}_{r}^{g}
+\mathbf{T}_{b}^{g}
 \begin{bmatrix}
-X_r \\
-Y_r \\
+X_b \\
+Y_b \\
 1
 \end{bmatrix}
 \end{equation}
-where $\mathbf{T}_{r}^{g}$ denotes the homogeneous transformation 
+where $\mathbf{T}_{b}^{g}$ denotes the homogeneous transformation 
 from the \texttt{base\_footprint} frame to the global field frame.
 
 Table~\ref{tab:static_results} summarizes the static evaluation results, 
@@ -1119,7 +1119,7 @@ $P'(550.0, 300.0)$, repeated for 10 trials.
 
 During walking, the robot head performs continuous scanning motions 
 to detect visible objects. The IPM module continuously estimates 
-the relative object positions $(X_r, Y_r)$ in the 
+the relative object positions $(X_b, Y_b)$ in the 
 \texttt{base\_footprint} frame.
 
 To express object positions in global coordinates, the relative 
@@ -1132,10 +1132,10 @@ IPM outputs are transformed using the robot pose estimated from odometry:
 1
 \end{bmatrix}
 =
-\mathbf{T}_{r,\text{odom}}^{g}
+\mathbf{T}_{b,\text{odom}}^{g}
 \begin{bmatrix}
-X_r \\
-Y_r \\
+X_b \\
+Y_b \\
 1
 \end{bmatrix}
 \end{equation}
