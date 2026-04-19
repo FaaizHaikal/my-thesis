@@ -562,8 +562,8 @@ data, making it difficult to deploy on humanoid robots with limited computationa
 Stereo vision is another alternative that estimates depth from two cameras, but requires precise calibration
 and is sensitive to lighting and texture variations, which reduces reliability in dynamic environments \cite{Kok2019}.
 
-Inverse Perspective Mapping (IPM) offers a a lightweight geometric solution that estimates
-objects positions by projecting image points by assuming that objects of interests lie on a planar surface, \cite{Li2024}.
+Inverse Perspective Mapping (IPM) offers a lightweight geometric solution that estimates
+objects positions by projecting image points by assuming that objects of interest lie on a planar surface, \cite{Li2024}.
 IPM has been widely used in autonomus driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}. 
 However, implementing IPM to humanoid robots is more challenging because the camera pose change continuously due
 to body posture changes \cite{Dias2024}.
@@ -787,7 +787,7 @@ is obtained by transforming $P_c$ into the \texttt{base\_footprint} frame:
 \begin{bmatrix} P_w \\ 1 \end{bmatrix} = \mathbf{T}_{c}^{b} \begin{bmatrix} P_c \\ 1 \end{bmatrix}
 \end{equation}
 where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix. 
-Notice that, the system rejects any results where $Z_c \leq 0$ or is undefined (NaN), 
+Notice that the system rejects any results where $Z_c \leq 0$ or is undefined (NaN), 
 as these indicate points behind the camera or parallel to the optical axis.
 
 \section{Methodology}
@@ -815,7 +815,7 @@ various distances and angles as shown in Figure \ref{fig:camera_calib}.
 These images were then processed using OpenCV
 calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
 coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
-radial and tangensial distortion values for the Logitech C930e were found to be
+radial and tangential distortion values for the Logitech C930e were found to be
 sufficiently small to be neglected.
 
 \subsection{Robot Frames Package}
@@ -890,7 +890,7 @@ are known, the height offset $h$ corresponds to its radius. Consequently, the de
 equation derived in the Section \ref{sec:theories} is modified as follows:
 
 \begin{equation} \label{eq:zc_final}
-Z_c = \frac{T_z - h}{r_{31}x + r_{32}y + r_{33}}
+Z_c = \frac{h - T_z}{r_{31}x + r_{32}y + r_{33}}
 \end{equation}
 
 The complete IPM projection pipeline is described in 
@@ -925,7 +925,7 @@ Algorithm~\ref{alg:ipm}.
             \State $h \gets \text{ball radius}$
         \EndIf
 
-        \State $Z_c \gets \dfrac{t_z - h}{R_{31}x + R_{32}y + R_{33}}$
+        \State $Z_c \gets \dfrac{h - t_z}{r_{31}x + r_{32}y + r_{33}}$
         \If{$Z_c \leq 0$}
             \State \textbf{continue}
         \EndIf
@@ -1088,7 +1088,7 @@ reported in both absolute and percentage forms.
 \midrule
 $O_1$ & (550.0, 348.4) & 1.6 (1.4\%) & 0.0 (0.0\%) & -1.6 (3.1\%) \\
 $O_2$ & (644.0, 197.3) & 6.6 (3.0\%) & -6.0 (3.0\%) & -2.7 (2.7\%) \\
-$O_3$ & (746.7.3, 300.5) & 3.3 (1.1\%) & -3.3 (1.1\%) & 0.5 (0.0\%) \\
+$O_3$ & (746.7, 300.5) & 3.3 (1.1\%) & -3.3 (1.1\%) & 0.5 (0.0\%) \\
 $O_4$ & (806.2, 446.8) & 7.0 (1.9\%) & 6.2 (1.8\%) & -3.2 (2.2\%) \\
 $O_5$ & (916.4, 463.4) & 21.3 (4.5\%) & 16.4 (3.7\%) & 13.4 (8.9\%) \\
 $O_6$ & (938.6, 194.3) & 38.8 (8.4\%) & 38.6 (8.6\%) & 4.3 (3.9\%) \\
