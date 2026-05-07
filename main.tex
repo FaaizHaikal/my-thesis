@@ -1063,7 +1063,6 @@ the variability of the estimation results.
 \begin{equation}
 \sigma = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(E_i-\bar{E})^2}
 \end{equation}
-
 where $N$ denotes the number of evaluated samples, $E_i$ is the 
 Euclidean error of the $i$-th sample, and $\bar{E}$ is the mean 
 Euclidean error.
@@ -1222,8 +1221,8 @@ $O_3$ & 14.14 & 50.17 & 48.13 & (-6.52, 0.08) \\
 The spatial distribution of the dynamic estimates is shown in 
 Figure~\ref{fig:dynamic_ipm_evaluation}. A 15 cm tolerance circle is 
 drawn around each reference object position to indicate the concentration 
-of the filtered IPM estimates. The figure shows that most ball and penalty 
-marker estimates remain clustered around their reference positions, while 
+of the filtered IPM estimates. The figure shows that most ball and X-intersection
+estimates remain clustered around their reference positions, while 
 the robot object has a wider spread because its bounding box changes more 
 strongly with walking motion and detection variation.
 
