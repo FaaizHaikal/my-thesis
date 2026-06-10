@@ -474,27 +474,28 @@ rully130270@gmail.com).
 \pagestyle{empty}
 \thispagestyle{empty}
 
-
 \begin{abstract}
 %\boldmath
-Accurate vision-based distance estimation is a critical component of perception systems
-for humanoid soccer robots. Inverse Perspective Mapping (IPM) provides a geometric approach
-to estimate object positions from monocular camera images without additional distance sensors,
-which are prohibited in humanoid robot soccer competitions such as RoboCup. In practice,
-because the camera extrinsic parameters change continuously during walking and
-head movement, IPM is challenging to implement reliably.
-
-This paper presents an IPM implementation for object distance estimation on a humanoid soccer robot
-developed by ICHIRO ITS team using ROS 2 software, a widely used robotics framework that enables modular
-and real-time data exchange between multiple robot subsystems,
-including sensors and processing modules. The proposed system integrates
-object detection outputs, camera intrinsic parameters, and real-time kinematic transformations
-obtained from the robot model. Evaluations under static and walking conditions
-show that the system produces stable object position estimates. In addition, a comparison with
-a previously used regression-based method by ICHIRO ITS demonstrates that the proposed IPM approach provides
-more consistent accuracy across a wider distance range and removes the dependence on active
-object tracking.
+Accurate vision-based distance estimation is a critical component of
+perception systems for humanoid soccer robots. Inverse Perspective Mapping
+(IPM) provides a geometric approach to estimate object positions from
+monocular camera images without additional distance sensors, which are prohibited
+in RoboCup humanoid robot soccer competitions. In practice, because the camera extrinsic
+parameters change continuously during walking and head movement, IPM is
+challenging to implement reliably. This paper presents an IPM implementation
+for object distance estimation on a humanoid soccer robot developed by the
+ICHIRO ITS team using ROS~2, a robotics framework that enables modular, real-time
+data exchange between robot subsystems. The proposed architecture integrates
+object detection outputs, camera intrinsics, and real-time kinematic transformations.
+Experimental evaluation under static conditions achieved MAE values below 8~cm
+for objects under 4~m distance, while dynamic walking trials
+show robust median tracking errors tightly bounded between 5.11~cm and 14.75~cm.
+Furthermore, a comparative evaluation against a legacy regression-based method demonstrates
+that the proposed analytical IPM approach eliminates distance estimation saturation at
+longer ranges, reduces the overall MAE from 36.90~cm to 2.24~cm, and removes the
+operational dependence on active object tracking.
 \end{abstract}
+
 % IAENGtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
 % if the journal you are submitting to favors bold math in the abstract,
@@ -585,12 +586,12 @@ whenever the robot configuration changes. These limitations motivate the
 use of a more robust approach, addressed in this work using Inverse
 Perspective Mapping.
 
-The remainder of this paper is organized as follows. Section II presents the overall system description,
-including the humanoid robot platform and the software framework used in this work.
-Section III introduces the theoretical background underlying the proposed approach.
-Section IV describes the implementation methodology of the system.
-Section V presents the experimental evaluation and results.
-Finally, Section VI concludes the paper and discusses future work.
+The remainder of this paper is organized as follows. Section II presents
+the overall system description, including the humanoid robot platform and
+the software framework. Section III introduces the theoretical background,
+while Section IV and Section V describe the implementation methodology and
+experimental evaluations, respectively. Finally, Section VI concludes the
+paper and outlines future work.
 
 \begin{figure*}[t]
 \centering
@@ -945,20 +946,14 @@ Algorithm~\ref{alg:ipm}.
 
 \section{Evaluation}
 
-This section evaluates the performance of the proposed IPM-based distance
-estimation under static and dynamic conditions. Both evaluations are
-conducted using the same object configuration and identical initial
-robot position to ensure consistency. The static evaluation measures
-the intrinsic accuracy of IPM when the robot remains stationary,
-while the dynamic evaluation analyzes system behavior during walking
-and considers the influence of odometry when expressing results in
-global coordinates.
-
-In addition, a comparative evaluation is conducted against the
-previous regression-based method used in the system. This comparison
-highlights the limitations of the prior approach and demonstrates
-the advantages of the proposed IPM method in terms of scalability
-and robustness across varying distances.
+This section evaluates the proposed IPM distance estimation under static
+and dynamic walking conditions using identical object configurations to ensure
+consistency. The static evaluation measures estimation accuracy when the robot remains
+stationary, while the dynamic evaluation analyzes performance during
+walking, where object positions are expressed in global coordinates
+using odometry. A comparison with the previously used regression-based
+method is also conducted to demonstrate the advantages of the proposed
+approach across varying distances.
 
 \subsection{Experimental Setup}
 
@@ -1011,36 +1006,26 @@ Figure~\ref{fig:combined_setup}, which illustrates the schematic target layout
 \includegraphics[width=\textwidth]{Real Setup.jpg}
 \\ \vspace{1mm} \footnotesize (b) Physical test platform deployment.
 \end{minipage}
-\caption{Complete experimental configuration deployed on the RoboCup field, displaying the robot starting kickoff orientation and the fixed global coordinates for targets $O_1$--$O_6$.}
+\caption{Complete experimental configuration deployed on the RoboCup field, displaying
+the robot starting kickoff orientation and the fixed global coordinates for
+targets $O_1$--$O_6$.}
 \label{fig:combined_setup}
 \end{figure*}
 
+To assess the precision of the IPM estimations, the estimated target coordinates
+$(\hat{X}, \hat{Y})$ are compared with ground-truth positions $(X, Y)$. Axis-wise errors
+are defined as $E_x = \hat{X} - X$ and $E_y = \hat{Y} - Y$, yielding the aggregate
+Euclidean position error:
 
-To assess the accuracy of the IPM estimations, three primary error metrics
-are defined for each observed object: the estimated object position $(\hat{X}, \hat{Y})$
-is compared with the corresponding ground-truth position $(X, Y)$. The estimation
-error along each axis is defined as
-
-\begin{equation}
-E_x = \hat{X} - X, \quad
-E_y = \hat{Y} - Y
-\end{equation}
-and the Euclidean position error is computed as
 \begin{equation}
 E = \sqrt{(E_x )^2 + ( E_y )^2}
 \end{equation}
 
-The Euclidean error represents the geometric distance between the estimated and
-reference positions in the field coordinate system. All position coordinates and error
-metrics reported in this study are expressed in centimeters (cm). For visualization purposes,
-the signed axis-wise errors $(E_x, E_y)$ are retained to indicate
-the direction of estimation bias.
-
-For each object, multiple observations are collected during the evaluation process.
-The distribution of Euclidean errors is summarized using the Mean Absolute Error (MAE),
-Root Mean Square Error (RMSE), median error, Median Absolute Deviation (MAD), and standard
-deviation ($\sigma$). In addition, 95\% confidence intervals for MAE and RMSE are estimated
-using bootstrap resampling with 10,000 iterations.
+All metrics are expressed in centimeters (cm). The distribution of tracking errors
+is summarized using Mean Absolute Error (MAE), Root Mean Square Error (RMSE), median error,
+Median Absolute Deviation (MAD), and standard deviation ($\sigma$). To establish
+statistical significance, 95\% confidence intervals are estimated via bootstrap resampling
+with 10,000 iterations.
 
 \subsection{Static Evaluation}
 
@@ -1106,11 +1091,10 @@ exhibit MAE values below 8~cm and standard deviations below 0.5~cm, indicating
 both accurate and stable estimations under static conditions.
 
 Among the evaluated objects, $O_1$ achieves the lowest error with an MAE of
-1.61~cm (95\% CI: [1.52, 1.69]), while $O_6$ exhibits the largest error with
-an MAE and RMSE of 38.80~cm. A clear increase in estimation error can be observed
-as the object distance from the robot increases. This trend is particularly
-evident for $O_5$ and $O_6$, which correspond to the most distant targets in
-the experimental setup.
+1.61~cm, while $O_6$ exhibits the largest error with
+an MAE and RMSE of 38.80~cm. The results show a clear increase in estimation
+error as object distance from the robot increases, particularly for the
+distant targets $O_5$ and $O_6$.
 
 This behavior is inherent to monocular IPM-based depth estimation.
 With the robot head maintained at a tilt angle of $0^\circ$, objects located
@@ -1128,7 +1112,7 @@ magnitude of the error vectors increases for distant targets.
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{static_ipm_evaluation_2.png}
+\includegraphics[width=0.72\textwidth]{static_ipm_evaluation_2.png}
 \caption{Static IPM evaluation in field coordinates, showing reference
 positions, mean IPM estimates, and error vectors for all evaluated objects.}
 \label{fig:static_ipm_evaluation}
@@ -1193,7 +1177,7 @@ Therefore, only objects with consistent and unambiguous detections are included 
 \label{tab:dynamic_results}
 \begin{tabular}{c c c c c c}
 \toprule
-\textbf{Obj} &
+\textbf{Obj.} &
 \textbf{MAE} &
 \textbf{RMSE} &
 \textbf{Median} &
@@ -1222,16 +1206,10 @@ the typical estimation error remains consistently small across repeated
 trials. This suggests that most position estimates remain close to the
 corresponding reference positions during walking.
 
-However, the substantial gap between the median and RMSE values suggests
-that the error distribution is highly asymmetric. A small number of
-large estimation failures significantly increase the mean-based metrics,
-while the majority of observations remain concentrated near the true
-object locations.
-
-\begin{table}[h]
+\begin{table}[!h]
 \centering
 \footnotesize
-\caption{Shapiro--Wilk normality test results for dynamic evaluation errors}
+\caption{Shapiro--Wilk test results for dynamic evaluation errors}
 \label{shapiro_wilk_test}
 \begin{tabular}{lcc}
 \toprule
@@ -1244,35 +1222,35 @@ $O_3$ & 0.5756 & $8.17 \times 10^{-21}$ \\
 \end{tabular}
 \end{table}
 
-To formally assess the normality of the dynamic error distributions,
-the Shapiro--Wilk normality test was performed for each evaluated object.
-The results are presented in Table~\ref{shapiro_wilk_test}. All
-evaluated objects produce extremely small p-values ($p < 0.05$),
-indicating that the null hypothesis of a normally distributed error
-population must be rejected.
+However, the substantial gap between the median and RMSE values suggests
+that the error distribution is highly asymmetric. A small number of
+large estimation failures significantly increase the mean-based metrics,
+while the majority of observations remain concentrated near the true
+object locations.
 
-To further visualize these deviations from normality, Quantile--Quantile
-(Q--Q) plots were generated for each object against a theoretical normal
-distribution, as shown in Figure~\ref{fig:dynamic_qq_plots}.
+\newpage
+
+To assess the normality of the dynamic error distributions, the
+Shapiro--Wilk test was performed for each evaluated object. As shown in
+Table~\ref{shapiro_wilk_test}, all objects produce extremely small
+p-values ($p < 0.05$), rejecting the null hypothesis of normally
+distributed errors. Consistent with this result, the Q--Q plots in
+Figure~\ref{fig:dynamic_qq_plots} exhibit pronounced upward curvature
+at the upper quantiles, indicating heavily right-skewed distributions
+caused by occasional large estimation failures. Consequently, robust
+statistics such as the median and MAD provide a more representative
+description of typical system performance than mean-based metrics alone.
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\textwidth]{dynamic_errors_qq_plots.png}
-\caption{Quantile-Quantile (Q-Q) plots of Euclidean distance errors for the ball ($O_1$), robot ($O_2$), and X-intersection ($O_3$) during dynamic walking trials. The sharp upward curve away from the straight normal line shows that the errors do not follow a normal distribution, but are heavily right-skewed due to occasional large estimation spikes.}
+\caption{Quantile-Quantile (Q-Q) plots of Euclidean distance errors for
+the ball ($O_1$), robot ($O_2$), and X-intersection ($O_3$) during dynamic
+walking trials. The sharp upward curve away from the straight normal
+line shows that the errors do not follow a normal distribution, but are heavily
+right-skewed due to occasional large estimation spikes.}
 \label{fig:dynamic_qq_plots}
 \end{figure*}
-
-The visual trends in Figure~\ref{fig:dynamic_qq_plots} are consistent with the
-Shapiro--Wilk test results. For all three objects, the data points bend sharply
-upward away from the linear normal baseline, particularly in the upper quantiles.
-This distinct upward curvature demonstrates that the tracking errors do not follow
-a Gaussian distribution, but are heavily right-skewed by occasional large estimation
-spikes.
-
-Together, the statistical tests and Q--Q plots confirm that the dynamic
-errors are strongly non-normal. Consequently, robust metrics like the median
-and MAD provide a much more accurate description of the system's typical
-tracking performance than standard mean-based metrics alone.
 
 The spatial distribution of the estimates is shown in
 Figure~\ref{fig:dynamic_ipm_evaluation}. A 15~cm tolerance circle is
@@ -1285,16 +1263,19 @@ robot being in motion.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.6\textwidth]{dynamic_ipm_evaluation_2.png}
-\caption{Dynamic IPM evaluation in field coordinates during active walking, displaying spatial distribution arrays, true reference markers, and the designated 15~cm error tolerance boundaries for targets $O_1$, $O_2$, and $O_3$.}
+\includegraphics[width=0.7\textwidth]{dynamic_ipm_evaluation_2.png}
+\caption{Dynamic IPM evaluation in field coordinates during active walking,
+displaying spatial distribution arrays, true reference markers, and the
+designated 15~cm error tolerance boundaries for targets $O_1$, $O_2$, and $O_3$.}
 \label{fig:dynamic_ipm_evaluation}
 \end{figure*}
 
-Several failure cases were observed during the evaluation, particularly when
-the estimated object position was projected to an unrealistic location on the field.
-Since IPM computes real-world coordinates directly from pixel coordinate,
-small errors in object detection, camera pose, or calibration can produce
-large position deviations, especially for distant objects and image regions near the horizon.
+Several failure cases were observed in which estimated object positions
+were projected to unrealistic field locations. Because IPM derives
+world coordinates directly from image measurements, small errors in
+object detection, camera pose, or calibration can be amplified into
+large position errors, particularly for distant objects near the image
+horizon.
 
 It is important to note that odometry is not involved in the IPM
 distance computation itself. IPM estimates object positions purely
@@ -1305,58 +1286,70 @@ estimation error and odometry drift. To better understand this
 influence, odometry error is analyzed independently using the
 approach proposed by Martinelli~\cite{Martinelli2001APS}.
 
-This method characterizes odometry uncertainty through four parameters:
+The method characterizes odometry uncertainty using four parameters:
 translational bias ($E_t$), translational noise ($K_\rho$),
 rotational bias ($E_r$), and rotational noise ($K_\theta$).
-The parameters $E_t$ and $E_r$ represent \textit{systematic errors},
-which correspond to consistent and repeatable deviations in robot motion,
-such as bias in traveled distance or heading. In contrast, the parameters
-$K_\rho$ and $K_\theta$ represent \textit{non-systematic errors}, which
-capture random variations caused by factors such as sensor noise and
-surface interaction.
+The bias terms represent systematic errors, while the noise terms
+capture random variations caused by sensor noise and surface interaction.
 
 The parameters are estimated by comparing the odometry-based pose
 $(x_{\text{odom}}, y_{\text{odom}}, \theta_{\text{odom}})$ with the
 reference pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$
 at the end of each trial, when the robot reaches the target position
 $P'(550.0, 300.0)$. The resulting odometry error parameters are:
-\begin{align*}
-E_r &= 0.0005 \ \text{deg/cm}, \\
-K_\theta &= 0.1994 \ \text{deg}^2/\text{cm}, \\
-E_t &= -1.6902\%, \\
-K_\rho &= 0.042551 \ \text{cm}.
-\end{align*}
+$E_r = 0.0005$ deg/cm,
+$K_\theta = 0.1994$ deg$^2$/cm,
+$E_t = -1.6902\%$, and
+$K_\rho = 0.042551$ cm.
 
-The relatively small magnitude of these parameters suggests that odometry
-drift remains limited during the evaluated walking distance. Nevertheless,
-its contribution cannot be completely separated from the overall dynamic
-estimation error, as the global coordinate transformation depends on the
-odometry-based robot pose estimate.
+The obtained parameters indicate that both systematic and non-systematic
+odometry errors remain relatively small over the evaluated 1~m walking
+trajectory. In particular, the low rotational bias suggests that the
+robot maintains a consistent heading during forward walking, while the
+small translational bias indicates only minor deviation from the
+expected traveled distance. These results are consistent with the
+observed walking behavior and suggest that the odometry system provides
+a sufficiently accurate pose estimate for transforming IPM outputs into
+global field coordinates during the experiment.
+
+\begin{figure*}[!h]
+\centering
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{regression_vs_ipm_estimates.png}
+\\ \vspace{1mm} \footnotesize (a) Distance estimates comparison.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{regression_vs_ipm_error.png}
+\\ \vspace{1mm} \footnotesize (b) Absolute distance error.
+\end{minipage}
+\caption{Comparison between the regression-based and IPM-based distance estimation
+methods: (a) estimated distances versus ground-truth distances, and (b) corresponding
+absolute distance errors.Comparative performance profiling between the legacy
+regression-based.}
+\label{fig:regression_vs_ipm}
+\end{figure*}
 
 \subsection{Comparison with Regression-Based Method}
 
-To evaluate the effectiveness of the proposed IPM approach for the ICHIRO ITS team,
-a comparison is conducted with the previous distance estimation method used in the
-system, which is based on polynomial regression of the robot head
-pan and tilt angles.
+To evaluate the proposed IPM approach, a comparison was conducted with
+the regression-based distance estimation method previously used by the
+ICHIRO ITS team. The evaluation was performed in a static setup with
+the ball placed at distances ranging from 20 cm to 400 cm. Both methods
+estimated the ball distance while the robot actively tracked the target
+to ensure consistent observations.
 
-The evaluation is performed in a static setup, where the ball is placed
-at increasing distances from the robot, ranging from 20~cm to 400~cm.
-For each distance, both the regression-based method and the proposed
-IPM method are used to estimate the distance to the ball. In both approaches,
-the robot actively tracks the ball to ensure a consistent observation
-for comparison. The experimental setup during these measurements is
-shown in Figure~\ref{fig:regression_vs_ipm_setup}.
+The resulting distance estimates and absolute errors are presented in Figure~\ref{fig:regression_vs_ipm},
+while the aggregate error metrics are summarized in Table~\ref{tab:regression_vs_ipm}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.72\columnwidth]{regression_vs_ipm_setup.jpg}
+\includegraphics[width=0.8\columnwidth]{regression_vs_ipm_setup.jpg}
 \caption{Actual experimental setup for comparing regression-based and IPM distance estimation.}
 \label{fig:regression_vs_ipm_setup}
 \end{figure}
-
-The distance estimates and absolute errors are shown in Figure~\ref{fig:regression_vs_ipm}, while
-the aggregate error metrics are summarized in Table~\ref{tab:regression_vs_ipm}.
 
 \begin{table}[h]
 \centering
@@ -1373,22 +1366,6 @@ IPM & 2.24 & 2.55 & 4.20 \\
 \end{tabular}
 \end{table}
 
-\begin{figure*}[!h]
-\centering
-\begin{minipage}[b]{0.48\textwidth}
-\centering
-\includegraphics[width=\textwidth]{regression_vs_ipm_estimates.png}
-\\ \vspace{1mm} \footnotesize (a) Distance estimates comparison.
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.48\textwidth}
-\centering
-\includegraphics[width=\textwidth]{regression_vs_ipm_error.png}
-\\ \vspace{1mm} \footnotesize (b) Absolute distance error.
-\end{minipage}
-\caption{Comparative performance profiling between the legacy regression-based infrastructure and the proposed analytical IPM architecture: (a) estimated distance curves plotted against ground-truth references, and (b) corresponding absolute distance errors across the 400~cm operational target line.}
-\label{fig:regression_vs_ipm}
-\end{figure*}
 As shown in Figure~\ref{fig:regression_vs_ipm}a, the regression-based method
 produces acceptable performance at short distances but fails to generalize
 as the distance increases. In particular, beyond approximately 250~cm,
@@ -1407,10 +1384,9 @@ substantially reduces the average and worst-case distance estimation errors
 under the tested conditions.
 
 Furthermore, unlike the regression-based approach, IPM does not require
-continuous object tracking, as demonstrated in both the dynamic
-evaluations. This enables more flexible perception and supports higher-level
-capabilities such as localization, which is critical for maintaining the
-robot's spatial awareness and tactical positioning on the field.
+continuous object tracking and can estimate positions directly from
+individual object detections, providing greater flexibility for
+perception tasks in dynamic soccer environments.
 
 %\hfill mds
 %\hfill January 11, 2007
@@ -1530,17 +1506,29 @@ by ICHIRO ITS team using ROS 2. The proposed approach integrates camera calibrat
 real-time kinematic transformations, and object detection outputs to estimate
 object positions from monocular vision.
 
-Experimental results demonstrate that the system achieves reliable performance under
-both static and dynamic conditions. In static scenarios, the method produces accurate
-and consistent estimates across multiple object types. During walking, the system
-maintains stable performance despite the influence of robot motion and odometry drift,
-showing its robustness in realistic operating conditions.
+Experimental results demonstrate accurate and stable performance under
+static conditions. For nearby and intermediate-distance (below 4~m) targets,
+the system achieved MAE values below 8~cm, while the lowest error was obtained
+for the ball ($O_1$) with an MAE of 1.61~cm. Estimation accuracy decreased for
+distant objects due to the increased sensitivity of IPM near the image horizon,
+with the largest error observed for the goalpost ($O_6$), which achieved an MAE of
+38.80~cm.
 
-Compared to the previously used regression-based method by ICHIRO ITS, the proposed IPM approach
-provides more consistent accuracy over a wider distance range and eliminates the
-dependence on active object tracking. In addition, it removes the need for repeated
-empirical calibration, making it more practical for deployment in dynamic and
-time-constrained environments such as humanoid robot competitions.
+During walking, the error distribution became highly non-normal due to
+occasional large estimation failures. Nevertheless, the median errors
+remained relatively low at 12.74~cm, 14.75~cm, and 5.11~cm for the
+ball, robot, and X-intersection, respectively. Furthermore, 59.5\%,
+50.2\%, and 62.2\% of the corresponding estimates remained within
+15 cm of the reference position, indicating that most object position
+estimates remained reasonably accurate despite robot motion.
+
+A comparison with the regression-based method previously used by the
+ICHIRO ITS team showed a substantial improvement in distance estimation
+accuracy, reducing the MAE from 36.90~cm to 2.24~cm and the RMSE from
+61.00~cm to 2.55~cm. Unlike the regression-based approach, the proposed
+method does not depend on active object tracking or repeated empirical
+distance calibration, making it more suitable for deployment in dynamic
+humanoid soccer environments.
 
 Future work will focus on integrating the proposed system with higher-level perception
 modules, such as localization and mapping, as well as improving robustness against
