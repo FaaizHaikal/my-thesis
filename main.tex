@@ -477,22 +477,22 @@ rully130270@gmail.com).
 
 \begin{abstract}
 %\boldmath
-Accurate vision-based distance estimation is a critical component of perception systems 
-for humanoid soccer robots. Inverse Perspective Mapping (IPM) provides a geometric approach 
-to estimate object positions from monocular camera images without additional distance sensors, 
-which are prohibited in humanoid robot soccer competitions such as RoboCup. In practice, 
-because the camera extrinsic parameters change continuously during walking and 
-head movement, IPM is challenging to implement reliably. 
+Accurate vision-based distance estimation is a critical component of perception systems
+for humanoid soccer robots. Inverse Perspective Mapping (IPM) provides a geometric approach
+to estimate object positions from monocular camera images without additional distance sensors,
+which are prohibited in humanoid robot soccer competitions such as RoboCup. In practice,
+because the camera extrinsic parameters change continuously during walking and
+head movement, IPM is challenging to implement reliably.
 
 This paper presents an IPM implementation for object distance estimation on a humanoid soccer robot
-developed by ICHIRO ITS team using ROS 2 software, a widely used robotics framework that enables modular 
-and real-time data exchange between multiple robot subsystems, 
-including sensors and processing modules. The proposed system integrates 
-object detection outputs, camera intrinsic parameters, and real-time kinematic transformations 
-obtained from the robot model. Evaluations under static and walking conditions 
-show that the system produces stable object position estimates. In addition, a comparison with 
-a previously used regression-based method by ICHIRO ITS demonstrates that the proposed IPM approach provides 
-more consistent accuracy across a wider distance range and removes the dependence on active 
+developed by ICHIRO ITS team using ROS 2 software, a widely used robotics framework that enables modular
+and real-time data exchange between multiple robot subsystems,
+including sensors and processing modules. The proposed system integrates
+object detection outputs, camera intrinsic parameters, and real-time kinematic transformations
+obtained from the robot model. Evaluations under static and walking conditions
+show that the system produces stable object position estimates. In addition, a comparison with
+a previously used regression-based method by ICHIRO ITS demonstrates that the proposed IPM approach provides
+more consistent accuracy across a wider distance range and removes the dependence on active
 object tracking.
 \end{abstract}
 % IAENGtran.cls defaults to using nonbold math in the Abstract.
@@ -543,16 +543,16 @@ IPM, Humanoid Robot, ROS 2
 \IAENGPARstart{H}{umanoid} robots are designed to operate in environments intended
 for humans with body structures and capabilities similar to humans \cite{Kajita2014}.
 Research on humanoid robots has increased significantly across various domains \cite{Siciliano2010}.
-One benchmark for evaluating these advancements is competitive soccer, which tests autonomous systems 
-in real-time perception and dynamic stability \cite{RoboCupHumanoidLeague2025}. The RoboCup initiative sets a long-range goal: by 2050, 
-a team of fully autonomous humanoid robots shall win a soccer game against the winner of the most 
+One benchmark for evaluating these advancements is competitive soccer, which tests autonomous systems
+in real-time perception and dynamic stability \cite{RoboCupHumanoidLeague2025}. The RoboCup initiative sets a long-range goal: by 2050,
+a team of fully autonomous humanoid robots shall win a soccer game against the winner of the most
 recent FIFA World Cup \cite{RobocupFederation2026}.
 
-To encourage human-like perception, the RoboCup Humanoid League competition rules restrict the use of non-human sensors. 
-Distance sensors such as LiDAR and depth cameras are prohibited, forcing teams to rely primarily on 
-vision sensors, inertial sensors, and joint encoders. Consequently, accurate distance estimation from a 
-single camera remains a critical and challenging problem \cite{RoboCupHumanoidLeague2025}. Humanoid soccer robots must estimate 
-the positions of objects such as the ball, goalposts, and field features to perform navigation 
+To encourage human-like perception, the RoboCup Humanoid League competition rules restrict the use of non-human sensors.
+Distance sensors such as LiDAR and depth cameras are prohibited, forcing teams to rely primarily on
+vision sensors, inertial sensors, and joint encoders. Consequently, accurate distance estimation from a
+single camera remains a critical and challenging problem \cite{RoboCupHumanoidLeague2025}. Humanoid soccer robots must estimate
+the positions of objects such as the ball, goalposts, and field features to perform navigation
 and make decisions \cite{SatyaWidodo2012}.
 
 Several approaches have been proposed for estimating object distance using visual data. Monocular depth estimation uses
@@ -564,32 +564,32 @@ and is sensitive to lighting and texture variations, which reduces reliability i
 
 Inverse Perspective Mapping (IPM) offers a lightweight geometric solution that estimates
 object positions by projecting image points under the assumption that objects of interest lie on a planar surface \cite{Li2024}.
-IPM has been widely used in autonomous driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}. 
+IPM has been widely used in autonomous driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}.
 However, implementing IPM on humanoid robots is more challenging because the camera pose changes continuously due
 to body posture changes \cite{Dias2024}.
 
-This paper presents the implementation of an IPM-based object position estimation system on a 
-humanoid soccer robot developed by the ICHIRO ITS team. The objective of this work is to demonstrate 
-how IPM can be integrated with real-time kinematic transformations in ROS 2 to estimate object positions 
+This paper presents the implementation of an IPM-based object position estimation system on a
+humanoid soccer robot developed by the ICHIRO ITS team. The objective of this work is to demonstrate
+how IPM can be integrated with real-time kinematic transformations in ROS 2 to estimate object positions
 under both static and dynamic conditions.
 
-Previously, the ICHIRO ITS team used a polynomial regression-based 
-approach to estimate distances by mapping the robot's head pan and tilt 
-angles to tracked object distances. However, this method relies on active 
-object tracking, as the mapping is only valid when the object is centered 
-in the field of view. Its performance also degrades at longer distances, 
-where the head tilt angle approaches zero and reduces model sensitivity. 
-In addition, the method requires an empirical calibration process across 
-various head configurations, which is time-consuming and must be repeated 
-whenever the robot configuration changes. These limitations motivate the 
-use of a more robust approach, addressed in this work using Inverse 
+Previously, the ICHIRO ITS team used a polynomial regression-based
+approach to estimate distances by mapping the robot's head pan and tilt
+angles to tracked object distances. However, this method relies on active
+object tracking, as the mapping is only valid when the object is centered
+in the field of view. Its performance also degrades at longer distances,
+where the head tilt angle approaches zero and reduces model sensitivity.
+In addition, the method requires an empirical calibration process across
+various head configurations, which is time-consuming and must be repeated
+whenever the robot configuration changes. These limitations motivate the
+use of a more robust approach, addressed in this work using Inverse
 Perspective Mapping.
 
-The remainder of this paper is organized as follows. Section II presents the overall system description, 
-including the humanoid robot platform and the software framework used in this work. 
+The remainder of this paper is organized as follows. Section II presents the overall system description,
+including the humanoid robot platform and the software framework used in this work.
 Section III introduces the theoretical background underlying the proposed approach.
-Section IV describes the implementation methodology of the system. 
-Section V presents the experimental evaluation and results. 
+Section IV describes the implementation methodology of the system.
+Section V presents the experimental evaluation and results.
 Finally, Section VI concludes the paper and discusses future work.
 
 \begin{figure*}[t]
@@ -601,7 +601,7 @@ Finally, Section VI concludes the paper and discusses future work.
 
 \section{System Description} \label{sec:system_desc}
 
-This section describes the humanoid robot platform and software framework used 
+This section describes the humanoid robot platform and software framework used
 in this research, providing the system context in which the proposed approach is implemented.
 
 \subsection{ICHIRO ITS}
@@ -622,46 +622,46 @@ module (CM) board is responsible for low-level sensor acquisition and actuator i
 An overview of the robot platform is shown in Figure ~\ref{fig:ichiro}.
 
 \subsection{Robot Operating System 2}
-The robot's software is built using the Robot Operating System 2 (ROS 2) 
-Jazzy Jalisco, which provides a modular, multi-process architecture. 
-The system uses the Data Distribution Service (DDS) middleware to 
-ensure robust inter-process communication with configurable Quality of Service 
-(QoS) policies. The ROS 2 framework facilitates a publisher-subscriber 
-model that allows independent nodes to share information through standardized 
+The robot's software is built using the Robot Operating System 2 (ROS 2)
+Jazzy Jalisco, which provides a modular, multi-process architecture.
+The system uses the Data Distribution Service (DDS) middleware to
+ensure robust inter-process communication with configurable Quality of Service
+(QoS) policies. The ROS 2 framework facilitates a publisher-subscriber
+model that allows independent nodes to share information through standardized
 topics \cite{Macenski2022}.
 
-In this research, the IPM implementation leverages existing software 
-modules: a Deep Neural Network (DNN) node that publishes detected objects 
-as bounding boxes, a joint state publisher that provides real-time servo 
-encoder values, and an IMU node that provides orientation feedback. These 
-synchronized data streams provide the necessary inputs for the IPM deprojection 
-algorithm, allowing the system to accurately correlate visual features in 
+In this research, the IPM implementation leverages existing software
+modules: a Deep Neural Network (DNN) node that publishes detected objects
+as bounding boxes, a joint state publisher that provides real-time servo
+encoder values, and an IMU node that provides orientation feedback. These
+synchronized data streams provide the necessary inputs for the IPM deprojection
+algorithm, allowing the system to accurately correlate visual features in
 image space with the robot's physical configuration in the real world.
 
 \subsection{Universal Robot Description Format}
 
-Universal Robot Description Format (URDF) is an XML-based format used to 
-model a robot's physical structure. This format is widely supported by 
-the robotics ecosystem, including ROS 2, and enables the construction of a 
+Universal Robot Description Format (URDF) is an XML-based format used to
+model a robot's physical structure. This format is widely supported by
+the robotics ecosystem, including ROS 2, and enables the construction of a
 complete transformation tree. The transformations in this tree are constructed using
-the ROS 2 \texttt{tf2} library and are broadcast by a publisher node, 
+the ROS 2 \texttt{tf2} library and are broadcast by a publisher node,
 allowing other nodes to consume synchronized pose data for real-time calculations.
 
-The URDF for the ICHIRO ITS robot incorporates the 20 DOF servo actuators 
-along with a dedicated \texttt{camera\_frame}. This frame follows the 
-standard ROS vision axis convention where the $Z$-axis points forward 
-along the optical axis, the $Y$-axis points downward, and the $X$-axis 
-points to the right \cite{NVIDIA2026}. Additionally, the model 
-defines the \texttt{left\_foot\_frame} and \texttt{right\_foot\_frame}, 
-which are used to dynamically compute the \texttt{base\_footprint}. 
-This virtual frame serves as the primary ground-level reference for 
-the \texttt{camera\_frame} in the IPM calculation, ensuring that visual 
+The URDF for the ICHIRO ITS robot incorporates the 20 DOF servo actuators
+along with a dedicated \texttt{camera\_frame}. This frame follows the
+standard ROS vision axis convention where the $Z$-axis points forward
+along the optical axis, the $Y$-axis points downward, and the $X$-axis
+points to the right \cite{NVIDIA2026}. Additionally, the model
+defines the \texttt{left\_foot\_frame} and \texttt{right\_foot\_frame},
+which are used to dynamically compute the \texttt{base\_footprint}.
+This virtual frame serves as the primary ground-level reference for
+the \texttt{camera\_frame} in the IPM calculation, ensuring that visual
 deprojections are correctly referenced to the playing surface.
 
 \section{Theoretical Background} \label{sec:theories}
 
-This section presents the theoretical foundations required for the 
-proposed approach, including camera projection models, kinematic transformations, 
+This section presents the theoretical foundations required for the
+proposed approach, including camera projection models, kinematic transformations,
 ground plane assumption, and the IPM formulation.
 
 \subsection{Pinhole Camera Model}
@@ -671,11 +671,11 @@ world point and the two-dimensional image plane, as shown in Equation \ref{eq:pi
 
 \begin{equation} \label{eq:pinhole}
 \begin{split}
-\begin{pmatrix} x \\ y \\ 1 \end{pmatrix} &= 
+\begin{pmatrix} x \\ y \\ 1 \end{pmatrix} &=
 \begin{bmatrix}
 f_{x} & 0 & p_{x} & 0 \\
 0 & f_{y} & p_{y} & 0 \\
-0 & 0 & 1     & 0 
+0 & 0 & 1     & 0
 \end{bmatrix}
 \begin{bmatrix}
 R & t \\
@@ -690,47 +690,47 @@ where:
 \begin{itemize}
     \item $(x, y)$: Coordinates of the projected point on the 2D image plane.
     \item $(X, Y, Z)$: Coordinates of the point in the 3D world coordinate system.
-    \item $K$: The camera intrinsic matrix, parameters unique to specific camera hardware,  
+    \item $K$: The camera intrinsic matrix, parameters unique to specific camera hardware,
                including the focal length $(f_x, f_y)$ and the principal point coordinates $(p_x, p_y)$.
-    \item $R$: The camera rotation matrix $(3 \times 3)$, representing the orientation 
+    \item $R$: The camera rotation matrix $(3 \times 3)$, representing the orientation
                of the camera in the world frame.
-    \item $t$: The camera translation vector $(3 \times 1)$, representing the position 
+    \item $t$: The camera translation vector $(3 \times 1)$, representing the position
                of the camera origin in the world frame.
 \end{itemize}
 This formulation follows the standard pinhole camera model widely used in computer
 vision \cite{Hartley2003,Szeliski2011}.
 
 \subsection{Kinematics Tree}
-A kinematic tree represents the hierarchical relationship between rigid 
-bodies (links) connected by joints. In this structure, each node corresponds 
-to a specific coordinate frame, while the edges define the rigid transformations 
-between parent and child frames. This mathematical representation allows the pose 
-of any link or sensor within the tree to be computed relative to a global or local 
+A kinematic tree represents the hierarchical relationship between rigid
+bodies (links) connected by joints. In this structure, each node corresponds
+to a specific coordinate frame, while the edges define the rigid transformations
+between parent and child frames. This mathematical representation allows the pose
+of any link or sensor within the tree to be computed relative to a global or local
 reference frame through the use of chained homogeneous transformations \cite{Craig1986,Siciliano2010}.
 
-A rigid body transformation between two frames is represented using 
+A rigid body transformation between two frames is represented using
 a $4 \times 4$ homogeneous transformation matrix as shown in Equation \ref{eq:transformation_matrix}.
 \begin{equation} \label{eq:transformation_matrix}
-\mathbf{T}_{a}^{b} = 
+\mathbf{T}_{a}^{b} =
 \begin{bmatrix}
 \mathbf{R}_{a}^{b} & \mathbf{t}_{a}^{b} \\
 \mathbf{0}^{T} & 1
 \end{bmatrix}
 \end{equation}
-where $\mathbf{R}_{a}^{b}$ is a $3 \times 3$ rotation matrix and 
-$\mathbf{t}_{a}^{b}$ is a $3 \times 1$ translation vector from frame 
-$a$ to frame $b$. Using homogeneous transformation matrix, a point $P_a$ expressed 
-in coordinate frame $a$ is transformed into frame $b$ as shown in 
+where $\mathbf{R}_{a}^{b}$ is a $3 \times 3$ rotation matrix and
+$\mathbf{t}_{a}^{b}$ is a $3 \times 1$ translation vector from frame
+$a$ to frame $b$. Using homogeneous transformation matrix, a point $P_a$ expressed
+in coordinate frame $a$ is transformed into frame $b$ as shown in
 Equation \ref{eq:transformation_equation}.
 \begin{equation} \label{eq:transformation_equation}
 \begin{bmatrix} P_b \\ 1 \end{bmatrix} = \mathbf{T}_{a}^{b} \begin{bmatrix} P_a \\ 1 \end{bmatrix}
 \end{equation}
-This representation is commonly used in robotics to model body structures and 
+This representation is commonly used in robotics to model body structures and
 to compute forward kinematics \cite{Kajita2014}.
 
 \subsection{Ground Plane Assumption}
-Inverse Perspective Mapping relies on the assumption that objects of interest lie on a planar surface \cite{Mark2024}. 
-In humanoid soccer, this assumption is valid for objects such as the ball, goalposts, and field markings, 
+Inverse Perspective Mapping relies on the assumption that objects of interest lie on a planar surface \cite{Mark2024}.
+In humanoid soccer, this assumption is valid for objects such as the ball, goalposts, and field markings,
 as the playing field is flat \cite{RoboCupHumanoidLeague2025}.
 
 By constraining points to lie on a plane, we can recover the depth $Z_c$ along the optical axis
@@ -739,13 +739,13 @@ by defining a plane in the camera frame $P_c$ using plane equation as shown in E
 \begin{equation} \label{eq:plane_camera}
 n_c \cdot P_c + d = 0
 \end{equation}
-where $n_c = [n_x, n_y, n_z]^T$ is the plane normal in the camera frame and $d$ 
+where $n_c = [n_x, n_y, n_z]^T$ is the plane normal in the camera frame and $d$
 is the perpendicular distance from the camera origin to the plane \cite{Stewart2012}.
 
-The normal $n_c$ can be derived by transforming the fixed ground normal from the \texttt{base\_footprint} 
-frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest 
+The normal $n_c$ can be derived by transforming the fixed ground normal from the \texttt{base\_footprint}
+frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest
 lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$.
-By applying the rotation matrix $R_{c}^{b}$, we can express this 
+By applying the rotation matrix $R_{c}^{b}$, we can express this
 normal in the camera's coordinate system as shown in Equation \ref{eq:base_plane_wrt_camera}
 
 \begin{equation} \label{eq:base_plane_wrt_camera}
@@ -754,45 +754,45 @@ n_c = (R_{c}^{b})^{T} \cdot n_b = \begin{bmatrix} r_{31} \\ r_{32} \\ r_{33} \en
 where $r_{31}, r_{32}, r_{33}$ are elements of the third row of the rotation matrix $R_{c}^{b}$.
 
 \subsection{Inverse Perspective Mapping}
-Inverse Perspective Mapping (IPM) aims to recover the three-dimensional 
-position of an image point under the assumption that it lies on a known 
-planar surface, typically the ground. Given the camera intrinsic parameters 
-and the camera pose relative to the ground, the depth of a projected image 
+Inverse Perspective Mapping (IPM) aims to recover the three-dimensional
+position of an image point under the assumption that it lies on a known
+planar surface, typically the ground. Given the camera intrinsic parameters
+and the camera pose relative to the ground, the depth of a projected image
 point can be analytically recovered \cite{Bertozzi1998,Park2023}.
 
-The pixel $(u, v)$ in the image plane can be converted to a three-dimensional coordinate in 
+The pixel $(u, v)$ in the image plane can be converted to a three-dimensional coordinate in
 the camera frame $P_c = [X_c, Y_c, Z_c]$ using the inverse pinhole camera model
 from Equation \ref{eq:pinhole}:
 
-\begin{equation} \label{eq:coordinate_camera} 
-\begin{bmatrix} X_c \\ Y_c \end{bmatrix} = Z_c 
-\begin{bmatrix} \frac{u - p_x}{f_x} \\ \frac{v - p_y}{f_y} \end{bmatrix} = Z_c 
-\begin{bmatrix} x \\ y \end{bmatrix} 
+\begin{equation} \label{eq:coordinate_camera}
+\begin{bmatrix} X_c \\ Y_c \end{bmatrix} = Z_c
+\begin{bmatrix} \frac{u - p_x}{f_x} \\ \frac{v - p_y}{f_y} \end{bmatrix} = Z_c
+\begin{bmatrix} x \\ y \end{bmatrix}
 \end{equation}
 where $(x, y)$ are normalized image coordinates.
 
-By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with 
-the distance $d$ from the plane in the \texttt{camera\_frame} equal to 
-the camera translation $T_z$ along the vertical axis relative to the base frame.
+By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with
+the distance $d$ from the plane in the \texttt{camera\_frame} equal to
+the camera translation $t_z$ along the vertical axis relative to the base frame.
 Therefore, $Z_c$ can be calculated as shown in Equation \ref{eq:zc}.
 
 \begin{equation} \label{eq:zc}
-Z_c = \frac{-T_z}{r_{31} x + r_{32} y + r_{33}}
+Z_c = \frac{-t_z}{r_{31} x + r_{32} y + r_{33}}
 \end{equation}
 
-Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$ 
+Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$
 is obtained by transforming $P_c$ into the \texttt{base\_footprint} frame:
 
 \begin{equation}
 \begin{bmatrix} P_w \\ 1 \end{bmatrix} = \mathbf{T}_{c}^{b} \begin{bmatrix} P_c \\ 1 \end{bmatrix}
 \end{equation}
-where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix. 
-The system rejects any results where $Z_c \leq 0$ or is undefined (NaN), 
+where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix.
+The system rejects any results where $Z_c \leq 0$ or is undefined (NaN),
 as these indicate points behind the camera or parallel to the optical axis.
 
 \section{Methodology}
 
-This section focuses on practical aspects, including camera calibration, 
+This section focuses on practical aspects, including camera calibration,
 robot kinematic frame construction, and the integration of the IPM module for object distance estimation.
 
 \subsection{Camera Calibration}
@@ -801,37 +801,37 @@ required for the projection calculation between the three-dimensional world and 
 image plane, as described in Equation \ref{eq:pinhole}. In this paper, we used a Logitech C930e camera mounted
 on the robot's head.
 
-The calibration was conducted using a standard $8 \times 6$ checkerboard with known 
+The calibration was conducted using a standard $8 \times 6$ checkerboard with known
 square dimensions. We captured approximately 15 images of the checkerboard from
 various distances and angles as shown in Figure \ref{fig:camera_calib}.
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\columnwidth]{camera-calibration.png}
+\includegraphics[width=0.72\columnwidth]{camera-calibration.png}
 \caption{Visualization of detected checkerboard corners used for camera calibration.}
 \label{fig:camera_calib}
 \end{figure}
 
 These images were then processed using the OpenCV
-calibration library to estimate the focal length $(f_x, f_y)$ and principal point 
+calibration library to estimate the focal length $(f_x, f_y)$ and principal point
 coordinates $(p_x, p_y)$. While the calibration script also calculates lens distortion coefficients, the
 radial and tangential distortion values for the Logitech C930e were found to be
 sufficiently small to be neglected.
 
 \subsection{Robot Frames Package}
-In this research, we implemented a dedicated ROS 2 package, \texttt{robot\_frames}, 
-which loads the URDF model and broadcasts kinematic transformations using the \texttt{tf2} library. 
+In this research, we implemented a dedicated ROS 2 package, \texttt{robot\_frames},
+which loads the URDF model and broadcasts kinematic transformations using the \texttt{tf2} library.
 By consuming live joint encoder and IMU data, the package provides real-time kinematic transformations
 that reflect the robot's physical state in the real world.
 
-In addition, the package computes the \texttt{base\_footprint}, a virtual frame that serves as the 
-reference frame for IPM calculations. This frame is calculated dynamically using information from 
-the \texttt{right\_foot\_frame} and \texttt{left\_foot\_frame}. Since the robot is always in contact 
-with the ground, the $Z$-height of the \texttt{base\_footprint} is set to match the supporting foot 
-(i.e., the foot currently in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates are 
+In addition, the package computes the \texttt{base\_footprint}, a virtual frame that serves as the
+reference frame for IPM calculations. This frame is calculated dynamically using information from
+the \texttt{right\_foot\_frame} and \texttt{left\_foot\_frame}. Since the robot is always in contact
+with the ground, the $Z$-height of the \texttt{base\_footprint} is set to match the supporting foot
+(i.e., the foot currently in contact with the ground). Meanwhile, the $X$ and $Y$ coordinates are
 defined as the midpoint between both feet.
 
-The overall procedure of the robot frame computation is summarized 
+The overall procedure of the robot frame computation is summarized
 in Algorithm~\ref{alg:robot_frames}.
 
 \begin{algorithm}[!h]
@@ -872,28 +872,28 @@ in Algorithm~\ref{alg:robot_frames}.
 
 \subsection{IPM Package}
 
-We implemented another dedicated ROS~2 package, \texttt{ipm}, to perform distance estimation using 
-the Inverse Perspective Mapping (IPM) algorithm. This package subscribes to object bounding boxes 
-produced by a Deep Neural Network (DNN) detection module and kinematic transformations provided by 
-the \texttt{robot\_frames} package. In addition, it loads a JSON configuration file containing the 
+We implemented another dedicated ROS~2 package, \texttt{ipm}, to perform distance estimation using
+the Inverse Perspective Mapping (IPM) algorithm. This package subscribes to object bounding boxes
+produced by a Deep Neural Network (DNN) detection module and kinematic transformations provided by
+the \texttt{robot\_frames} package. In addition, it loads a JSON configuration file containing the
 camera intrinsic parameters ($K$) obtained from the calibration process.
 
-For each detected object, a representative image pixel $(x, y)$ is selected to approximate the 
-object's contact point with the ground. For objects such as other robots or goalposts, the 
-bottom-center of the bounding box is selected. For objects such as the ball or field markers, 
+For each detected object, a representative image pixel $(x, y)$ is selected to approximate the
+object's contact point with the ground. For objects such as other robots or goalposts, the
+bottom-center of the bounding box is selected. For objects such as the ball or field markers,
 the center of the bounding box is used.
 
-Note that for certain objects, such as the ball, the selected pixel may not correspond to direct 
-ground contact. This discrepancy is handled by introducing a height offset ($h$), which effectively 
-treats the ground plane as being elevated by that amount. Since the physical dimensions of the ball 
-are known, the height offset $h$ corresponds to its radius. Consequently, the depth recovery 
+Note that for certain objects, such as the ball, the selected pixel may not correspond to direct
+ground contact. This discrepancy is handled by introducing a height offset ($h$), which effectively
+treats the ground plane as being elevated by that amount. Since the physical dimensions of the ball
+are known, the height offset $h$ corresponds to its radius. Consequently, the depth recovery
 equation derived in Section \ref{sec:theories} is modified as follows:
 
 \begin{equation} \label{eq:zc_final}
-Z_c = \frac{h - T_z}{r_{31}x + r_{32}y + r_{33}}
+Z_c = \frac{h - t_z}{r_{31}x + r_{32}y + r_{33}}
 \end{equation}
 
-The complete IPM projection pipeline is described in 
+The complete IPM projection pipeline is described in
 Algorithm~\ref{alg:ipm}.
 
 \begin{algorithm}[!h]
@@ -908,6 +908,7 @@ Algorithm~\ref{alg:ipm}.
 \While{receiving detections}
     \State $\mathcal{O} \gets \text{ReadDetections}()$
     \State $\mathcal{P} \gets \emptyset$
+    \State $(R, t) \gets \text{LookupTransform}(\mathcal{T}, \text{camera} \rightarrow \text{base\_footprint})$
 
     \ForAll{$o \in \mathcal{O}$}
         \State $u \gets (o.left + o.right)/2$
@@ -918,7 +919,6 @@ Algorithm~\ref{alg:ipm}.
         \EndIf
 
         \State $(x, y) \gets \text{NormalizePixel(u, v, K)}$
-        \State $(R, t) \gets \text{LookupTransform}(\mathcal{T}, \text{camera} \rightarrow \text{base\_footprint})$
 
         \State $h \gets 0$
         \If{$o.\text{label} = \text{"ball"}$}
@@ -945,32 +945,32 @@ Algorithm~\ref{alg:ipm}.
 
 \section{Evaluation}
 
-This section evaluates the performance of the proposed IPM-based distance 
-estimation under static and dynamic conditions. Both evaluations are 
-conducted using the same object configuration and identical initial 
-robot position to ensure consistency. The static evaluation measures 
-the intrinsic accuracy of IPM when the robot remains stationary, 
-while the dynamic evaluation analyzes system behavior during walking 
-and considers the influence of odometry when expressing results in 
+This section evaluates the performance of the proposed IPM-based distance
+estimation under static and dynamic conditions. Both evaluations are
+conducted using the same object configuration and identical initial
+robot position to ensure consistency. The static evaluation measures
+the intrinsic accuracy of IPM when the robot remains stationary,
+while the dynamic evaluation analyzes system behavior during walking
+and considers the influence of odometry when expressing results in
 global coordinates.
 
-In addition, a comparative evaluation is conducted against the 
-previous regression-based method used in the system. This comparison 
-highlights the limitations of the prior approach and demonstrates 
-the advantages of the proposed IPM method in terms of scalability 
+In addition, a comparative evaluation is conducted against the
+previous regression-based method used in the system. This comparison
+highlights the limitations of the prior approach and demonstrates
+the advantages of the proposed IPM method in terms of scalability
 and robustness across varying distances.
 
 \subsection{Experimental Setup}
 
-All experiments were conducted on a $6 \times 9$ m kid-size field 
+All experiments were conducted on a $6 \times 9$ m kid-size field
 following the RoboCup 2026 rules.
-The robot is initialized at the same global position for both 
-static and dynamic evaluations, namely the kickoff position 
+The robot is initialized at the same global position for both
+static and dynamic evaluations, namely the kickoff position
 $P(450.0, 300.0)$ at the center of the field.
 
-A fixed set of objects is placed at known global coordinates 
-and remains unchanged throughout all trials. 
-Each object is assigned a symbolic notation for concise reference 
+A fixed set of objects is placed at known global coordinates
+and remains unchanged throughout all trials.
+Each object is assigned a symbolic notation for concise reference
 in subsequent tables and equations.
 
 \begin{table}[h]
@@ -991,92 +991,68 @@ $O_6$ & Left Goalpost & $(900.0, 190.0)$ \\
 \end{tabular}
 \end{table}
 
-The global coordinates $(X_i, Y_i)$ are determined using field geometry 
-and manual measurement to ensure repeatability. These positions remain 
-constant for both static and dynamic experiments. A visualization of the 
-experimental configuration is shown in Figure~\ref{fig:experiment_setup}, 
-while the actual experimental setup is presented in Figure~\ref{fig:real_setup}.
+The global coordinates $(X_i, Y_i)$ are determined using field geometry
+and manual measurement to ensure repeatability. These positions remain
+constant for both static and dynamic experiments. The complete experimental
+configuration deployed on the RoboCup field is presented in
+Figure~\ref{fig:combined_setup}, which illustrates the schematic target layout
+(a) alongside the physical test platform deployment (b).
 
-\begin{figure}[!h]
+\begin{figure*}[!h]
 \centering
-\includegraphics[width=\columnwidth]{Experiment Setup.png} 
-\caption{Experimental setup showing the kickoff position of the robot 
-and the fixed global positions of objects $O_1$–$O_6$ on the field.}
-\label{fig:experiment_setup}
-\end{figure}
-
-\begin{figure}[!h]
+\begin{minipage}[b]{0.6\textwidth}
 \centering
-\includegraphics[width=\columnwidth]{Real Setup.jpg}
-\caption{Actual experimental setup on the RoboCup field, showing the 
-robot placement and physical arrangement of objects used during evaluation.}
-\label{fig:real_setup}
-\end{figure}
+\includegraphics[width=\textwidth]{Experiment Setup.png}
+\\ \vspace{1mm} \footnotesize (a) Schematic diagram of target configurations.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.36\textwidth}
+\centering
+\includegraphics[width=\textwidth]{Real Setup.jpg}
+\\ \vspace{1mm} \footnotesize (b) Physical test platform deployment.
+\end{minipage}
+\caption{Complete experimental configuration deployed on the RoboCup field, displaying the robot starting kickoff orientation and the fixed global coordinates for targets $O_1$--$O_6$.}
+\label{fig:combined_setup}
+\end{figure*}
 
-To assess the accuracy of the IPM estimations, three primary error metrics 
-are defined for each observed object: the Euclidean error ($E$), the X-axis 
-error ($E_x$), and the Y-axis error ($E_y$). These errors represent the overall 
-geometric deviation between the estimated position $(\hat{X}, \hat{Y})$ and the reference position 
-$(X, Y)$, defined as:
+
+To assess the accuracy of the IPM estimations, three primary error metrics
+are defined for each observed object: the estimated object position $(\hat{X}, \hat{Y})$
+is compared with the corresponding ground-truth position $(X, Y)$. The estimation
+error along each axis is defined as
 
 \begin{equation}
 E_x = \hat{X} - X, \quad
 E_y = \hat{Y} - Y
 \end{equation}
+and the Euclidean position error is computed as
 \begin{equation}
 E = \sqrt{(E_x )^2 + ( E_y )^2}
 \end{equation}
 
-To provide a normalized measure of error, the Euclidean error is expressed 
-as a percentage relative to the distance between the robot's initial position 
-$P(450.0, 300.0)$ and the object:
+The Euclidean error represents the geometric distance between the estimated and
+reference positions in the field coordinate system. All position coordinates and error
+metrics reported in this study are expressed in centimeters (cm). For visualization purposes,
+the signed axis-wise errors $(E_x, E_y)$ are retained to indicate
+the direction of estimation bias.
 
-\begin{equation}
-E^{\%} = \frac{E}{\sqrt{(X - X_0)^2 + (Y - Y_0)^2}} \times 100\%
-\end{equation}
-Similarly, the axis-wise percentage errors are defined as:
-
-\begin{equation}
-E_x^{\%} = \frac{|E_x|}{|X - X_0|} \times 100\%, \quad
-E_y^{\%} = \frac{|E_y|}{|Y - Y_0|} \times 100\%
-\end{equation}
-
-The signed axis-wise errors $(E_x, E_y)$ are retained to indicate the 
-direction of estimation bias, while absolute values are used in the 
-percentage formulation to represent error magnitude independently of direction.
-
-For evaluations involving multiple observations or repeated trials, 
-additional statistical metrics are used to analyze the overall estimation 
-performance. The Mean Absolute Error (MAE) represents the average magnitude 
-of the estimation error, the Root Mean Square Error (RMSE) emphasizes larger 
-deviations caused by outliers, and the standard deviation ($\sigma$) measures 
-the variability of the estimation results.
-
-\begin{equation}
-\mathrm{MAE} = \frac{1}{N}\sum_{i=1}^{N} |E_i|
-\end{equation}
-
-\begin{equation}
-\mathrm{RMSE} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} E_i^2}
-\end{equation}
-
-\begin{equation}
-\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(E_i-\bar{E})^2}
-\end{equation}
-where $N$ denotes the number of evaluated samples, $E_i$ is the 
-Euclidean error of the $i$-th sample, and $\bar{E}$ is the mean 
-Euclidean error.
+For each object, multiple observations are collected during the evaluation process.
+The distribution of Euclidean errors is summarized using the Mean Absolute Error (MAE),
+Root Mean Square Error (RMSE), median error, Median Absolute Deviation (MAD), and standard
+deviation ($\sigma$). In addition, 95\% confidence intervals for MAE and RMSE are estimated
+using bootstrap resampling with 10,000 iterations.
 
 \subsection{Static Evaluation}
 
-In the static evaluation, the robot remains stationary at the kickoff 
-position $P(450.0, 300.0)$, and both the body and head are kept fixed. 
-Since the robot pose is known and does not change during this evaluation, 
-it is used as the reference pose.
+In the static evaluation, the robot remains stationary at the kickoff
+position $P(450.0, 300.0)$, and both the body and head are kept fixed.
+Since the robot pose is known and constant, it is used as the reference
+pose for transforming the estimated object positions into the global
+field coordinate system.
 
-For each object, the IPM module estimates the relative position 
-$(X_b, Y_b)$ with respect to the \texttt{base\_footprint} frame. 
-The estimated global position $(\hat{X}_i, \hat{Y}_i)$ is obtained 
+For each object, the IPM module estimates the relative position
+$(X_b, Y_b)$ with respect to the \texttt{base\_footprint} frame.
+The estimated global position $(\hat{X}_i, \hat{Y}_i)$ is obtained
 by applying a rigid body transformation using the known robot pose:
 
 \begin{equation}
@@ -1093,74 +1069,93 @@ Y_b \\
 1
 \end{bmatrix}
 \end{equation}
-where $\mathbf{T}_{b}^{g}$ denotes the homogeneous transformation 
+where $\mathbf{T}_{b}^{g}$ denotes the homogeneous transformation
 from the \texttt{base\_footprint} frame to the global field frame.
 
-Table~\ref{tab:static_results} summarizes the static evaluation results, 
-including the estimated positions, Euclidean error, and axis-wise errors 
-reported in both absolute and percentage forms.
+For each object, Euclidean errors were computed for every frame in the
+recorded image sequence while the robot and objects remained stationary.
+Table~\ref{tab:static_results} summarizes the corresponding error statistics.
 
 \begin{table}[h]
 \centering
 \footnotesize
-\caption{Static IPM estimation results}
+\caption{Static IPM estimation error statistics}
 \label{tab:static_results}
-\begin{tabular}{c c c c c}
+\begin{tabular}{c c c c c c}
 \toprule
-\textbf{Obj} & \textbf{$(\hat{X}, \hat{Y})$} & \textbf{$E$} & \textbf{$E_x$} & \textbf{$E_y$} \\
+\textbf{Obj.} &
+\textbf{MAE} &
+\textbf{RMSE} &
+\textbf{Median} &
+\textbf{MAD} &
+\textbf{$\sigma$} \\
 \midrule
-$O_1$ & (550.0, 348.4) & 1.6 (1.4\%) & 0.0 (0.0\%) & -1.6 (3.1\%) \\
-$O_2$ & (644.0, 197.3) & 6.6 (3.0\%) & -6.0 (3.0\%) & -2.7 (2.7\%) \\
-$O_3$ & (746.7, 300.5) & 3.3 (1.1\%) & -3.3 (1.1\%) & 0.5 (0.0\%) \\
-$O_4$ & (806.2, 446.8) & 7.0 (1.9\%) & 6.2 (1.8\%) & -3.2 (2.2\%) \\
-$O_5$ & (916.4, 463.4) & 21.3 (4.5\%) & 16.4 (3.7\%) & 13.4 (8.9\%) \\
-$O_6$ & (938.6, 194.3) & 38.8 (8.4\%) & 38.6 (8.6\%) & 4.3 (3.9\%) \\
+$O_1$ & 1.61 & 1.62 & 1.78 & 0.17 & 0.19 \\
+$O_2$ & 6.61 & 6.62 & 6.74 & 0.13 & 0.40 \\
+$O_3$ & 3.33 & 3.33 & 3.33 & 0.00 & 0.00 \\
+$O_4$ & 7.05 & 7.05 & 7.08 & 0.03 & 0.10 \\
+$O_5$ & 21.30 & 22.16 & 18.63 & 3.50 & 6.11 \\
+$O_6$ & 38.80 & 38.80 & 38.80 & 0.00 & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The results in Table~\ref{tab:static_results} show that the proposed 
-IPM method achieves high accuracy for objects located at moderate distances, 
-with most errors remaining below 10 cm. However, a clear trend can be observed 
-where the estimation error increases as the object distance becomes larger, 
-particularly for $O_5$ and $O_6$.
+The results indicate that the proposed IPM method achieves high positional
+accuracy for nearby and intermediate-distance objects. Objects $O_1$--$O_4$
+exhibit MAE values below 8~cm and standard deviations below 0.5~cm, indicating
+both accurate and stable estimations under static conditions.
 
-Figure~\ref{fig:static_ipm_evaluation} visualizes the same result in 
-field coordinates by comparing the reference object positions with the 
-IPM estimates. The error vectors show that the estimates remain close 
-to the reference positions for nearby and mid-range objects, while the 
-largest deviations occur for distant objects.
+Among the evaluated objects, $O_1$ achieves the lowest error with an MAE of
+1.61~cm (95\% CI: [1.52, 1.69]), while $O_6$ exhibits the largest error with
+an MAE and RMSE of 38.80~cm. A clear increase in estimation error can be observed
+as the object distance from the robot increases. This trend is particularly
+evident for $O_5$ and $O_6$, which correspond to the most distant targets in
+the experimental setup.
 
-\begin{figure}[h]
+This behavior is inherent to monocular IPM-based depth estimation.
+With the robot head maintained at a tilt angle of $0^\circ$, objects located
+farther from the robot project closer to the image horizon due to perspective
+effects. In this region, small variations in image coordinates correspond to
+large variations in the estimated depth. Consequently, the depth term computed
+in Equation~\ref{eq:zc_final} becomes increasingly sensitive to joint offsets,
+detection inaccuracies, and calibration errors, resulting in larger
+estimation deviations for distant objects.
+
+Figure~\ref{fig:static_ipm_evaluation} visualizes the mean estimated positions and
+corresponding error vectors in field coordinates. The estimated positions remain
+close to their respective ground-truth locations for nearby objects, while the
+magnitude of the error vectors increases for distant targets.
+
+\begin{figure*}[h]
 \centering
-\includegraphics[width=\columnwidth]{static_ipm_evaluation_2.png}
-\caption{Static IPM evaluation in field coordinates, showing reference 
+\includegraphics[width=0.6\textwidth]{static_ipm_evaluation_2.png}
+\caption{Static IPM evaluation in field coordinates, showing reference
 positions, mean IPM estimates, and error vectors for all evaluated objects.}
 \label{fig:static_ipm_evaluation}
-\end{figure}
+\end{figure*}
 
-This behavior is inherent to monocular IPM-based depth estimation. 
-With the robot head maintained at a tilt angle of $0^\circ$, objects located 
-farther from the robot project closer to the image horizon due to perspective 
-effects. In this region, small variations in image coordinates correspond to 
-large variations in the estimated depth. Consequently, the depth term computed 
-in Equation~\ref{eq:zc_final} becomes increasingly sensitive to pixel noise, 
-segmentation inaccuracies, and calibration errors, resulting in larger 
-estimation deviations for distant objects.
+In addition, $O_5$ exhibits the highest variance among all evaluated objects,
+with a standard deviation of 6.11~cm and a wider margin of uncertainty
+(MAE 95\% CI: [19.04, 24.12]). This behavior is attributed to small variations
+in the detected bounding-box center across frames. Although the object is
+consistently detected, slight changes in the predicted bounding box lead to
+different IPM estimates. Because the effect is amplified for distant objects,
+the resulting position estimates exhibit higher variance than those of the
+other evaluated targets.
 
 \subsection{Dynamic Evaluation}
 
-The dynamic evaluation extends the experiment to conditions in 
-which the robot is walking. The robot starts from the same kickoff 
-position $P(450.0, 300.0)$ and walks forward for 1 meter toward target point 
+The dynamic evaluation extends the experiment to conditions in
+which the robot is walking. The robot starts from the same kickoff
+position $P(450.0, 300.0)$ and walks forward for 1 meter toward target point
 $P'(550.0, 300.0)$, repeated for 10 trials.
 
-During walking, the robot head performs continuous scanning motions 
-to detect visible objects. The IPM module continuously estimates 
-the relative object positions $(X_b, Y_b)$ in the 
+During walking, the robot head performs continuous scanning motions
+to detect visible objects. The IPM module continuously estimates
+the relative object positions $(X_b, Y_b)$ in the
 \texttt{base\_footprint} frame.
 
-To express object positions in global coordinates, the relative 
+To express object positions in global coordinates, the relative
 IPM outputs are transformed using the robot pose estimated from odometry:
 
 \begin{equation}
@@ -1178,94 +1173,152 @@ Y_b \\
 \end{bmatrix}
 \end{equation}
 
-As in the static case, the error is computed as the Euclidean 
-distance between the estimated and reference object positions. 
-In addition, axis-wise errors $(E_x, E_y)$ are reported to analyze 
+As in the static case, the error is computed as the Euclidean
+distance between the estimated and reference object positions.
+In addition, axis-wise errors $(E_x, E_y)$ are reported to analyze
 directional bias.
 
-Certain objects are excluded from the dynamic evaluation. In particular, 
-the L-intersection ($O_4$) and T-intersection ($O_5$) are not considered, 
-as multiple instances of these features are detected at different 
-locations during walking. Additionally, the goalpost ($O_6$) is excluded because of 
+Certain objects are excluded from the dynamic evaluation. In particular,
+the L-intersection ($O_4$) and T-intersection ($O_5$) are not considered,
+as multiple instances of these features are detected at different
+locations during walking. Additionally, the goalpost ($O_6$) is excluded because of
 ambiguity when only a single post, rather than the complete goal, is detected.
-This ambiguity makes it difficult to associate detections with a unique reference position. 
+This ambiguity makes it difficult to associate detections with a unique reference position.
 Therefore, only objects with consistent and unambiguous detections are included in the analysis.
-
-Before computing the aggregate dynamic results, outliers caused by false 
-or ambiguous object detections are removed using the interquartile range 
-(IQR) criterion for each object class. Approximately 17\% of the collected samples were removed 
-during this process. Most removed samples correspond to intermittent 
-misdetections and blurred observations occurring during robot motion 
-and head scanning. The filtered results are then used 
-to evaluate the stability of the IPM estimates during walking.
-
-Table~\ref{tab:dynamic_results} presents the aggregated dynamic evaluation 
-results.
 
 \begin{table}[h]
 \centering
 \footnotesize
 \caption{Dynamic IPM estimation results (10 trials)}
 \label{tab:dynamic_results}
-\begin{tabular}{c c c c c}
+\begin{tabular}{c c c c c c}
 \toprule
-\textbf{Obj} & \textbf{MAE (cm)} & \textbf{RMSE (cm)} & \textbf{$\sigma$ (cm)} & \textbf{($E_x, E_y$) (cm)} \\
+\textbf{Obj} &
+\textbf{MAE} &
+\textbf{RMSE} &
+\textbf{Median} &
+\textbf{MAD} &
+\textbf{$\sigma$} \\
 \midrule
-$O_1$ & 11.56 & 16.12 & 11.23 & (5.29, -6.26) \\
-$O_2$ & 18.47 & 33.44 & 27.88 & (2.72, 2.33) \\
-$O_3$ & 14.14 & 50.17 & 48.13 & (-6.52, 0.08) \\
+$O_1$ & 32.08 & 62.81  & 12.74 & 25.33 & 54.00  \\
+$O_2$ & 62.16 & 113.87 & 14.75 & 55.05 & 95.41  \\
+$O_3$ & 61.05 & 123.33 & 5.11  & 58.74 & 107.16 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The spatial distribution of the dynamic estimates is shown in 
-Figure~\ref{fig:dynamic_ipm_evaluation}. A 15 cm tolerance circle is 
-drawn around each reference object position to indicate the concentration 
-of the filtered IPM estimates. The figure shows that most ball and X-intersection
-estimates remain clustered around their reference positions, while 
-the robot object has a wider spread because its bounding box changes more 
-strongly with walking motion and detection variation.
+Table~\ref{tab:dynamic_results} presents the aggregated dynamic evaluation
+results. Compared with the static evaluation, all objects exhibit substantially
+larger MAE, RMSE, and standard deviation values. This increase is expected because
+the robot continuously performs locomotion and head scanning motions, introducing
+additional uncertainty in object detection, camera pose estimation, and odometry error.
 
-\begin{figure}[h]
+Despite the increase in aggregate error metrics, the median error remains
+relatively low for all evaluated objects. The median errors are
+12.74~cm (95\% CI: 11.83--13.55~cm), 14.75~cm (95\% CI: 12.10--17.46~cm),
+and 5.11~cm (95\% CI: 3.70--8.55~cm) for $O_1$, $O_2$, and $O_3$,
+respectively. The relatively narrow confidence intervals indicate that
+the typical estimation error remains consistently small across repeated
+trials. This suggests that most position estimates remain close to the
+corresponding reference positions during walking.
+
+However, the substantial gap between the median and RMSE values suggests
+that the error distribution is highly asymmetric. A small number of
+large estimation failures significantly increase the mean-based metrics,
+while the majority of observations remain concentrated near the true
+object locations.
+
+\begin{table}[h]
 \centering
-\includegraphics[width=\columnwidth]{dynamic_ipm_evaluation_2.png}
-\caption{Dynamic IPM evaluation in field coordinates during walking, showing 
-IPM estimates, reference positions, and 15 cm tolerance regions for 
-the ball, robot, and X-intersection.}
+\footnotesize
+\caption{Shapiro--Wilk normality test results for dynamic evaluation errors}
+\label{shapiro_wilk_test}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Object} & \textbf{Statistic} & \textbf{p-value} \\
+\midrule
+$O_1$ & 0.5424 & $6.05 \times 10^{-26}$ \\
+$O_2$ & 0.6558 & $4.53 \times 10^{-23}$ \\
+$O_3$ & 0.5756 & $8.17 \times 10^{-21}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+To formally assess the normality of the dynamic error distributions,
+the Shapiro--Wilk normality test was performed for each evaluated object.
+The results are presented in Table~\ref{shapiro_wilk_test}. All
+evaluated objects produce extremely small p-values ($p < 0.05$),
+indicating that the null hypothesis of a normally distributed error
+population must be rejected.
+
+To further visualize these deviations from normality, Quantile--Quantile
+(Q--Q) plots were generated for each object against a theoretical normal
+distribution, as shown in Figure~\ref{fig:dynamic_qq_plots}.
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=\textwidth]{dynamic_errors_qq_plots.png}
+\caption{Quantile-Quantile (Q-Q) plots of Euclidean distance errors for the ball ($O_1$), robot ($O_2$), and X-intersection ($O_3$) during dynamic walking trials. The sharp upward curve away from the straight normal line shows that the errors do not follow a normal distribution, but are heavily right-skewed due to occasional large estimation spikes.}
+\label{fig:dynamic_qq_plots}
+\end{figure*}
+
+The visual trends in Figure~\ref{fig:dynamic_qq_plots} are consistent with the
+Shapiro--Wilk test results. For all three objects, the data points bend sharply
+upward away from the linear normal baseline, particularly in the upper quantiles.
+This distinct upward curvature demonstrates that the tracking errors do not follow
+a Gaussian distribution, but are heavily right-skewed by occasional large estimation
+spikes.
+
+Together, the statistical tests and Q--Q plots confirm that the dynamic
+errors are strongly non-normal. Consequently, robust metrics like the median
+and MAD provide a much more accurate description of the system's typical
+tracking performance than standard mean-based metrics alone.
+
+The spatial distribution of the estimates is shown in
+Figure~\ref{fig:dynamic_ipm_evaluation}. A 15~cm tolerance circle is
+drawn around each reference object position. Using this threshold,
+the proposed method achieves successful position estimation rates of
+59.5\%, 50.2\%, and 62.2\% for objects $O_1$, $O_2$, and $O_3$,
+respectively. These results indicate that a majority of object position
+estimates remain within 15~cm of the reference position despite the
+robot being in motion.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{dynamic_ipm_evaluation_2.png}
+\caption{Dynamic IPM evaluation in field coordinates during active walking, displaying spatial distribution arrays, true reference markers, and the designated 15~cm error tolerance boundaries for targets $O_1$, $O_2$, and $O_3$.}
 \label{fig:dynamic_ipm_evaluation}
-\end{figure}
+\end{figure*}
 
-A noticeable difference between the MAE and RMSE values can be observed 
-for several objects, particularly $O_2$ and $O_3$. This indicates the 
-presence of occasional large estimation errors during certain trials. 
-Since RMSE squares the error term, it becomes more sensitive to outliers 
-than MAE. These larger deviations are primarily caused by false detections, 
-image blur during rapid head scanning due to the camera's rolling-shutter behavior, 
-and inaccuracies in the camera extrinsic parameters while the robot is walking.
+Several failure cases were observed during the evaluation, particularly when
+the estimated object position was projected to an unrealistic location on the field.
+Since IPM computes real-world coordinates directly from pixel coordinate,
+small errors in object detection, camera pose, or calibration can produce
+large position deviations, especially for distant objects and image regions near the horizon.
 
-It is important to note that odometry is not involved in the IPM 
-distance computation itself. IPM estimates object positions purely 
-relative to the robot. Odometry is only used to express estimated 
-object positions in global coordinates during dynamic evaluation. 
-Therefore, the measured dynamic error is influenced by both IPM 
-estimation error and odometry drift. To better understand this 
-influence, odometry error is analyzed independently using the 
+It is important to note that odometry is not involved in the IPM
+distance computation itself. IPM estimates object positions purely
+relative to the robot. Odometry is only used to express estimated
+object positions in global coordinates during dynamic evaluation.
+Therefore, the measured dynamic error is influenced by both IPM
+estimation error and odometry drift. To better understand this
+influence, odometry error is analyzed independently using the
 approach proposed by Martinelli~\cite{Martinelli2001APS}.
 
-This method characterizes odometry uncertainty through four parameters: 
-translational bias ($E_t$), translational noise ($K_\rho$), 
+This method characterizes odometry uncertainty through four parameters:
+translational bias ($E_t$), translational noise ($K_\rho$),
 rotational bias ($E_r$), and rotational noise ($K_\theta$).
-The parameters $E_t$ and $E_r$ represent \textit{systematic errors}, 
-which correspond to consistent and repeatable deviations in robot motion, 
-such as bias in traveled distance or heading. In contrast, the parameters 
-$K_\rho$ and $K_\theta$ represent \textit{non-systematic errors}, which 
-capture random variations caused by factors such as sensor noise and 
+The parameters $E_t$ and $E_r$ represent \textit{systematic errors},
+which correspond to consistent and repeatable deviations in robot motion,
+such as bias in traveled distance or heading. In contrast, the parameters
+$K_\rho$ and $K_\theta$ represent \textit{non-systematic errors}, which
+capture random variations caused by factors such as sensor noise and
 surface interaction.
 
-The parameters are estimated by comparing the odometry-based pose 
-$(x_{\text{odom}}, y_{\text{odom}}, \theta_{\text{odom}})$ with the 
-reference pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$ 
-at the end of each trial, when the robot reaches the target position 
+The parameters are estimated by comparing the odometry-based pose
+$(x_{\text{odom}}, y_{\text{odom}}, \theta_{\text{odom}})$ with the
+reference pose $(x_{\text{true}}, y_{\text{true}}, \theta_{\text{true}})$
+at the end of each trial, when the robot reaches the target position
 $P'(550.0, 300.0)$. The resulting odometry error parameters are:
 \begin{align*}
 E_r &= 0.0005 \ \text{deg/cm}, \\
@@ -1274,42 +1327,35 @@ E_t &= -1.6902\%, \\
 K_\rho &= 0.042551 \ \text{cm}.
 \end{align*}
 
-The relatively small magnitude of these parameters suggests that odometry 
-drift remains limited during the evaluated walking distance. Nevertheless, 
-its contribution cannot be completely separated from the overall dynamic 
-estimation error, as the global coordinate transformation depends on the 
+The relatively small magnitude of these parameters suggests that odometry
+drift remains limited during the evaluated walking distance. Nevertheless,
+its contribution cannot be completely separated from the overall dynamic
+estimation error, as the global coordinate transformation depends on the
 odometry-based robot pose estimate.
-
-The dynamic evaluation results in Table~\ref{tab:dynamic_results} show an overall 
-increase in estimation error compared to the static case. This is expected, 
-as the robot performs continuous motion, introducing additional sources 
-of uncertainty such as body oscillation, head movement, and detection noise.
-Despite these challenges, the proposed IPM method maintains consistent 
-estimation performance across all evaluated object classes.
 
 \subsection{Comparison with Regression-Based Method}
 
-To evaluate the effectiveness of the proposed IPM approach for the ICHIRO ITS team, 
-a comparison is conducted with the previous distance estimation method used in the 
-system, which is based on polynomial regression of the robot head 
+To evaluate the effectiveness of the proposed IPM approach for the ICHIRO ITS team,
+a comparison is conducted with the previous distance estimation method used in the
+system, which is based on polynomial regression of the robot head
 pan and tilt angles.
 
-The evaluation is performed in a static setup, where the ball is placed 
-at increasing distances from the robot, ranging from 20 cm to 400 cm. 
-For each distance, both the regression-based method and the proposed 
-IPM method are used to estimate the distance to the ball. In both approaches, 
-the robot actively tracks the ball to ensure a consistent observation 
-for comparison. The experimental setup during these measurements is 
-shown in Figure~\ref{fig:regression_vs_ipm_setup}. 
+The evaluation is performed in a static setup, where the ball is placed
+at increasing distances from the robot, ranging from 20~cm to 400~cm.
+For each distance, both the regression-based method and the proposed
+IPM method are used to estimate the distance to the ball. In both approaches,
+the robot actively tracks the ball to ensure a consistent observation
+for comparison. The experimental setup during these measurements is
+shown in Figure~\ref{fig:regression_vs_ipm_setup}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{regression_vs_ipm_setup.jpg}
+\includegraphics[width=0.72\columnwidth]{regression_vs_ipm_setup.jpg}
 \caption{Actual experimental setup for comparing regression-based and IPM distance estimation.}
 \label{fig:regression_vs_ipm_setup}
 \end{figure}
 
-The distance estimates and absolute errors are shown in Figure~\ref{fig:regression_vs_ipm}, while 
+The distance estimates and absolute errors are shown in Figure~\ref{fig:regression_vs_ipm}, while
 the aggregate error metrics are summarized in Table~\ref{tab:regression_vs_ipm}.
 
 \begin{table}[h]
@@ -1319,7 +1365,7 @@ the aggregate error metrics are summarized in Table~\ref{tab:regression_vs_ipm}.
 \label{tab:regression_vs_ipm}
 \begin{tabular}{c c c c}
 \toprule
-\textbf{Method} & \textbf{MAE (cm)} & \textbf{RMSE (cm)} & \textbf{Max. Error (cm)} \\ 
+\textbf{Method} & \textbf{MAE} & \textbf{RMSE} & \textbf{Max. Error} \\
 \midrule
 Regression-based & 36.90 & 61.00 & 154.60 \\
 IPM & 2.24 & 2.55 & 4.20 \\
@@ -1327,36 +1373,43 @@ IPM & 2.24 & 2.55 & 4.20 \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure*}[!h]
 \centering
-\includegraphics[width=0.88\columnwidth]{regression_vs_ipm.png}
-\caption{Comparison between regression-based and IPM distance estimation: 
-(a) estimated distance against reference distance and (b) absolute error 
-across the tested distance range.}
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{regression_vs_ipm_estimates.png}
+\\ \vspace{1mm} \footnotesize (a) Distance estimates comparison.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{regression_vs_ipm_error.png}
+\\ \vspace{1mm} \footnotesize (b) Absolute distance error.
+\end{minipage}
+\caption{Comparative performance profiling between the legacy regression-based infrastructure and the proposed analytical IPM architecture: (a) estimated distance curves plotted against ground-truth references, and (b) corresponding absolute distance errors across the 400~cm operational target line.}
 \label{fig:regression_vs_ipm}
-\end{figure}
-
-As shown in Figure~\ref{fig:regression_vs_ipm}, the regression-based method 
-produces acceptable performance at short distances but fails to generalize 
-as the distance increases. In particular, beyond approximately 250 cm, 
+\end{figure*}
+As shown in Figure~\ref{fig:regression_vs_ipm}a, the regression-based method
+produces acceptable performance at short distances but fails to generalize
+as the distance increases. In particular, beyond approximately 250~cm,
 the estimated distance saturates and no longer follows the reference trend.
-This limitation arises because the regression model relies primarily on the head 
-tilt angle as its input feature. As the object moves farther away, the tilt angle 
-eventually remains at $0^\circ$, reducing the sensitivity of the 
+This limitation arises because the regression model relies primarily on the head
+tilt angle as its input feature. As the object moves farther away, the tilt angle
+eventually remains at $0^\circ$, reducing the sensitivity of the
 mapping and causing the model to lose its predictive capability.
 
-In contrast, the proposed IPM method maintains a consistent relationship with 
-the reference distance across the entire range. Even at longer distances, 
-the estimated values continue to increase proportionally, demonstrating better 
-scalability and robustness. The quantitative summary in 
-Table~\ref{tab:regression_vs_ipm} further shows that IPM 
-substantially reduces the average and worst-case distance estimation errors 
+In contrast, the proposed IPM method maintains a consistent relationship with
+the reference distance across the entire range. Even at longer distances,
+the estimated values continue to increase proportionally, demonstrating better
+scalability and robustness. The quantitative summary in
+Table~\ref{tab:regression_vs_ipm} further shows that IPM
+substantially reduces the average and worst-case distance estimation errors
 under the tested conditions.
 
-Furthermore, unlike the regression-based approach, IPM does not require 
-continuous object tracking, as demonstrated in both the static and dynamic 
-evaluations. This enables more flexible perception and supports higher-level 
-capabilities such as localization, which is critical for maintaining the 
+Furthermore, unlike the regression-based approach, IPM does not require
+continuous object tracking, as demonstrated in both the dynamic
+evaluations. This enables more flexible perception and supports higher-level
+capabilities such as localization, which is critical for maintaining the
 robot's spatial awareness and tactical positioning on the field.
 
 %\hfill mds
@@ -1471,26 +1524,26 @@ robot's spatial awareness and tactical positioning on the field.
 
 \section{Conclusion}
 
-In this paper, we implemented Inverse Perspective Mapping (IPM)-based 
-object position estimation system on a humanoid soccer robot developed 
-by ICHIRO ITS team using ROS 2. The proposed approach integrates camera calibration, 
-real-time kinematic transformations, and object detection outputs to estimate 
+In this paper, we implemented Inverse Perspective Mapping (IPM)-based
+object position estimation system on a humanoid soccer robot developed
+by ICHIRO ITS team using ROS 2. The proposed approach integrates camera calibration,
+real-time kinematic transformations, and object detection outputs to estimate
 object positions from monocular vision.
 
-Experimental results demonstrate that the system achieves reliable performance under 
-both static and dynamic conditions. In static scenarios, the method produces accurate 
-and consistent estimates across multiple object types. During walking, the system 
-maintains stable performance despite the influence of robot motion and odometry drift, 
+Experimental results demonstrate that the system achieves reliable performance under
+both static and dynamic conditions. In static scenarios, the method produces accurate
+and consistent estimates across multiple object types. During walking, the system
+maintains stable performance despite the influence of robot motion and odometry drift,
 showing its robustness in realistic operating conditions.
 
-Compared to the previously used regression-based method by ICHIRO ITS, the proposed IPM approach 
-provides more consistent accuracy over a wider distance range and eliminates the 
-dependence on active object tracking. In addition, it removes the need for repeated 
-empirical calibration, making it more practical for deployment in dynamic and 
+Compared to the previously used regression-based method by ICHIRO ITS, the proposed IPM approach
+provides more consistent accuracy over a wider distance range and eliminates the
+dependence on active object tracking. In addition, it removes the need for repeated
+empirical calibration, making it more practical for deployment in dynamic and
 time-constrained environments such as humanoid robot competitions.
 
-Future work will focus on integrating the proposed system with higher-level perception 
-modules, such as localization and mapping, as well as improving robustness against 
+Future work will focus on integrating the proposed system with higher-level perception
+modules, such as localization and mapping, as well as improving robustness against
 detection noise, joint offsets, and IMU drift.
 
 
