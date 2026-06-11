@@ -8,7 +8,7 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.3
 #   kernelspec:
-#     display_name: .venv
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -18,8 +18,7 @@ import glob
 import json
 import re
 from collections import defaultdict
-from tkinter import Frame
-
+import os
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -104,10 +103,9 @@ def load_ipm_estimations(path, labels=None):
 
 dynamic_ipm = []
 files = sorted(
-    glob.glob("../data/dynamic_ipm_logs_*.json"),
-    key=lambda x: int(re.search(r"_(\d+)\.json", x).group(1)),
+    glob.glob("../data/dynamic_ipm_logs*.json")
 )
-
+print("Dynamic logs count:", len(files))
 for filename in files:
     data = load_ipm_estimations(filename, ["ball", "robot", "X-Intersection"])
     dynamic_ipm.append(data)
@@ -424,56 +422,8 @@ plot_est_vs_gt_static(static_ipm, static_results)
 
 
 # %%
-def plot_error_boxplot(dynamic_ipm, labels=None):
-    if labels is None:
-        labels = OBJECTS_GROUND_TRUTH.keys()
-
-    data = []
-    names = []
-
-    for label in labels:
-        gt = OBJECTS_GROUND_TRUTH[label]
-        errors = []
-
-        for run in dynamic_ipm:
-            if label not in run:
-                continue
-
-            for est, _, _ in run[label]:
-                dx = est.x - gt.x
-                dy = est.y - gt.y
-                err = np.hypot(dx, dy)
-                errors.append(err)
-
-        if len(errors) > 0:
-            data.append(errors)
-            names.append(label)
-
-    plt.figure(figsize=(7, 5))
-    plt.boxplot(data, labels=names, showfliers=True)
-
-    plt.ylabel("Error (cm)")
-    plt.title("Error Distribution with IQR Outliers")
-    plt.grid(True)
-
-    plt.show()
-
-
-plot_error_boxplot(dynamic_ipm, labels=["ball", "robot", "X-Intersection"])
-
-
-# %% [markdown]
-# #### Removing outliers
-
-
-# %%
-MIN_WALKING_FRAME = 7
-
-
 def is_estimation_valid(est, robot, frame):
     # estimated point must lie inside field
-    if frame < MIN_WALKING_FRAME:
-        return False, f"static_baseline_phase (frame < {MIN_WALKING_FRAME})"
     if not (FIELD_X_MIN <= est.x <= FIELD_X_MAX):
         return False, "outside_field_x"
 
@@ -557,7 +507,8 @@ def filter_invalid_estimates(runs, exclude_labels=None):
     print("\n" + "=" * 60)
     print(f"Total samples   : {total_samples}")
     print(f"Removed samples : {removed_samples}")
-    print(f"Removal percent : {100 * removed_samples / total_samples:.2f}%")
+    if total_samples > 0:
+        print(f"Removal percent : {100 * removed_samples / total_samples:.2f}%")
     print("=" * 60)
 
     return filtered_runs
@@ -644,9 +595,8 @@ def evaluate_dynamic(runs):
 dynamic_results = evaluate_dynamic(filtered_dynamic_ipm)
 print_summary_dynamic("DYNAMIC IPM", filtered_dynamic_ipm, dynamic_results)
 
+
 # %%
-
-
 def evaluate_normality_dynamic(results_dict):
     """Performs Shapiro-Wilk test and plots separate Q-Q plots for each object
 
@@ -749,114 +699,6 @@ def evaluate_normality_dynamic(results_dict):
 # Execution syntax:
 evaluate_normality_dynamic(dynamic_results)
 # %%
-
-
-def evaluate_dynamic_per_trial(runs):
-    """
-    Saves data exactly how your plot expects:
-    { "ball": [ [trial1_frames], [trial2_frames], ... ] }
-    """
-    # Dict mapping label -> list of lists (trials)
-    metrics_log = defaultdict(list)
-
-    for run in runs:
-        # Collect errors for this specific trial run
-        trial_errors_per_obj = defaultdict(list)
-
-        for label, entries in run.items():
-            if label not in OBJECTS_GROUND_TRUTH:
-                continue
-
-            actual = OBJECTS_GROUND_TRUTH[label]
-
-            for est, robot, _ in entries:
-                err = euclidean_error(est, actual, robot)
-                trial_errors_per_obj[label].append(err)
-
-        # Append this individual trial's array into the main log
-        for label, err_list in trial_errors_per_obj.items():
-            metrics_log[label].append(err_list)
-
-    return metrics_log
-
-
-def plot_trial_errors(trials_data):
-    color_map = {
-        "ball": "blue",
-        "robot": "red",
-        "X-Intersection": "orange",
-        "goalpost": "green",
-        "L-Intersection": "purple",
-        "T-Intersection": "brown",
-    }
-
-    objects = list(trials_data.keys())
-    if not objects:
-        print("No objects to plot.")
-        return
-
-    # Create a subplot for each object
-    fig, axes = plt.subplots(
-        len(objects), 1, figsize=(12, 4 * len(objects)), sharex=True
-    )
-
-    if len(objects) == 1:
-        axes = [axes]
-
-    for obj_idx, obj_name in enumerate(objects):
-        ax = axes[obj_idx]
-        trials = trials_data[obj_name]  # This is now safely a list of trial lists
-
-        # Loop through each individual trial run sequence
-        for trial_num, trial_errors in enumerate(trials):
-            # trial_errors is a list of frame errors; len() works perfectly now
-            frames = np.arange(len(trial_errors))
-
-            ax.plot(
-                frames,
-                trial_errors,
-                color=color_map.get(obj_name, "grey"),
-                alpha=0.4,  # Translucent to reveal overlapping spikes
-                linewidth=1,
-                label=f"Trial {trial_num + 1}" if obj_idx == 0 else "",
-            )
-
-        ax.set_title(
-            f"Temporal Euclidean Error Across Trials: {obj_name}",
-            fontsize=12,
-            fontweight="bold",
-        )
-        ax.set_ylabel("Euclidean Error (cm)")
-        ax.grid(True, linestyle=":", alpha=0.6)
-
-        # Highlight acceptable boundary line
-        ax.axhline(
-            y=20,
-            color="black",
-            linestyle="--",
-            alpha=0.5,
-            label="Acceptable Threshold" if obj_idx == 0 else "",
-        )
-
-    axes[-1].set_xlabel("Time Step")
-
-    # Shift the single clean master legend safely outside to the right axis border
-    axes[0].legend(loc="upper left", bbox_to_anchor=(1.02, 1.0))
-
-    plt.tight_layout()
-    plt.savefig("../figures/error_over_time_trials.png", bbox_inches="tight")
-    plt.show()
-
-
-# --- Execution ---
-# 1. Use the updated evaluation function that splits by trials
-dynamic_trial_results = evaluate_dynamic_per_trial(filtered_dynamic_ipm)
-
-# 2. Run your plotting script smoothly without type crashes
-plot_trial_errors(dynamic_trial_results)
-
-
-# %%
 def summarize_per_run_per_object(runs):
     summary = []
 
@@ -882,8 +724,11 @@ def summarize_per_run_per_object(runs):
             mae = mae_func(total_errs)
             ci_mae = compute_ci(total_errs, mae_func)
 
+            # Median & MAD
             median = np.median(total_errs)
+            ci_median = compute_ci(total_errs, median_func)
             mad = np.mean(np.abs(total_errs - median))
+            ci_mad = compute_ci(total_errs, mad_func)
 
             std_dev = np.std(total_errs)
             ci_std = compute_ci(total_errs, std_func)
@@ -900,7 +745,9 @@ def summarize_per_run_per_object(runs):
                     "mae": mae,
                     "ci_mae": ci_mae,
                     "median": median,
+                    "ci_median": ci_median,
                     "mad": mad,
+                    "ci_mad": ci_mad,
                     "std": std_dev,
                     "ci_std": ci_std,
                     "rmse": rmse,
@@ -930,8 +777,8 @@ def print_summary_per_run_per_object(title, summary):
         print(
             f"    MAE        : {row['mae']:.2f}  95% CI: [{row['ci_mae'][0]:.2f}, {row['ci_mae'][1]:.2f}]"
         )
-        print(f"    Median     : {row['median']:.2f}")
-        print(f"    MAD        : {row['mad']:.2f}")
+        print(f"    Median     : {row['median']:.2f} 95% CI: [{row['ci_median'][0]:.2f}, {row['ci_median'][1]:.2f}]")
+        print(f"    MAD        : {row['mad']:.2f} 95% CI: [{row['ci_mad'][0]:.2f}, {row['ci_mad'][1]:.2f}]")
         print(
             f"    STD Dev    : {row['std']:.2f}  95% CI: [{row['ci_std'][0]:.2f}, {row['ci_std'][1]:.2f}]"
         )
@@ -947,40 +794,6 @@ def print_summary_per_run_per_object(title, summary):
 # Execution
 per_run_summary = summarize_per_run_per_object(filtered_dynamic_ipm)
 print_summary_per_run_per_object("DYNAMIC IPM PER RUN", per_run_summary)
-
-
-# %%
-def print_dynamic_runs(dynamic_logs, run_indices=None, labels=None):
-    if run_indices is None:
-        run_indices = list(range(len(dynamic_logs)))
-
-    if labels is None:
-        labels = OBJECTS_GROUND_TRUTH.keys()
-
-    print("=== DYNAMIC IPM RAW (FILTERED) ===")
-
-    for i in run_indices:
-        if i >= len(dynamic_logs):
-            continue
-
-        run = dynamic_logs[i]
-        print(f"\n--- Run {i} ---")
-
-        for label in labels:
-            if label not in run or not run[label]:
-                continue
-
-            print(f"{label}:")
-
-            for est, robot, frame in run[label]:
-                print(
-                    f"  Frame {frame} | "
-                    f"Est: ({est.x:.2f}, {est.y:.2f}) | "
-                    f"Robot: ({robot.x:.2f}, {robot.y:.2f})"
-                )
-
-
-print_dynamic_runs(dynamic_ipm, labels=["robot"], run_indices=[0])
 
 
 # %%
@@ -1255,65 +1068,6 @@ def plot_est_vs_gt_dynamic(dynamic_ipm, labels=None, radius=15):
 
 plot_est_vs_gt_dynamic(filtered_dynamic_ipm, labels=["ball", "robot", "X-Intersection"])
 
-
-# %%
-def calculate_dynamic_stats(dynamic_data):
-    # dynamic_data is your list of 10 dicts (one per trial)
-    all_results = []
-
-    for label in ["ball", "robot", "X-Intersection"]:
-        actual = OBJECTS_GROUND_TRUTH[label]
-        dist_to_obj = np.hypot(actual.x - 450, actual.y - 300)
-
-        # Collect all Euclidean errors for this object across ALL trials
-        e_list = []
-        ex_list = []
-        ey_list = []
-
-        for run in dynamic_data:
-            if label in run:
-                for est, _, _ in run[label]:
-                    dx = est.x - actual.x
-                    dy = est.y - actual.y
-                    err = np.hypot(dx, dy)
-
-                    e_list.append(err)
-                    ex_list.append(dx)
-                    ey_list.append(dy)
-
-        if not e_list:
-            continue
-
-        # Calculate Stats
-        mae = np.mean(e_list)
-        rmse = np.sqrt(np.mean(np.square(e_list)))
-        std_dev = np.std(e_list)
-        # Using mean of absolute errors for axis-wise to show bias
-        mean_ex = np.mean(ex_list)
-        mean_ey = np.mean(ey_list)
-
-        # Normalized Error E% (using MAE)
-        e_pct = (mae / dist_to_obj) * 100
-
-        all_results.append(
-            {
-                "Obj": label,
-                "MAE (E)": mae,
-                "RMSE": rmse,
-                "Std Dev": std_dev,
-                "E%": e_pct,
-                "Ex": mean_ex,
-                "Ey": mean_ey,
-            }
-        )
-
-    return pd.DataFrame(all_results)
-
-
-# Run it
-dynamic_stats_df = calculate_dynamic_stats(filtered_dynamic_ipm)
-print(dynamic_stats_df.round(2))
-
 # %% [markdown]
 # #### Horizon Line Visualization
 
@@ -1474,73 +1228,6 @@ df["delta_y"] = df["estimated_pos_y"] - df["actual_pos_y"]
 df["delta_orientation"] = df["estimated_orientation"] - df["actual_orientation"]
 
 df.head(10)
-
-# %%
-
-
-def plot_final_pose_clusters(df):
-    plt.figure(figsize=(8, 8))
-
-    # 1. Plot Actual vs Estimated for each trial
-    for i in range(len(df)):
-        # Line connecting actual to estimated for that trial
-        plt.plot(
-            [df.loc[i, "actual_pos_x"], df.loc[i, "estimated_pos_x"]],
-            [df.loc[i, "actual_pos_y"], df.loc[i, "estimated_pos_y"]],
-            "k-",
-            alpha=0.2,
-            zorder=1,
-        )
-
-        # Plot points
-        plt.scatter(
-            df.loc[i, "actual_pos_x"],
-            df.loc[i, "actual_pos_y"],
-            marker="X",
-            color="green",
-            s=100,
-            edgecolors="black",
-            label="Actual End" if i == 0 else "",
-            zorder=3,
-        )
-        plt.scatter(
-            df.loc[i, "estimated_pos_x"],
-            df.loc[i, "estimated_pos_y"],
-            marker="o",
-            color="blue",
-            s=80,
-            edgecolors="white",
-            label="Estimated End" if i == 0 else "",
-            zorder=2,
-        )
-
-    # Calculate and plot the mean of the estimations
-    mean_est_x = df["estimated_pos_x"].mean()
-    mean_est_y = df["estimated_pos_y"].mean()
-    plt.scatter(
-        mean_est_x,
-        mean_est_y,
-        color="red",
-        marker="+",
-        s=200,
-        linewidths=3,
-        label="Mean Estimation",
-        zorder=4,
-    )
-
-    plt.title("Final Endpoint Distribution (10 Trials)", fontsize=14)
-    plt.xlabel("Field X (cm)")
-    plt.ylabel("Field Y (cm)")
-    plt.legend()
-    plt.grid(True, linestyle=":", alpha=0.6)
-
-    # Set limits based on data to "zoom in" on the target area
-    plt.axis("equal")
-    plt.tight_layout()
-    plt.show()
-
-
-plot_final_pose_clusters(df)
 
 # %%
 rho_target_cm = 100  # Target was 1 meter
