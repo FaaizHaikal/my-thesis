@@ -236,7 +236,7 @@ print_summary_static("STATIC IPM", static_ipm, static_results)
 def plot_est_vs_gt_static(static_ipm, static_results, labels=None):
     if labels is None:
         labels = list(static_ipm.keys())
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(5.5, 5.5))
     # -------------------------------------
     # Colors & Markers
     # -------------------------------------
@@ -328,8 +328,13 @@ def plot_est_vs_gt_static(static_ipm, static_results, labels=None):
         total_errs = np.array(static_results[label])
         mae = mae_func(total_errs)
 
-        offset_x = 5 if (avg_x >= gt.x) else -15
-        offset_y = 5 if (avg_y >= gt.y) else -10
+        offset_x = 10 if (avg_x >= gt.x) else -15
+        offset_y = 10 if (avg_y >= gt.y) else -15
+
+        if label == "X-Intersection":
+            offset_y = 15
+        elif label == "robot":
+            offset_y = -25
 
         # ---------------------------------
         # Ground Truth (Filled)
@@ -411,6 +416,7 @@ def plot_est_vs_gt_static(static_ipm, static_results, labels=None):
         handles=legend_elements, loc="upper left", fontsize="small", frameon=True
     )
     plt.tight_layout()
+    plt.savefig("../figures/static_ipm_evaluation_2.png", bbox_inches="tight")
     plt.show()
 
 

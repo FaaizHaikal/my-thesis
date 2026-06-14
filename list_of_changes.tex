@@ -9,7 +9,7 @@
 
 \begin{center}
 \textbf{A List of Changes (Significant Improvement on Content)}\\
-\textbf{Last updated date: 11 May 2026}
+\textbf{Last updated date: 15 June 2026}
 \end{center}
 
 \vspace{0.5em}
@@ -17,43 +17,40 @@
 \noindent
 \textbf{The most significant change}
 
-The revised paper substantially expands the evaluation metrics for the proposed
-IPM method. The static and dynamic evaluations now report absolute Euclidean
-error, axis-wise error, normalized percentage error, MAE, RMSE, and standard
-deviation where appropriate, instead of relying only on average estimated
-positions. This provides a more complete assessment of accuracy and error
-variation under both stationary and walking conditions.
+The evaluation methodology was substantially strengthened by introducing a 
+comprehensive statistical assessment framework, including MAE, RMSE, median error, 
+MAD, standard deviation, and 95\% bootstrap confidence intervals based on 10,000 resamples. 
+This provides a more rigorous and statistically reliable evaluation of the proposed IPM method.
 
 \vspace{0.8em}
 
 \noindent
 \textbf{The second most significant change}
 
-The revised paper adds field-coordinate spatial analyses for both static and
-dynamic evaluations. The static analysis compares reference object positions
-with mean IPM estimates and error vectors for six field objects, while the
-dynamic analysis shows filtered estimates over 10 walking trials with 15 cm
-tolerance regions. These additions make the spatial behavior of the method and
-the effect of walking motion clearer.
+Statistical validation of the dynamic evaluation results was added through the 
+Shapiro–Wilk normality test and Q–Q plot analysis. The findings show that the 
+error distribution deviates from normality, supporting the use of median-based 
+metrics and improving the statistical validity of the reported performance analysis.
 
 \vspace{0.8em}
 
 \noindent
 \textbf{The third most significant change}
 
-The revised paper strengthens the comparison against the previously used
-polynomial regression method. The comparison now includes distance-wise
-estimated-distance and absolute-error trends, together with MAE, RMSE, and
-maximum error over reference distances from 20 cm to 400 cm. The results show
-that IPM reduces the tested MAE from 36.90 cm to 2.24 cm and avoids the
-long-distance saturation observed in the regression method.
+A numerical simulation of the IPM projection model was introduced to analyze the 
+geometric relationship between image coordinates and estimated field distance. 
+The simulation demonstrates the non-linear depth sensitivity of IPM near the horizon 
+and provides a theoretical explanation for the increased estimation error and variance 
+observed at long distances.
 
 \vspace{1.2em}
 
 \noindent
 \textbf{Deletion if any}
 
-No major technical content was deleted. The revision mainly adds evaluation
-metrics, spatial evaluation analysis, and a stronger quantitative comparison.
+The comparative MAE, RMSE, and related error metrics were removed from the regression-versus-IPM 
+evaluation because they could produce misleading conclusions when comparing methods with substantially 
+different operating ranges. The comparison was revised to emphasize the maximum reliable estimation 
+distance, which more accurately reflects the practical advantage of the proposed IPM approach.
 
 \end{document}
