@@ -544,15 +544,15 @@ IPM, Humanoid Robot, ROS 2
 \IAENGPARstart{H}{umanoid} robots are designed to operate in environments intended
 for humans with body structures and capabilities similar to humans \cite{Kajita2014}.
 Research on humanoid robots has increased significantly across various domains \cite{Siciliano2010}.
-One benchmark for evaluating these advancements is competitive soccer, which tests autonomous systems
-in real-time perception and dynamic stability \cite{RoboCupHumanoidLeague2025}. The RoboCup initiative sets a long-range goal: by 2050,
-a team of fully autonomous humanoid robots shall win a soccer game against the winner of the most
-recent FIFA World Cup \cite{RobocupFederation2026}.
+One benchmark for evaluating these advancements is competitive soccer, which tests 
+the real-time perception and dynamic stability of autonomous systems \cite{RoboCupHumanoidLeague2025}. 
+The RoboCup initiative sets a long-range goal: by 2050, a team of fully autonomous humanoid 
+robots shall win a soccer game against the champion of the most recent FIFA World Cup \cite{RobocupFederation2026}.
 
 To encourage human-like perception, the RoboCup Humanoid League competition rules restrict the use of non-human sensors.
 Distance sensors such as LiDAR and depth cameras are prohibited, forcing teams to rely primarily on
 vision sensors, inertial sensors, and joint encoders. Consequently, accurate distance estimation from a
-single camera remains a critical and challenging problem \cite{RoboCupHumanoidLeague2025}. Humanoid soccer robots must estimate
+single camera remains a critical and challenging problem \cite{RoboCupHumanoidLeague2025}. Humanoid soccer robots must determine
 the positions of objects such as the ball, goalposts, and field features to perform navigation
 and make decisions \cite{SatyaWidodo2012}.
 
@@ -567,7 +567,7 @@ Inverse Perspective Mapping (IPM) offers a lightweight geometric solution that e
 object positions by projecting image points under the assumption that objects of interest lie on a planar surface \cite{Li2024}.
 IPM has been widely used in autonomous driving systems, where the camera pose is relatively fixed \cite{Bertozzi1998}.
 However, implementing IPM on humanoid robots is more challenging because the camera pose changes continuously due
-to body posture changes \cite{Dias2024}.
+to body posture changes \cite{daSilva2024}.
 
 This paper presents the implementation of an IPM-based object position estimation system on a
 humanoid soccer robot developed by the ICHIRO ITS team. The objective of this work is to demonstrate
@@ -620,7 +620,7 @@ head and serves as the primary sensor for perception. Additional sensors include
 encoders for all actuated joints and an Inertial Measurement Unit (IMU) that provides
 orientation information. The robot runs on an Intel NUC i5 mini PC, while a custom control
 module (CM) board is responsible for low-level sensor acquisition and actuator interfacing.
-An overview of the robot platform is shown in Figure ~\ref{fig:ichiro}.
+An overview of the robot platform is shown in Figure~\ref{fig:ichiro}.
 
 \subsection{Robot Operating System 2}
 The robot's software is built using the Robot Operating System 2 (ROS 2)
@@ -668,7 +668,7 @@ ground plane assumption, and the IPM formulation.
 \subsection{Pinhole Camera Model}
 
 The pinhole camera model describes the relationship between a three-dimensional
-world point and the two-dimensional image plane, as shown in Equation \ref{eq:pinhole}.
+world point and the two-dimensional image plane, as shown in Equation~\ref{eq:pinhole}.
 
 \begin{equation} \label{eq:pinhole}
 \begin{split}
@@ -707,10 +707,10 @@ bodies (links) connected by joints. In this structure, each node corresponds
 to a specific coordinate frame, while the edges define the rigid transformations
 between parent and child frames. This mathematical representation allows the pose
 of any link or sensor within the tree to be computed relative to a global or local
-reference frame through the use of chained homogeneous transformations \cite{Craig1986,Siciliano2010}.
+reference frame through the use of chained homogeneous transformations \cite{Craig2009,Siciliano2010}.
 
 A rigid body transformation between two frames is represented using
-a $4 \times 4$ homogeneous transformation matrix as shown in Equation \ref{eq:transformation_matrix}.
+a $4 \times 4$ homogeneous transformation matrix as shown in Equation~\ref{eq:transformation_matrix}.
 \begin{equation} \label{eq:transformation_matrix}
 \mathbf{T}_{a}^{b} =
 \begin{bmatrix}
@@ -722,7 +722,7 @@ where $\mathbf{R}_{a}^{b}$ is a $3 \times 3$ rotation matrix and
 $\mathbf{t}_{a}^{b}$ is a $3 \times 1$ translation vector from frame
 $a$ to frame $b$. Using homogeneous transformation matrix, a point $P_a$ expressed
 in coordinate frame $a$ is transformed into frame $b$ as shown in
-Equation \ref{eq:transformation_equation}.
+Equation~\ref{eq:transformation_equation}.
 \begin{equation} \label{eq:transformation_equation}
 \begin{bmatrix} P_b \\ 1 \end{bmatrix} = \mathbf{T}_{a}^{b} \begin{bmatrix} P_a \\ 1 \end{bmatrix}
 \end{equation}
@@ -735,7 +735,7 @@ In humanoid soccer, this assumption is valid for objects such as the ball, goalp
 as the playing field is flat \cite{RoboCupHumanoidLeague2025}.
 
 By constraining points to lie on a plane, we can recover the depth $Z_c$ along the optical axis
-by defining a plane in the camera frame $P_c$ using plane equation as shown in Equation \ref{eq:plane_camera}
+by defining a plane in the camera frame $P_c$ using the plane equation as shown in Equation~\ref{eq:plane_camera}
 
 \begin{equation} \label{eq:plane_camera}
 n_c \cdot P_c + d = 0
@@ -747,12 +747,12 @@ The normal $n_c$ can be derived by transforming the fixed ground normal from the
 frame to the \texttt{camera\_frame}. Since the IPM algorithm assumes that all objects of interest
 lie on a flat surface, the ground normal in the base frame is fixed as $n_b = [0, 0, 1]^T$.
 By applying the rotation matrix $R_{c}^{b}$, we can express this
-normal in the camera's coordinate system as shown in Equation \ref{eq:base_plane_wrt_camera}
+normal in the camera's coordinate system as shown in Equation~\ref{eq:base_plane_wrt_camera}
 
 \begin{equation} \label{eq:base_plane_wrt_camera}
 n_c = (R_{c}^{b})^{T} \cdot n_b = \begin{bmatrix} r_{31} \\ r_{32} \\ r_{33} \end{bmatrix}
 \end{equation}
-where $r_{31}, r_{32}, r_{33}$ are elements of the third row of the rotation matrix $R_{c}^{b}$.
+where $r_{31}, r_{32}, r_{33}$ represent the elements of the third row of the rotation matrix $R_{c}^{b}$.
 
 \subsection{Inverse Perspective Mapping}
 Inverse Perspective Mapping (IPM) aims to recover the three-dimensional
@@ -763,7 +763,7 @@ point can be analytically recovered \cite{Bertozzi1998,Park2023}.
 
 The pixel $(u, v)$ in the image plane can be converted to a three-dimensional coordinate in
 the camera frame $P_c = [X_c, Y_c, Z_c]$ using the inverse pinhole camera model
-from Equation \ref{eq:pinhole}:
+from Equation~\ref{eq:pinhole}:
 
 \begin{equation} \label{eq:coordinate_camera}
 \begin{bmatrix} X_c \\ Y_c \end{bmatrix} = Z_c
@@ -772,10 +772,10 @@ from Equation \ref{eq:pinhole}:
 \end{equation}
 where $(x, y)$ are normalized image coordinates.
 
-By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation \ref{eq:plane_camera}, with
+By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation~\ref{eq:plane_camera}, with
 the distance $d$ from the plane in the \texttt{camera\_frame} equal to
-the camera translation $t_z$ along the vertical axis relative to the base frame.
-Therefore, $Z_c$ can be calculated as shown in Equation \ref{eq:zc}.
+the camera translation $t_z$ along the vertical axis relative to the base frame,
+the value of $Z_c$ can be calculated as shown in Equation~\ref{eq:zc}.
 
 \begin{equation} \label{eq:zc}
 Z_c = \frac{-t_z}{r_{31} x + r_{32} y + r_{33}}
@@ -799,12 +799,12 @@ robot kinematic frame construction, and the integration of the IPM module for ob
 \subsection{Camera Calibration}
 The objective of camera calibration is to obtain the intrinsic parameters ($K$)
 required for the projection calculation between the three-dimensional world and two-dimensional
-image plane, as described in Equation \ref{eq:pinhole}. In this paper, we used a Logitech C930e camera mounted
+image plane, as described in Equation~\ref{eq:pinhole}. In this paper, we used a Logitech C930e camera mounted
 on the robot's head.
 
 The calibration was conducted using a standard $8 \times 6$ checkerboard with known
 square dimensions. We captured approximately 15 images of the checkerboard from
-various distances and angles as shown in Figure \ref{fig:camera_calib}.
+various distances and angles as shown in Figure~\ref{fig:camera_calib}.
 
 \begin{figure}[!h]
 \centering
@@ -888,7 +888,7 @@ Note that for certain objects, such as the ball, the selected pixel may not corr
 ground contact. This discrepancy is handled by introducing a height offset ($h$), which effectively
 treats the ground plane as being elevated by that amount. Since the physical dimensions of the ball
 are known, the height offset $h$ corresponds to its radius. Consequently, the depth recovery
-equation derived in Section \ref{sec:theories} is modified as follows:
+equation derived in Section~\ref{sec:theories} is modified as follows:
 
 \begin{equation} \label{eq:zc_final}
 Z_c = \frac{h - t_z}{r_{31}x + r_{32}y + r_{33}}
@@ -1311,7 +1311,7 @@ The bias terms represent systematic errors, while the noise terms
 capture random variations caused by sensor noise and surface interaction.
 
 The odometry error parameters estimated at the target position $P'(550.0, 300.0)$ are: 
-$E_r = 0.0005$ deg/cm, $K_\theta = 0.1994$ deg$^2$/cm, $E_t = -1.6902\%$, and $K_\rho = 0.042551$ cm. 
+$E_r = 0.0005$ deg/cm, $K_\theta = 0.1994$ deg$^2$/cm, $E_t = -1.6902\%$, and $K_\rho = 0.042551$~cm. 
 These values indicate that both systematic and non-systematic errors remain 
 relatively small over the 1~m walking trajectory. Specifically, the low 
 rotational bias ($E_r$) and minor translational bias ($E_t$) confirm that the 
@@ -1334,8 +1334,7 @@ robot maintains a consistent heading and expected traveled distance.
 \end{minipage}
 \caption{Comparison between the regression-based and IPM-based distance estimation
 methods: (a) estimated distances versus ground-truth distances, and (b) corresponding
-absolute distance errors.Comparative performance profiling between the legacy
-regression-based.}
+absolute distance errors.}
 \label{fig:regression_vs_ipm}
 \end{figure*}
 
@@ -1406,48 +1405,6 @@ and suitable for deployment in dynamic humanoid soccer environments.
 Future work will focus on integrating the proposed system with higher-level perception
 modules, such as localization and mapping, as well as improving robustness against
 detection noise, joint offsets, and IMU drift.
-
-
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
-% \ifCLASSOPTIONcaptionsoff
-%   \newpage
-% \fi
-
-% \newpage
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IAENGtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IAENGtriggercmd{\enlargethispage{-5in}}
-
-% references section
-
-% can use a bibliography generated by BibTeX as a .bbl file
-% BibTeX documentation can be easily obtained at:
-% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
-% The IAENGtran BibTeX style support page is at:
-% http://www.michaelshell.org/tex/IAENGtran/bibtex/
-%\bibliographystyle{IAENGtran}
-% argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IAENGabrv,../bib/paper}
-%
-% <OR> manually copy in the resultant .bbl file
-% set second argument of \begin to the number of references
-% (used to reserve space for the reference number labels box)
-% \begin{thebibliography}{1}
-
-% \bibitem{IJCS}
-% N.~Meghanathan and G.~W. Skelton, ``Risk Notification Message
-% Dissemination Protocol for Energy Efficient Broadcast in Vehicular
-% Ad hoc Networks,'' {\it IAENG International Journal of Computer
-% Science}, vol. 37, no. 1, pp. 1-10, Jul. 2010.
-
-% \end{thebibliography}
-
 
 % >>>>>>>>>>>>>>>>>>>>>> Bibliography <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
