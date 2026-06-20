@@ -668,7 +668,7 @@ ground plane assumption, and the IPM formulation.
 \subsection{Pinhole Camera Model}
 
 The pinhole camera model describes the relationship between a three-dimensional
-world point and the two-dimensional image plane, as shown in Equation~\ref{eq:pinhole}.
+world point and the two-dimensional image plane, as shown in Equation~\ref{eq:pinhole}:
 
 \begin{equation} \label{eq:pinhole}
 \begin{split}
@@ -710,19 +710,19 @@ of any link or sensor within the tree to be computed relative to a global or loc
 reference frame through the use of chained homogeneous transformations \cite{Craig2009,Siciliano2010}.
 
 A rigid body transformation between two frames is represented using
-a $4 \times 4$ homogeneous transformation matrix as shown in Equation~\ref{eq:transformation_matrix}.
+a $4 \times 4$ homogeneous transformation matrix as shown in Equation~\ref{eq:transformation_matrix}:
 \begin{equation} \label{eq:transformation_matrix}
 \mathbf{T}_{a}^{b} =
 \begin{bmatrix}
 \mathbf{R}_{a}^{b} & \mathbf{t}_{a}^{b} \\
-\mathbf{0}^{T} & 1
+\begin{matrix} 0 & 0 & 0 \end{matrix} & 1
 \end{bmatrix}
 \end{equation}
 where $\mathbf{R}_{a}^{b}$ is a $3 \times 3$ rotation matrix and
 $\mathbf{t}_{a}^{b}$ is a $3 \times 1$ translation vector from frame
 $a$ to frame $b$. Using homogeneous transformation matrix, a point $P_a$ expressed
 in coordinate frame $a$ is transformed into frame $b$ as shown in
-Equation~\ref{eq:transformation_equation}.
+Equation~\ref{eq:transformation_equation}:
 \begin{equation} \label{eq:transformation_equation}
 \begin{bmatrix} P_b \\ 1 \end{bmatrix} = \mathbf{T}_{a}^{b} \begin{bmatrix} P_a \\ 1 \end{bmatrix}
 \end{equation}
@@ -735,7 +735,7 @@ In humanoid soccer, this assumption is valid for objects such as the ball, goalp
 as the playing field is flat \cite{RoboCupHumanoidLeague2025}.
 
 By constraining points to lie on a plane, we can recover the depth $Z_c$ along the optical axis
-by defining a plane in the camera frame $P_c$ using the plane equation as shown in Equation~\ref{eq:plane_camera}
+by defining a plane in the camera frame $P_c$ using the plane equation as shown in Equation~\ref{eq:plane_camera}:
 
 \begin{equation} \label{eq:plane_camera}
 n_c \cdot P_c + d = 0
@@ -763,29 +763,30 @@ point can be analytically recovered \cite{Bertozzi1998,Park2023}.
 
 The pixel $(u, v)$ in the image plane can be converted to a three-dimensional coordinate in
 the camera frame $P_c = [X_c, Y_c, Z_c]$ using the inverse pinhole camera model
-from Equation~\ref{eq:pinhole}:
+from Equation~\ref{eq:pinhole}, which yields the relations in Equation~\ref{eq:coordinate_camera}:
 
 \begin{equation} \label{eq:coordinate_camera}
-\begin{bmatrix} X_c \\ Y_c \end{bmatrix} = Z_c
-\begin{bmatrix} \frac{u - p_x}{f_x} \\ \frac{v - p_y}{f_y} \end{bmatrix} = Z_c
-\begin{bmatrix} x \\ y \end{bmatrix}
+\begin{bmatrix} X_c \\ Y_c \\ Z_c \end{bmatrix} = Z_c 
+\begin{bmatrix} \frac{u - p_x}{f_x} \\ \frac{v - p_y}{f_y} \\ 1 \end{bmatrix} = Z_c 
+\begin{bmatrix} x \\ y \\ 1 \end{bmatrix}
 \end{equation}
 where $(x, y)$ are normalized image coordinates.
 
 By substituting $P_c = [x Z_c, y Z_c, Z_c]^T$ into Equation~\ref{eq:plane_camera}, with
 the distance $d$ from the plane in the \texttt{camera\_frame} equal to
 the camera translation $t_z$ along the vertical axis relative to the base frame,
-the value of $Z_c$ can be calculated as shown in Equation~\ref{eq:zc}.
+the value of $Z_c$ can be calculated as shown in Equation~\ref{eq:zc}:
 
 \begin{equation} \label{eq:zc}
 Z_c = \frac{-t_z}{r_{31} x + r_{32} y + r_{33}}
 \end{equation}
 
-Once $P_c$ is fully determined, the estimated position relative to the robot $P_w$
-is obtained by transforming $P_c$ into the \texttt{base\_footprint} frame:
+Once $P_c$ is fully determined, the estimated position relative to the robot $P_b$
+is obtained by transforming $P_c$ into the \texttt{base\_footprint} frame via the 
+coordinate mapping in Equation~\ref{eq:pb_final}:
 
-\begin{equation}
-\begin{bmatrix} P_w \\ 1 \end{bmatrix} = \mathbf{T}_{c}^{b} \begin{bmatrix} P_c \\ 1 \end{bmatrix}
+\begin{equation} \label{eq:pb_final}
+\begin{bmatrix} P_b \\ 1 \end{bmatrix} = \mathbf{T}_{c}^{b} \begin{bmatrix} P_c \\ 1 \end{bmatrix}
 \end{equation}
 where $\mathbf{T}_{c}^{b}$ is the $4 \times 4$ homogeneous transformation matrix.
 The system rejects any results where $Z_c \leq 0$ or is undefined (NaN),
@@ -888,7 +889,7 @@ Note that for certain objects, such as the ball, the selected pixel may not corr
 ground contact. This discrepancy is handled by introducing a height offset ($h$), which effectively
 treats the ground plane as being elevated by that amount. Since the physical dimensions of the ball
 are known, the height offset $h$ corresponds to its radius. Consequently, the depth recovery
-equation derived in Section~\ref{sec:theories} is modified as follows:
+equation defined in Equation~\ref{eq:zc} is modified as shown in Equation~\ref{eq:zc_final}:
 
 \begin{equation} \label{eq:zc_final}
 Z_c = \frac{h - t_z}{r_{31}x + r_{32}y + r_{33}}
@@ -932,7 +933,7 @@ Algorithm~\ref{alg:ipm}.
         \EndIf
 
         \State $P_c \gets (Z_c \cdot x, Z_c \cdot y, Z_c)$
-        \State $P_w \gets R \cdot P_c + t$
+        \State $P_b \gets R \cdot P_c + t$
 
         \State $\mathcal{P} \gets \mathcal{P} \cup \{P_w\}$
 
@@ -1015,11 +1016,11 @@ targets $O_1$--$O_6$.}
 To assess the precision of the IPM estimations, the estimated target coordinates
 $(\hat{X}, \hat{Y})$ are compared with ground-truth positions $(X, Y)$. Axis-wise errors
 are defined as $E_x = \hat{X} - X$ and $E_y = \hat{Y} - Y$, yielding the aggregate
-Euclidean position error:
+Euclidean position error as defined in Equation~\ref{eq:euclidean_error}:
 
-\begin{equation}
+\begin{equation} \label{eq:euclidean_error}
 E = \sqrt{(E_x )^2 + ( E_y )^2}
-\end{equation}
+\end{equation} 
 
 All metrics are expressed in centimeters (cm). The distribution of tracking errors
 is summarized using Mean Absolute Error (MAE), Root Mean Square Error (RMSE), median error,
@@ -1038,9 +1039,10 @@ field coordinate system.
 For each object, the IPM module estimates the relative position
 $(X_b, Y_b)$ with respect to the \texttt{base\_footprint} frame.
 The estimated global position $(\hat{X}_i, \hat{Y}_i)$ is obtained
-by applying a rigid body transformation using the known robot pose:
+by applying a rigid body transformation using the known robot pose as
+shown in Equation~\ref{eq:global_transform}:
 
-\begin{equation}
+\begin{equation} \label{eq:global_transform}
 \begin{bmatrix}
 \hat{X}_i \\
 \hat{Y}_i \\
@@ -1124,8 +1126,14 @@ with a standard deviation of 6.11~cm and a wider margin of uncertainty
 in the detected bounding-box center across frames. Although the object is
 consistently detected, slight changes in the predicted bounding box lead to
 different IPM estimates. Because the effect is amplified for distant objects,
-the resulting position estimates exhibit higher variance than those of the
-other evaluated targets.
+the resulting position estimates exhibit higher variance other evaluated targets.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.48\textwidth]{ipm_distances.png}
+  \caption{Numerical simulation of IPM distance mapping from a $32 \times 24$ pixel grid, showing exponential depth sensitivity and the invalid region above the horizon.}
+  \label{fig:ipm_numerical_simulation}
+\end{figure}
 
 To further validate these experimental observations, a theoretical numerical 
 simulation was conducted. A downsampled $32 \times 24$ pixel grid was passed 
@@ -1138,14 +1146,8 @@ the step size per pixel increases exponentially, and any projection above the ho
 becomes completely invalid. This simulation structurally confirms why both the systematic 
 errors ($O_6$) and the frame-to-frame variance ($O_5$) escalate dramatically with distance.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.48\textwidth]{ipm_distances.png}
-\caption{Numerical simulation of IPM distance mapping from a $32 \times 24$ pixel grid, showing exponential depth sensitivity and the invalid region above the horizon.}
-\label{fig:ipm_numerical_simulation}
-\end{figure}
 
-\newpage
+% \newpage
 
 \subsection{Dynamic Evaluation}
 
@@ -1160,9 +1162,10 @@ the relative object positions $(X_b, Y_b)$ in the
 \texttt{base\_footprint} frame.
 
 To express object positions in global coordinates, the relative
-IPM outputs are transformed using the robot pose estimated from odometry:
+IPM outputs are transformed using the robot pose estimated from odometry
+via the relationship in Equation~\ref{eq:odom_transform}:
 
-\begin{equation}
+\begin{equation} \label{eq:odom_transform}
 \begin{bmatrix}
 \hat{X}_i \\
 \hat{Y}_i \\
@@ -1176,11 +1179,6 @@ Y_b \\
 1
 \end{bmatrix}
 \end{equation}
-
-As in the static case, the error is computed as the Euclidean
-distance between the estimated and reference object positions.
-In addition, axis-wise errors $(E_x, E_y)$ are reported to analyze
-directional bias.
 
 Certain objects are excluded from the dynamic evaluation. In particular,
 the L-intersection ($O_4$) and T-intersection ($O_5$) are not considered,
@@ -1317,7 +1315,7 @@ relatively small over the 1~m walking trajectory. Specifically, the low
 rotational bias ($E_r$) and minor translational bias ($E_t$) confirm that the 
 robot maintains a consistent heading and expected traveled distance. 
 
-\newpage
+% \newpage
 
 \begin{figure*}[!h]
 \centering
@@ -1369,6 +1367,8 @@ method fails, the IPM estimates continue to track the ground truth accurately, w
 absolute error of only 4.20~cm. This demonstrates that the proposed IPM approach significantly 
 extends the effective perception range of the robot while maintaining high accuracy, providing 
 greater reliability for dynamic soccer environments.
+
+\newpage
 
 \section{Conclusion}
 
